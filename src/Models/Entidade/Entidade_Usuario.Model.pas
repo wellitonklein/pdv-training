@@ -13,11 +13,12 @@ uses
   ormbr.types.lazy,
   ormbr.types.mapping,
   ormbr.types.nullable,
-  ormbr.mapping.classes,
+  ormbr.mapping.Classes,
   ormbr.mapping.register,
   ormbr.mapping.attributes;
 
 type
+
   [Entity]
   [Table('USUARIO', '')]
   [PrimaryKey('GUUID', NotInc, NoSort, False, 'Chave primária')]
@@ -25,10 +26,10 @@ type
   private
     { Private declarations }
     FGUUID: String;
-    FNOME: Nullable<String>;
-    FSENHA: Nullable<String>;
-    FTIPO: Nullable<Integer>;
-    FSTATUS: Nullable<Integer>;
+    FNOME: nullable<String>;
+    FSENHA: nullable<String>;
+    FTIPO: nullable<SmallInt>;
+    FSTATUS: nullable<SmallInt>;
     FDATACADASTRO: TDateTime;
     FDATAALTERACAO: TDateTime;
     function GetGUUID: String;
@@ -43,19 +44,19 @@ type
 
     [Column('NOME', ftString, 60)]
     [Dictionary('Nome', 'Mensagem de validação', '', '', '', taLeftJustify)]
-    property NOME: Nullable<String> read FNOME write FNOME;
+    property NOME: nullable<String> read FNOME write FNOME;
 
     [Column('SENHA', ftString, 20)]
     [Dictionary('Senha', 'Mensagem de validação', '', '', '', taLeftJustify)]
-    property SENHA: Nullable<String> read FSENHA write FSENHA;
+    property SENHA: nullable<String> read FSENHA write FSENHA;
 
     [Column('TIPO', ftSmallint)]
     [Dictionary('Tipo', 'Mensagem de validação', '', '', '', taCenter)]
-    property TIPO: Nullable<Integer> read FTIPO write FTIPO;
+    property TIPO: nullable<SmallInt> read FTIPO write FTIPO;
 
     [Column('STATUS', ftSmallint)]
     [Dictionary('Situação', 'Mensagem de validação', '', '', '', taCenter)]
-    property STATUS: Nullable<Integer> read FSTATUS write FSTATUS;
+    property STATUS: nullable<SmallInt> read FSTATUS write FSTATUS;
 
     [Column('DATACADASTRO', ftDateTime)]
     [Dictionary('Data de cadastro', 'Mensagem de validação', '', '', '', taCenter)]
@@ -85,12 +86,13 @@ end;
 
 function TUSUARIO.GetGUUID: String;
 begin
-  if (FGUUID.IsEmpty) then
+  if FGUUID.IsEmpty then
     FGUUID := TGUID.NewGuid.ToString;
   Result := FGUUID;
 end;
 
 initialization
-  TRegisterClass.RegisterEntity(TUSUARIO)
+
+TRegisterClass.RegisterEntity(TUSUARIO)
 
 end.

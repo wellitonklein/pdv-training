@@ -10,7 +10,7 @@ uses
   Cliente.Model.Interf,
   Pagamento.Model.Interf,
   Venda.Model.Inerf,
-  Conexao.Model.Interf;
+  Conexao.Model.Interf, Entidade.Model.Interf;
 
 type
   TPDVUpdatesModel = class(TInterfacedObject, IPDVUpdatesModel)
@@ -19,13 +19,14 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New : IPDVUpdatesModel;
+    function Conexao: IConexaoModel;
+    function Entidade: IEntidadeFactoryModel;
     function Caixa: ICaixaModel;
     function Usuario: IUsuarioModel;
     function Item: IItemModel;
     function Cliente: IClienteModel;
     function Pagamento: IPagamentoModel;
     function Venda: IVendaModel;
-    function Conexao: IConexaoModel;
   end;
 
 implementation
@@ -37,7 +38,8 @@ uses
   Cliente_Factory.Model,
   Pagamento_Factory.Model,
   Venda_Factory.Model,
-  Conexao_Factory.Model;
+  Conexao_Factory.Model,
+  Entidade_Factory.Model;
 
 { TPDVUpdatesModel }
 
@@ -65,6 +67,11 @@ destructor TPDVUpdatesModel.Destroy;
 begin
 
   inherited;
+end;
+
+function TPDVUpdatesModel.Entidade: IEntidadeFactoryModel;
+begin
+  Result := TEntidadeFactoryModel.New;
 end;
 
 function TPDVUpdatesModel.Item: IItemModel;

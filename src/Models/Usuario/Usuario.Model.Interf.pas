@@ -3,7 +3,11 @@ unit Usuario.Model.Interf;
 interface
 
 uses
-  Entidade_Usuario.Model, Usuario_Operacoes.Controller.Interf;
+  // ORMBr
+  ormbr.container.objectset.interfaces,
+
+  Entidade_Usuario.Model,
+  Usuario_Operacoes.Controller.Interf;
 
 type
   IUsuarioModel = interface;
@@ -15,6 +19,7 @@ type
     function Metodo(Value: IUsuarioMetodoModel): IUsuarioMetodoModel;
     function Iterator: IUsuarioIteratorModel;
     function Entidade: TUsuario;
+    function DAO: IContainerObjectSet<TUSUARIO>;
   end;
 
   IUsuarioMetodoModel = interface
