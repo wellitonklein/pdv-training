@@ -9,7 +9,8 @@ uses
   Item.Model.Interf,
   Cliente.Model.Interf,
   Pagamento.Model.Interf,
-  Venda.Model.Inerf;
+  Venda.Model.Inerf,
+  Conexao.Model.Interf;
 
 type
   TPDVUpdatesModel = class(TInterfacedObject, IPDVUpdatesModel)
@@ -24,6 +25,7 @@ type
     function Cliente: IClienteModel;
     function Pagamento: IPagamentoModel;
     function Venda: IVendaModel;
+    function Conexao: IConexaoModel;
   end;
 
 implementation
@@ -34,7 +36,8 @@ uses
   Item_Factory.Model,
   Cliente_Factory.Model,
   Pagamento_Factory.Model,
-  Venda_Factory.Model;
+  Venda_Factory.Model,
+  Conexao_Factory.Model;
 
 { TPDVUpdatesModel }
 
@@ -46,6 +49,11 @@ end;
 function TPDVUpdatesModel.Cliente: IClienteModel;
 begin
   Result := TClienteFactoryModel.New.Cliente;
+end;
+
+function TPDVUpdatesModel.Conexao: IConexaoModel;
+begin
+  Result := TConexaoFactoryModel.New.Conexao;
 end;
 
 constructor TPDVUpdatesModel.Create;

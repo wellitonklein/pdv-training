@@ -147,7 +147,14 @@ uses
   Dialog_Pagamento.Controller in 'Controllers\Dialog\Dialog_Pagamento.Controller.pas',
   Dialog_PagamentoView in 'Views\Dialog\Dialog_PagamentoView.pas' {DialogPagamentoView},
   Pagamento_Operacoes.Controller.Interf in 'Controllers\Pagamento\Operacoes\Pagamento_Operacoes.Controller.Interf.pas',
-  Pagamento_Operacoes.Controller in 'Controllers\Pagamento\Operacoes\Pagamento_Operacoes.Controller.pas';
+  Pagamento_Operacoes.Controller in 'Controllers\Pagamento\Operacoes\Pagamento_Operacoes.Controller.pas',
+  Conexao_Driver_Factory.Model.interf in 'Models\Conexao\Driver\Factory\Conexao_Driver_Factory.Model.interf.pas',
+  Conexao_Driver_Factory.Model in 'Models\Conexao\Driver\Factory\Conexao_Driver_Factory.Model.pas',
+  Conexao_Factory.Model.Interf in 'Models\Conexao\Factory\Conexao_Factory.Model.Interf.pas',
+  Conexao_Factory.Model in 'Models\Conexao\Factory\Conexao_Factory.Model.pas',
+  Conexao.Model.Interf in 'Models\Conexao\Conexao.Model.Interf.pas',
+  Conexao.Model in 'Models\Conexao\Conexao.Model.pas',
+  Conexao_Driver_Firedac.Model in 'Models\Conexao\Driver\Conexao_Driver_Firedac.Model.pas';
 
 {$R *.res}
 

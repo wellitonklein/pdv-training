@@ -306,6 +306,13 @@
         </DCCReference>
         <DCCReference Include="Controllers\Pagamento\Operacoes\Pagamento_Operacoes.Controller.Interf.pas"/>
         <DCCReference Include="Controllers\Pagamento\Operacoes\Pagamento_Operacoes.Controller.pas"/>
+        <DCCReference Include="Models\Conexao\Driver\Factory\Conexao_Driver_Factory.Model.interf.pas"/>
+        <DCCReference Include="Models\Conexao\Driver\Factory\Conexao_Driver_Factory.Model.pas"/>
+        <DCCReference Include="Models\Conexao\Factory\Conexao_Factory.Model.Interf.pas"/>
+        <DCCReference Include="Models\Conexao\Factory\Conexao_Factory.Model.pas"/>
+        <DCCReference Include="Models\Conexao\Conexao.Model.Interf.pas"/>
+        <DCCReference Include="Models\Conexao\Conexao.Model.pas"/>
+        <DCCReference Include="Models\Conexao\Driver\Conexao_Driver_Firedac.Model.pas"/>
         <None Include="mvcbr.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
