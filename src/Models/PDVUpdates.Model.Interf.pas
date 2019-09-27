@@ -1,0 +1,27 @@
+unit PDVUpdates.Model.Interf;
+
+interface
+
+uses
+  Caixa.Model.interf,
+  Usuario.Model.Interf,
+  Item.Model.Interf,
+  Cliente.Model.Interf,
+  Pagamento.Model.Interf,
+  Venda.Model.Inerf;
+
+type
+
+  IPDVUpdatesModel = interface
+    ['{27FDDAB6-CFEC-4673-9BBC-6F16614FFC45}']
+    function Caixa: ICaixaModel;
+    function Usuario: IUsuarioModel;
+    function Item: IItemModel;
+    function Cliente: IClienteModel;
+    function Pagamento: IPagamentoModel;
+    function Venda: IVendaModel;
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,94 @@
+object DialogPagamentoView: TDialogPagamentoView
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = Single
+  Caption = 'Dialog_PagamentoView'
+  ClientHeight = 291
+  ClientWidth = 500
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  DesignerMasterStyle = 0
+  object Layout1: TLayout
+    Align = Contents
+    Size.Width = 500.000000000000000000
+    Size.Height = 291.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object ToolBar1: TToolBar
+      Size.Width = 500.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object Label1: TLabel
+        Align = Client
+        StyledSettings = [Family, Style]
+        Size.Width = 500.000000000000000000
+        Size.Height = 60.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.FontColor = xFF666666
+        TextSettings.HorzAlign = Center
+        Text = 'Label1'
+        TabOrder = 1
+      end
+    end
+    object ToolBar2: TToolBar
+      Align = Bottom
+      Position.Y = 231.000000000000000000
+      Size.Width = 500.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object Layout2: TLayout
+        Align = Client
+        Margins.Left = 50.000000000000000000
+        Margins.Right = 50.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 400.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Button1: TButton
+          Align = Left
+          Size.Width = 100.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'Button1'
+          OnClick = Button1Click
+        end
+        object Button2: TButton
+          Align = Right
+          Position.X = 300.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Button1'
+          OnClick = Button2Click
+        end
+      end
+    end
+    object ListBox1: TListBox
+      Align = Client
+      Cursor = crHandPoint
+      Margins.Left = 50.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 50.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Size.Width = 400.000000000000000000
+      Size.Height = 151.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      DisableFocusEffect = True
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 396.000000000000000000
+      Viewport.Height = 147.000000000000000000
+    end
+  end
+end

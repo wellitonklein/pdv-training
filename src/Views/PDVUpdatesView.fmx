@@ -1,0 +1,271 @@
+object PDVUpdatesView: TPDVUpdatesView
+  Left = 0
+  Top = 0
+  Caption = 'PDVUpdatesView'
+  ClientHeight = 563
+  ClientWidth = 640
+  Position = MainFormCenter
+  WindowState = wsMaximized
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object ListBox1: TListBox
+    Align = Left
+    Size.Width = 200.000000000000000000
+    Size.Height = 563.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    DisableFocusEffect = True
+    ItemHeight = 60.000000000000000000
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 196.000000000000000000
+    Viewport.Height = 559.000000000000000000
+    object ListBoxItem1: TListBoxItem
+      Size.Width = 196.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Abrir Caixa'
+      OnClick = ListBoxItem1Click
+    end
+    object ListBoxItem2: TListBoxItem
+      Position.Y = 60.000000000000000000
+      Size.Width = 196.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Fechar Caixa'
+      OnClick = ListBoxItem2Click
+    end
+    object ListBoxItem3: TListBoxItem
+      Position.Y = 120.000000000000000000
+      Size.Width = 196.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'Suprimento'
+      OnClick = ListBoxItem3Click
+    end
+    object ListBoxItem4: TListBoxItem
+      Position.Y = 180.000000000000000000
+      Size.Width = 196.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Sangria'
+      OnClick = ListBoxItem4Click
+    end
+    object ListBoxItem5: TListBoxItem
+      Position.Y = 240.000000000000000000
+      Size.Width = 196.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Trocar Operador'
+      OnClick = ListBoxItem5Click
+    end
+    object ListBoxItem6: TListBoxItem
+      Position.Y = 300.000000000000000000
+      Size.Width = 196.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'Bloquear Caixa'
+      OnClick = ListBoxItem6Click
+    end
+    object ListBoxItem7: TListBoxItem
+      Position.Y = 360.000000000000000000
+      Size.Width = 196.000000000000000000
+      Size.Height = 60.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Text = 'Desbloquear Caixa'
+      OnClick = ListBoxItem7Click
+    end
+  end
+  object ListBox2: TListBox
+    Align = Left
+    Position.X = 200.000000000000000000
+    Size.Width = 129.000000000000000000
+    Size.Height = 563.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    DisableFocusEffect = True
+    ItemHeight = 50.000000000000000000
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 125.000000000000000000
+    Viewport.Height = 559.000000000000000000
+    object ListBoxItem8: TListBoxItem
+      Size.Width = 125.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Item - Vender'
+      OnClick = ListBoxItem8Click
+    end
+    object ListBoxItem9: TListBoxItem
+      Position.Y = 50.000000000000000000
+      Size.Width = 125.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Item - Cancelar'
+      OnClick = ListBoxItem9Click
+    end
+    object ListBoxItem10: TListBoxItem
+      Position.Y = 100.000000000000000000
+      Size.Width = 125.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'Item - Desconto'
+      OnClick = ListBoxItem10Click
+    end
+    object ListBoxItem11: TListBoxItem
+      Position.Y = 150.000000000000000000
+      Size.Width = 125.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Item - Acrescimo'
+      OnClick = ListBoxItem11Click
+    end
+    object ListBoxItem12: TListBoxItem
+      Position.Y = 200.000000000000000000
+      Size.Width = 125.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Item - Repetir'
+      OnClick = ListBoxItem12Click
+    end
+    object ListBoxItem13: TListBoxItem
+      Position.Y = 250.000000000000000000
+      Size.Width = 125.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'Cliente - Saldo'
+      OnClick = ListBoxItem13Click
+    end
+  end
+  object ListBox3: TListBox
+    Align = Left
+    Position.X = 329.000000000000000000
+    Size.Width = 224.000000000000000000
+    Size.Height = 563.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    DisableFocusEffect = True
+    ItemHeight = 50.000000000000000000
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 220.000000000000000000
+    Viewport.Height = 559.000000000000000000
+    object ListBoxItem14: TListBoxItem
+      Size.Width = 220.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Pagamento - Dinheiro - Executar'
+      OnClick = ListBoxItem14Click
+    end
+    object ListBoxItem15: TListBoxItem
+      Position.Y = 50.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Pagamento - Dinheiro - Estornar'
+      OnClick = ListBoxItem15Click
+    end
+    object ListBoxItem16: TListBoxItem
+      Position.Y = 100.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'Pagamento - Cart'#227'o Cr'#233'dito - Executar'
+      OnClick = ListBoxItem16Click
+    end
+    object ListBoxItem17: TListBoxItem
+      Position.Y = 150.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Pagamento - Cart'#227'o Cr'#233'dito - Estornar'
+      OnClick = ListBoxItem17Click
+    end
+    object ListBoxItem18: TListBoxItem
+      Position.Y = 200.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Venda - Abrir'
+      OnClick = ListBoxItem18Click
+    end
+    object ListBoxItem19: TListBoxItem
+      Position.Y = 250.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'Venda - Pagar'
+      OnClick = ListBoxItem19Click
+    end
+    object ListBoxItem20: TListBoxItem
+      Position.Y = 300.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Text = 'Venda - Fechar'
+      OnClick = ListBoxItem20Click
+    end
+    object ListBoxItem21: TListBoxItem
+      Position.Y = 350.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      Text = 'Venda - Identificar Cliente'
+      OnClick = ListBoxItem21Click
+    end
+    object ListBoxItem22: TListBoxItem
+      Position.Y = 400.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+      Text = 'Venda - Vender Item'
+      OnClick = ListBoxItem22Click
+    end
+    object ListBoxItem23: TListBoxItem
+      Position.Y = 450.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 9
+      Text = 'Venda - Efetuar pagamento'
+      OnClick = ListBoxItem23Click
+    end
+    object ListBoxItem24: TListBoxItem
+      Position.Y = 500.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 10
+      Text = 'Venda - Efetuar estorno'
+      OnClick = ListBoxItem24Click
+    end
+  end
+end
