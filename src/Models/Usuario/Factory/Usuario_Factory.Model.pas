@@ -16,13 +16,14 @@ type
     class function New : IUsuarioFactoryModel;
     function Usuario: IUsuarioModel;
     function Iterator(Parent: IUsuarioModel): IUsuarioIteratorModel;
+    function Funcoes(Parent: IUsuarioModel): IUsuarioFuncoesModel;
   end;
 
 implementation
 
 uses
   Usuario.Model,
-  Usuario_Iterator.Model, Usuario_Tipo_Factory.Model;
+  Usuario_Iterator.Model, Usuario_Tipo_Factory.Model, Usuario_Funcoes.Model;
 
 { TUsuarioFactoryModel }
 
@@ -35,6 +36,12 @@ destructor TUsuarioFactoryModel.Destroy;
 begin
 
   inherited;
+end;
+
+function TUsuarioFactoryModel.Funcoes(
+  Parent: IUsuarioModel): IUsuarioFuncoesModel;
+begin
+  Result := TUsuarioFuncoesModel.New(Parent);
 end;
 
 function TUsuarioFactoryModel.Iterator(

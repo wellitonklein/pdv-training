@@ -41,7 +41,7 @@ type
     function UserName(const Value: String): IConexaoDriverConfiguracaoModel;
     function Password(const Value: String): IConexaoDriverConfiguracaoModel;
     function Port(const Value: Integer = 3050): IConexaoDriverConfiguracaoModel;
-    function &EndMetodo: IConexaoDriverModel;
+    function &EndDriverConfiguracao: IConexaoDriverModel;
   end;
 
 implementation
@@ -66,7 +66,7 @@ begin
   Result := FParent;
 end;
 
-function TConexaoDriverFiredacModel.EndMetodo: IConexaoDriverModel;
+function TConexaoDriverFiredacModel.&EndDriverConfiguracao: IConexaoDriverModel;
 begin
   Result := Self;
   setParametros;

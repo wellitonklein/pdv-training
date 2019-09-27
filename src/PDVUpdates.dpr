@@ -154,7 +154,8 @@ uses
   Conexao_Factory.Model in 'Models\Conexao\Factory\Conexao_Factory.Model.pas',
   Conexao.Model.Interf in 'Models\Conexao\Conexao.Model.Interf.pas',
   Conexao.Model in 'Models\Conexao\Conexao.Model.pas',
-  Conexao_Driver_Firedac.Model in 'Models\Conexao\Driver\Conexao_Driver_Firedac.Model.pas';
+  Conexao_Driver_Firedac.Model in 'Models\Conexao\Driver\Conexao_Driver_Firedac.Model.pas',
+  Usuario_Funcoes.Model in 'Models\Usuario\Usuario_Funcoes.Model.pas';
 
 {$R *.res}
 

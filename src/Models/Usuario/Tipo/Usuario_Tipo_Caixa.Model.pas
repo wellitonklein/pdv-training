@@ -90,16 +90,8 @@ var
 begin
   FParent := Parent;
   FResponsibility := NextResponsibility;
-
   FLista := TList<TRecordSenha>.Create;
-
-  Usuario.Nome  := 'CAIXA - Welliton Klein';
-  Usuario.Senha := '123';
-  FLista.Add(Usuario);
-
-  Usuario.Nome  := 'CAIXA - Fokushima San';
-  Usuario.Senha := '321';
-  FLista.Add(Usuario);
+  FParent.Funcoes.ListaSenha(FLista, tuCaixa);
 end;
 
 function TUsuarioTipoCaixaModel.&End: IUsuarioModel;
@@ -157,6 +149,8 @@ end;
 
 procedure TUsuarioTipoCaixaModel.PedirSenha;
 begin
+  if (FLista.Count <= 0) then Exit;
+
   FOperacao.PedirSenha
     .SetTitle('Entre com a senha do Caixa')
     .SetTextConfirm('Confirmar')

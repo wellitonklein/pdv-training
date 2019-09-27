@@ -4,7 +4,8 @@ interface
 
 uses
   Usuario.Model.Interf,
-  Usuario_Operacoes.Controller.Interf;
+  Usuario_Operacoes.Controller.Interf, PDVUpdates_Type.Controller,
+  System.Classes, System.Generics.Collections;
 
 type
   TUsuarioTipoGerenteModel = class(TInterfacedObject, IUsuarioMetodoModel)
@@ -12,6 +13,9 @@ type
     FParent: IUsuarioModel;
     FResponsibility: IUsuarioMetodoModel;
     FOperacao: IUsuarioOperacoesController;
+    FLista: TList<TRecordSenha>;
+    FResult: TRecordSenha;
+    procedure PedirSenha;
   public
     constructor Create(Parent: IUsuarioModel); overload;
     constructor Create(Parent: IUsuarioModel;
@@ -82,6 +86,8 @@ constructor TUsuarioTipoGerenteModel.Create(Parent: IUsuarioModel;
 begin
   FParent := Parent;
   FResponsibility := NextResponsibility;
+  FLista := TList<TRecordSenha>.Create;
+  FParent.Funcoes.ListaSenha(FLista, tuGerente);
 end;
 
 function TUsuarioTipoGerenteModel.&End: IUsuarioModel;
@@ -134,6 +140,19 @@ class function TUsuarioTipoGerenteModel.New(Parent: IUsuarioModel;
   NextResponsibility: IUsuarioMetodoModel): IUsuarioMetodoModel;
 begin
   Result := Self.Create(Parent, NextResponsibility);
+end;
+
+procedure TUsuarioTipoGerenteModel.PedirSenha;
+begin
+  if (FLista.Count <= 0) then Exit;
+
+  FOperacao.PedirSenha
+    .SetTitle('Entre com a senha do Gerente')
+    .SetTextConfirm('Confirmar')
+    .SetTextCancel('Cancelar')
+    .Lista(FLista)
+    .Result(FResult)
+  .&End;
 end;
 
 function TUsuarioTipoGerenteModel.SetOperacao(

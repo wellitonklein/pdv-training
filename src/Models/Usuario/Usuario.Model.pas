@@ -16,6 +16,7 @@ type
     FIterator: IUsuarioIteratorModel;
     FEntidade: TUsuario;
     FDAO: IContainerObjectSet<TUSUARIO>;
+    FFuncoes: IUsuarioFuncoesModel;
   public
     constructor Create;
     destructor Destroy; override;
@@ -24,6 +25,7 @@ type
     function Iterator: IUsuarioIteratorModel;
     function Entidade: TUsuario;
     function DAO: IContainerObjectSet<TUSUARIO>;
+    function Funcoes: IUsuarioFuncoesModel;
   end;
 
 implementation
@@ -39,9 +41,10 @@ uses
 constructor TUsuarioModel.Create;
 begin
   FConn     := TPDVUpdatesModel.New.Conexao;
-  FIterator := TUsuarioFactoryModel.New.Iterator(Self);
   FEntidade := TPDVUpdatesModel.New.Entidade.Usuario;
   FDAO      := TContainerObjectSet<TUSUARIO>.Create(FConn.Connection, 15);
+  FIterator := TUsuarioFactoryModel.New.Iterator(Self);
+  FFuncoes  := TUsuarioFactoryModel.New.Funcoes(Self);
 end;
 
 function TUsuarioModel.DAO: IContainerObjectSet<TUSUARIO>;
@@ -58,6 +61,11 @@ end;
 function TUsuarioModel.Entidade: TUsuario;
 begin
   Result := FEntidade;
+end;
+
+function TUsuarioModel.Funcoes: IUsuarioFuncoesModel;
+begin
+  Result := FFuncoes;
 end;
 
 function TUsuarioModel.Iterator: IUsuarioIteratorModel;

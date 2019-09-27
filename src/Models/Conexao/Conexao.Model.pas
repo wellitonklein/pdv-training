@@ -61,14 +61,14 @@ end;
 
 procedure TConexaoModel.SetParametros;
 begin
-  with FDriver.Configuracao do
-  begin
-    DriverID('FB');
-    Database(ExtractFilePath(ParamStr(0)) + 'database\PDVUPDATES.FDB');
-    UserName('SYSDBA');
-    Password('masterkey');
-    Port(3050);
-  end;
+  FDriver
+    .Configuracao
+      .DriverID('FB')
+      .Database(ExtractFilePath(ParamStr(0)) + 'database\PDVUPDATES.FDB')
+      .UserName('SYSDBA')
+      .Password('masterkey')
+      .Port(3050)
+    .&EndDriverConfiguracao;
 end;
 
 end.

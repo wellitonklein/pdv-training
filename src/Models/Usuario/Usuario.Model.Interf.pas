@@ -7,11 +7,13 @@ uses
   ormbr.container.objectset.interfaces,
 
   Entidade_Usuario.Model,
-  Usuario_Operacoes.Controller.Interf;
+  Usuario_Operacoes.Controller.Interf, PDVUpdates_Type.Controller,
+  System.Generics.Collections;
 
 type
   IUsuarioModel = interface;
   IUsuarioMetodoModel = interface;
+  IUsuarioFuncoesModel = interface;
   IUsuarioIteratorModel = interface;
 
   IUsuarioModel = interface
@@ -20,6 +22,7 @@ type
     function Iterator: IUsuarioIteratorModel;
     function Entidade: TUsuario;
     function DAO: IContainerObjectSet<TUSUARIO>;
+    function Funcoes: IUsuarioFuncoesModel;
   end;
 
   IUsuarioMetodoModel = interface
@@ -36,6 +39,12 @@ type
     function BloquearCaixa: IUsuarioMetodoModel;
     function DesbloquearCaixa: IUsuarioMetodoModel;
     function TrocarOperador: IUsuarioMetodoModel;
+    function &End: IUsuarioModel;
+  end;
+
+  IUsuarioFuncoesModel = interface
+    ['{F3FE7867-CBB4-413C-B1BF-D5EF0DB3151B}']
+    function ListaSenha(var Lista: TList<TRecordSenha>; Tipo: TTypeUsuario): IUsuarioFuncoesModel;
     function &End: IUsuarioModel;
   end;
 
