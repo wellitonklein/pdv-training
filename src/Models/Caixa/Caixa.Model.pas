@@ -22,7 +22,8 @@ type
     // ICaixaModel
     function Metodo: ICaixaMetodoModel;
     function SetState(Value: ICaixaMetodoModel): ICaixaModel;
-    function Entidade: TCaixa;
+    function Entidade: TCaixa; overload;
+    function Entidade(Value: TCAIXA): ICaixaModel; overload;
     function DAO: IContainerObjectSet<TCaixa>;
 
     // ICaixaMetodoModel
@@ -59,6 +60,12 @@ end;
 function TCaixaModel.&End: ICaixaModel;
 begin
   Result := Self;
+end;
+
+function TCaixaModel.Entidade(Value: TCAIXA): ICaixaModel;
+begin
+  Result := Self;
+  FEntidade := Value;
 end;
 
 function TCaixaModel.Entidade: TCaixa;

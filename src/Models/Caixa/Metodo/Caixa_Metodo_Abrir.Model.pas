@@ -26,7 +26,9 @@ type
 implementation
 
 uses
-  System.SysUtils, Caixa_State_Factory.Model;
+  System.SysUtils,
+  Caixa_State_Factory.Model,
+  PDVUpdates_Type.Controller, PDVUpdates.Model;
 
 { TCaixaMetodoAbrirModel }
 
@@ -34,10 +36,11 @@ function TCaixaMetodoAbrirModel.&End: ICaixaMetodoModel;
 begin
   Result := FParent.Metodo;
 
+  FParent.Entidade(TPDVUpdatesModel.New.Entidade.Caixa);
   FParent.Entidade.VALORABERTURA := Self.FValor;
-  FParent.Entidade.USUARIO  := FFiscal.Entidade.GUUID;
+  FParent.Entidade.FISCAL_ABERTURA  := FFiscal.Entidade.GUUID;
   FParent.Entidade.OPERADOR := FOperador.Entidade.GUUID;
-  FParent.Entidade.STATUS  := 0;
+  FParent.Entidade.STATUS  := Integer(tcAberto);
   FParent.DAO.Insert(FParent.Entidade);
 
   FParent.SetState(TCaixaStateFactoryModel.New.Aberto);

@@ -6,6 +6,7 @@ type
 
   TTypeUsuario = (tuCaixa, tuFiscal, tuGerente);
   TTypePagamento = (tpDinheiro, tpCartaoCredito);
+  TTypeCaixaStatus = (tcAberto, tcBloqueado, tcFechado);
 
   TRecordPagamento = record
     Descricao: string;

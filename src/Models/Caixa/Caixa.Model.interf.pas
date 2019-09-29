@@ -22,7 +22,8 @@ type
     ['{437844E1-00F0-4BF3-AF3B-2E7F24AD1E84}']
     function Metodo: ICaixaMetodoModel;
     function SetState(Value: ICaixaMetodoModel): ICaixaModel;
-    function Entidade: TCaixa;
+    function Entidade: TCaixa; overload;
+    function Entidade(Value: TCAIXA): ICaixaModel; overload;
     function DAO: IContainerObjectSet<TCaixa>;
   end;
 

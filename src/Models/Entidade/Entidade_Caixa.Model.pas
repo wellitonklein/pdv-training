@@ -18,7 +18,6 @@ uses
   ormbr.mapping.attributes;
 
 type
-
   [Entity]
   [Table('CAIXA', '')]
   [PrimaryKey('GUUID', NotInc, NoSort, False, 'Chave primária')]
@@ -27,16 +26,17 @@ type
     { Private declarations }
     FGUUID: String;
     FDATAABERTURA: TDateTime;
-    FDATAFECHAMENTO: nullable<TDateTime>;
-    FSTATUS: nullable<SmallInt>;
-    FVALORABERTURA: nullable<Double>;
-    FVALORFECHAMENTO: nullable<Double>;
-    FUSUARIO: nullable<String>;
-    FOPERADOR: nullable<String>;
+    FDATAFECHAMENTO: Nullable<TDateTime>;
+    FSTATUS: SmallInt;
+    FVALORABERTURA: Nullable<Double>;
+    FVALORFECHAMENTO: Nullable<Double>;
+    FFISCAL_ABERTURA: Nullable<String>;
+    FFISCAL_FECHAMENTO: Nullable<String>;
+    FOPERADOR: Nullable<String>;
     FDATAALTERACAO: TDateTime;
-    function GetGUUID: String;
     function GetDATAABERTURA: TDateTime;
     function GetDATAALTERACAO: TDateTime;
+    function GetGUUID: String;
   public
     { Public declarations }
     [Restrictions([NotNull])]
@@ -49,34 +49,32 @@ type
     property DATAABERTURA: TDateTime read GetDATAABERTURA write FDATAABERTURA;
 
     [Column('DATAFECHAMENTO', ftDateTime)]
-    [Dictionary('DATAFECHAMENTO', 'Mensagem de validação', '', '', '',
-      taCenter)]
-    property DATAFECHAMENTO: nullable<TDateTime> read FDATAFECHAMENTO
-      write FDATAFECHAMENTO;
+    [Dictionary('DATAFECHAMENTO', 'Mensagem de validação', '', '', '', taCenter)]
+    property DATAFECHAMENTO: Nullable<TDateTime> read FDATAFECHAMENTO write FDATAFECHAMENTO;
 
     [Column('STATUS', ftSmallint)]
     [Dictionary('STATUS', 'Mensagem de validação', '', '', '', taCenter)]
-    property STATUS: nullable<SmallInt> read FSTATUS write FSTATUS;
+    property STATUS: SmallInt read FSTATUS write FSTATUS;
 
     [Column('VALORABERTURA', ftBCD, 18, 4)]
-    [Dictionary('VALORABERTURA', 'Mensagem de validação', '0', '', '',
-      taRightJustify)]
-    property VALORABERTURA: nullable<Double> read FVALORABERTURA
-      write FVALORABERTURA;
+    [Dictionary('VALORABERTURA', 'Mensagem de validação', '0', '', '', taRightJustify)]
+    property VALORABERTURA: Nullable<Double> read FVALORABERTURA write FVALORABERTURA;
 
     [Column('VALORFECHAMENTO', ftBCD, 18, 4)]
-    [Dictionary('VALORFECHAMENTO', 'Mensagem de validação', '0', '', '',
-      taRightJustify)]
-    property VALORFECHAMENTO: nullable<Double> read FVALORFECHAMENTO
-      write FVALORFECHAMENTO;
+    [Dictionary('VALORFECHAMENTO', 'Mensagem de validação', '0', '', '', taRightJustify)]
+    property VALORFECHAMENTO: Nullable<Double> read FVALORFECHAMENTO write FVALORFECHAMENTO;
 
-    [Column('USUARIO', ftString, 64)]
-    [Dictionary('USUARIO', 'Mensagem de validação', '', '', '', taLeftJustify)]
-    property USUARIO: nullable<String> read FUSUARIO write FUSUARIO;
+    [Column('FISCAL_ABERTURA', ftString, 64)]
+    [Dictionary('FISCAL_ABERTURA', 'Mensagem de validação', '', '', '', taLeftJustify)]
+    property FISCAL_ABERTURA: Nullable<String> read FFISCAL_ABERTURA write FFISCAL_ABERTURA;
+
+    [Column('FISCAL_FECHAMENTO', ftString, 64)]
+    [Dictionary('FISCAL_FECHAMENTO', 'Mensagem de validação', '', '', '', taLeftJustify)]
+    property FISCAL_FECHAMENTO: Nullable<String> read FFISCAL_FECHAMENTO write FFISCAL_FECHAMENTO;
 
     [Column('OPERADOR', ftString, 64)]
     [Dictionary('OPERADOR', 'Mensagem de validação', '', '', '', taLeftJustify)]
-    property OPERADOR: nullable<String> read FOPERADOR write FOPERADOR;
+    property OPERADOR: Nullable<String> read FOPERADOR write FOPERADOR;
 
     [Column('DATAALTERACAO', ftDateTime)]
     [Dictionary('DATAALTERACAO', 'Mensagem de validação', '', '', '', taCenter)]
