@@ -4,7 +4,8 @@ interface
 
 uses
   Entidade.Model.Interf,
-  Entidade_Usuario.Model;
+  Entidade_Usuario.Model,
+  Entidade_Caixa.Model;
 
 type
   TEntidadeFactoryModel = class(TInterfacedObject, IEntidadeFactoryModel)
@@ -14,11 +15,17 @@ type
     destructor Destroy; override;
     class function New : IEntidadeFactoryModel;
     function Usuario: TUsuario;
+    function Caixa: TCaixa;
   end;
 
 implementation
 
 { TEntidadeFactoryModel }
+
+function TEntidadeFactoryModel.Caixa: TCaixa;
+begin
+  Result := TCaixa.Create;
+end;
 
 constructor TEntidadeFactoryModel.Create;
 begin

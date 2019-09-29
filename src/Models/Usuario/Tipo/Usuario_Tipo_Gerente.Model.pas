@@ -5,7 +5,7 @@ interface
 uses
   Usuario.Model.Interf,
   Usuario_Operacoes.Controller.Interf, PDVUpdates_Type.Controller,
-  System.Classes, System.Generics.Collections;
+  System.Classes, System.Generics.Collections, Entidade_Usuario.Model;
 
 type
   TUsuarioTipoGerenteModel = class(TInterfacedObject, IUsuarioMetodoModel)
@@ -13,8 +13,8 @@ type
     FParent: IUsuarioModel;
     FResponsibility: IUsuarioMetodoModel;
     FOperacao: IUsuarioOperacoesController;
-    FLista: TList<TRecordSenha>;
-    FResult: TRecordSenha;
+    FLista: TObjectList<TUsuario>;
+    FResult: TUsuario;
     procedure PedirSenha;
   public
     constructor Create(Parent: IUsuarioModel); overload;
@@ -86,7 +86,7 @@ constructor TUsuarioTipoGerenteModel.Create(Parent: IUsuarioModel;
 begin
   FParent := Parent;
   FResponsibility := NextResponsibility;
-  FLista := TList<TRecordSenha>.Create;
+  FLista := TObjectList<TUsuario>.Create;
   FParent.Funcoes.ListaSenha(FLista, tuGerente);
 end;
 
@@ -153,6 +153,7 @@ begin
     .Lista(FLista)
     .Result(FResult)
   .&End;
+  FParent.Entidade(FResult);
 end;
 
 function TUsuarioTipoGerenteModel.SetOperacao(

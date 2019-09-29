@@ -4,8 +4,8 @@ interface
 
 uses
   Usuario.Model.Interf,
-  Usuario_Operacoes.Controller.Interf, PDVUpdates_Type.Controller,
-  System.Generics.Collections;
+  Usuario_Operacoes.Controller.Interf,
+  System.Generics.Collections, Entidade_Usuario.Model;
 
 type
   TUsuarioTipoCaixaModel = class(TInterfacedObject, IUsuarioMetodoModel)
@@ -13,8 +13,8 @@ type
     FParent: IUsuarioModel;
     FResponsibility: IUsuarioMetodoModel;
     FOperacao: IUsuarioOperacoesController;
-    FLista: TList<TRecordSenha>;
-    FResult: TRecordSenha;
+    FLista: TObjectList<TUsuario>;
+    FResult: TUsuario;
     procedure PedirSenha;
   public
     constructor Create(Parent: IUsuarioModel); overload;
@@ -42,6 +42,9 @@ type
   end;
 
 implementation
+
+uses
+  PDVUpdates_Type.Controller;
 
 { TUsuarioTipoCaixaModel }
 
@@ -86,11 +89,11 @@ end;
 constructor TUsuarioTipoCaixaModel.Create(Parent: IUsuarioModel;
   NextResponsibility: IUsuarioMetodoModel);
 var
-  Usuario: TRecordSenha;
+  Usuario: TUsuario;
 begin
   FParent := Parent;
   FResponsibility := NextResponsibility;
-  FLista := TList<TRecordSenha>.Create;
+  FLista := TObjectList<TUsuario>.Create;
   FParent.Funcoes.ListaSenha(FLista, tuCaixa);
 end;
 
@@ -158,6 +161,7 @@ begin
     .Lista(FLista)
     .Result(FResult)
   .&End;
+  FParent.Entidade(FResult);
 end;
 
 function TUsuarioTipoCaixaModel.SetOperacao(

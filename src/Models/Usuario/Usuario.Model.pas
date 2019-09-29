@@ -23,7 +23,8 @@ type
     class function New : IUsuarioModel;
     function Metodo(Value: IUsuarioMetodoModel): IUsuarioMetodoModel;
     function Iterator: IUsuarioIteratorModel;
-    function Entidade: TUsuario;
+    function Entidade: TUsuario; overload;
+    function Entidade(Value: TUSUARIO): IUsuarioModel; overload;
     function DAO: IContainerObjectSet<TUSUARIO>;
     function Funcoes: IUsuarioFuncoesModel;
   end;
@@ -56,6 +57,12 @@ destructor TUsuarioModel.Destroy;
 begin
   FreeAndNil(FEntidade);
   inherited;
+end;
+
+function TUsuarioModel.Entidade(Value: TUSUARIO): IUsuarioModel;
+begin
+  Result := Self;
+  FEntidade := Value;
 end;
 
 function TUsuarioModel.Entidade: TUsuario;

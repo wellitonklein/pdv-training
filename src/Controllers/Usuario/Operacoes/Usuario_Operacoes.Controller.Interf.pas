@@ -3,7 +3,8 @@ unit Usuario_Operacoes.Controller.Interf;
 interface
 
 uses
-  System.Generics.Collections, PDVUpdates_Type.Controller;
+  System.Generics.Collections, PDVUpdates_Type.Controller,
+  Entidade_Usuario.Model;
 
 type
   IUsuarioOperacoesController = interface;
@@ -19,8 +20,8 @@ type
     function SetTitle(Value: string): IUsuarioOperacaoPedirSenhaController;
     function SetTextConfirm(Value: string): IUsuarioOperacaoPedirSenhaController;
     function SetTextCancel(Value: string): IUsuarioOperacaoPedirSenhaController;
-    function Lista(Value: TList<TRecordSenha>): IUsuarioOperacaoPedirSenhaController;
-    function Result(Value: TRecordSenha): IUsuarioOperacaoPedirSenhaController;
+    function Lista(Value: TObjectList<TUsuario>): IUsuarioOperacaoPedirSenhaController;
+    function Result(var Value: TUsuario): IUsuarioOperacaoPedirSenhaController;
     function &End: IUsuarioOperacoesController;
   end;
 

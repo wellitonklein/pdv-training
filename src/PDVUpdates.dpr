@@ -155,7 +155,8 @@ uses
   Conexao.Model.Interf in 'Models\Conexao\Conexao.Model.Interf.pas',
   Conexao.Model in 'Models\Conexao\Conexao.Model.pas',
   Conexao_Driver_Firedac.Model in 'Models\Conexao\Driver\Conexao_Driver_Firedac.Model.pas',
-  Usuario_Funcoes.Model in 'Models\Usuario\Usuario_Funcoes.Model.pas';
+  Usuario_Funcoes.Model in 'Models\Usuario\Usuario_Funcoes.Model.pas',
+  Entidade_Caixa.Model in 'Models\Entidade\Entidade_Caixa.Model.pas';
 
 {$R *.res}
 

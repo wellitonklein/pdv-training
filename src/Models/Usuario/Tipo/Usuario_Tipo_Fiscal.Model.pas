@@ -15,8 +15,8 @@ type
     FParent: IUsuarioModel;
     FResponsibility: IUsuarioMetodoModel;
     FOperacao: IUsuarioOperacoesController;
-    FLista: TList<TRecordSenha>;
-    FResult: TRecordSenha;
+    FLista: TObjectList<TUsuario>;
+    FResult: TUSUARIO;
     procedure OnConfirmSenha(Sender: TObject);
     procedure OnCancelSenha(Sender: TObject);
     procedure PedirSenha;
@@ -99,7 +99,7 @@ constructor TUsuarioTipoFiscalModel.Create(Parent: IUsuarioModel;
 begin
   FParent := Parent;
   FResponsibility := NextResponsibility;
-  FLista := TList<TRecordSenha>.Create;
+  FLista := TObjectList<TUsuario>.Create;
   FParent.Funcoes.ListaSenha(FLista, tuFiscal);
 end;
 
@@ -181,6 +181,7 @@ begin
     .Lista(FLista)
     .Result(FResult)
   .&End;
+  FParent.Entidade(FResult);
 end;
 
 function TUsuarioTipoFiscalModel.SetOperacao(

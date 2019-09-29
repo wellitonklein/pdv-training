@@ -3,7 +3,8 @@ unit Usuario_Funcoes.Model;
 interface
 
 uses
-  Usuario.Model.Interf, System.Generics.Collections, PDVUpdates_Type.Controller;
+  Usuario.Model.Interf, System.Generics.Collections, PDVUpdates_Type.Controller,
+  Entidade_Usuario.Model;
 
 type
   TUsuarioFuncoesModel = class(TInterfacedObject, IUsuarioFuncoesModel)
@@ -13,15 +14,13 @@ type
     constructor Create(Parent: IUsuarioModel);
     destructor Destroy; override;
     class function New(Parent: IUsuarioModel): IUsuarioFuncoesModel;
-    function ListaSenha(var Lista: TList<TRecordSenha>; Tipo: TTypeUsuario): IUsuarioFuncoesModel;
+    function ListaSenha(var Lista: TObjectList<TUsuario>; Tipo: TTypeUsuario): IUsuarioFuncoesModel;
     function &End: IUsuarioModel;
   end;
 
 implementation
 
 { TUsuarioFuncoesModel }
-
-uses Entidade_Usuario.Model;
 
 function TUsuarioFuncoesModel.&End: IUsuarioModel;
 begin
@@ -39,25 +38,14 @@ begin
   inherited;
 end;
 
-function TUsuarioFuncoesModel.ListaSenha(var Lista: TList<TRecordSenha>; Tipo: TTypeUsuario): IUsuarioFuncoesModel;
-var
-  Usuario: TRecordSenha;
-  I: Integer;
-  FListaUsuario: TList<TUSUARIO>;
+function TUsuarioFuncoesModel.ListaSenha(var Lista: TObjectList<TUsuario>; Tipo: TTypeUsuario): IUsuarioFuncoesModel;
 begin
   Result := Self;
 
   case Tipo of
-    tuCaixa:   FListaUsuario := FParent.DAO.FindWhere('TIPO = 0');
-    tuFiscal:   FListaUsuario := FParent.DAO.FindWhere('TIPO = 1');
-    tuGerente:  FListaUsuario := FParent.DAO.FindWhere('TIPO = 2');
-  end;
-
-  for I := 0 to Pred(FListaUsuario.Count) do
-  begin
-    Usuario.Nome  := FListaUsuario[I].NOME;
-    Usuario.Senha := FListaUsuario[I].SENHA;
-    Lista.Add(Usuario);
+    tuCaixa:   Lista := FParent.DAO.FindWhere('TIPO = 0');
+    tuFiscal:   Lista := FParent.DAO.FindWhere('TIPO = 1');
+    tuGerente:  Lista := FParent.DAO.FindWhere('TIPO = 2');
   end;
 end;
 

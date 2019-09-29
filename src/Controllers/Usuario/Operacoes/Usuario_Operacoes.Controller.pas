@@ -5,14 +5,14 @@ interface
 uses
   Usuario_Operacoes.Controller.Interf,
   PDVUpdates_Type.Controller,
-  System.Generics.Collections;
+  System.Generics.Collections, Entidade_Usuario.Model;
 
 type
   TUsuarioOperacoesController = class(TInterfacedObject,
     IUsuarioOperacoesController, IUsuarioOperacaoPedirSenhaController)
   private
-    FLista: TList<TRecordSenha>;
-    FResult: TRecordSenha;
+    FLista: TObjectList<TUsuario>;
+    FResult: ^TUsuario;
     FTitle, FTextConfirm, FTextCancel: string;
     procedure ValidarSenha;
   public
@@ -27,8 +27,8 @@ type
     function SetTitle(Value: string): IUsuarioOperacaoPedirSenhaController;
     function SetTextConfirm(Value: string): IUsuarioOperacaoPedirSenhaController;
     function SetTextCancel(Value: string): IUsuarioOperacaoPedirSenhaController;
-    function Lista(Value: TList<TRecordSenha>): IUsuarioOperacaoPedirSenhaController;
-    function Result(Value: TRecordSenha): IUsuarioOperacaoPedirSenhaController;
+    function Lista(Value: TObjectList<TUsuario>): IUsuarioOperacaoPedirSenhaController;
+    function Result(var Value: TUSUARIO): IUsuarioOperacaoPedirSenhaController;
     function &End: IUsuarioOperacoesController;
   end;
 
@@ -49,13 +49,12 @@ begin
       FTextConfirm,
       FTextCancel,
       FLista,
-      FResult
+      FResult^
     );
   ValidarSenha;
 end;
 
-function TUsuarioOperacoesController.Lista(
-  Value: TList<TRecordSenha>): IUsuarioOperacaoPedirSenhaController;
+function TUsuarioOperacoesController.Lista(Value: TObjectList<TUsuario>): IUsuarioOperacaoPedirSenhaController;
 begin
   Result := Self;
   FLista := Value;
@@ -84,11 +83,10 @@ begin
   Result := Self;
 end;
 
-function TUsuarioOperacoesController.Result(
-  Value: TRecordSenha): IUsuarioOperacaoPedirSenhaController;
+function TUsuarioOperacoesController.Result(var Value: TUSUARIO): IUsuarioOperacaoPedirSenhaController;
 begin
   Result := Self;
-  FResult := Value;
+  FResult := @Value;
 end;
 
 function TUsuarioOperacoesController.SetTextCancel(

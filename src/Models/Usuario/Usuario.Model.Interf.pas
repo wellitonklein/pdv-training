@@ -20,7 +20,8 @@ type
     ['{53C70CA1-94A2-4D66-9452-84BF1F8549DC}']
     function Metodo(Value: IUsuarioMetodoModel): IUsuarioMetodoModel;
     function Iterator: IUsuarioIteratorModel;
-    function Entidade: TUsuario;
+    function Entidade: TUsuario; overload;
+    function Entidade(Value: TUSUARIO): IUsuarioModel; overload;
     function DAO: IContainerObjectSet<TUSUARIO>;
     function Funcoes: IUsuarioFuncoesModel;
   end;
@@ -44,7 +45,7 @@ type
 
   IUsuarioFuncoesModel = interface
     ['{F3FE7867-CBB4-413C-B1BF-D5EF0DB3151B}']
-    function ListaSenha(var Lista: TList<TRecordSenha>; Tipo: TTypeUsuario): IUsuarioFuncoesModel;
+    function ListaSenha(var Lista: TObjectList<TUsuario>; Tipo: TTypeUsuario): IUsuarioFuncoesModel;
     function &End: IUsuarioModel;
   end;
 

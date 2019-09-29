@@ -31,7 +31,12 @@ uses
 function TCaixaMetodoAbrirModel.&End: ICaixaMetodoModel;
 begin
   Result := FParent.Metodo;
-  { TODO -oWelliton -cCaixa : Executar o processo de abertura }
+
+  FParent.Entidade.VALORABERTURA := Self.FValor;
+  FParent.Entidade.USUARIO := FOperador.Entidade.GUUID;
+  FParent.Entidade.STATUS  := 0;
+  FParent.DAO.Insert(FParent.Entidade);
+
   FParent.SetState(TCaixaStateFactoryModel.New.Aberto);
 end;
 

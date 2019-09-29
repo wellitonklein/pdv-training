@@ -3,12 +3,17 @@ unit Caixa.Model;
 interface
 
 uses
-  Caixa.Model.interf;
+  Caixa.Model.interf,
+  Entidade_Caixa.Model,
+  ormbr.container.objectset.interfaces, Conexao.Model.Interf;
 
 type
   TCaixaModel = class(TInterfacedObject, ICaixaModel, ICaixaMetodoModel)
   private
+    FConn: IConexaoModel;
     FState: ICaixaMetodoModel;
+    FEntidade: TCAIXA;
+    FDAO: IContainerObjectSet<TCaixa>;
   public
     constructor Create;
     destructor Destroy; override;
@@ -17,6 +22,8 @@ type
     // ICaixaModel
     function Metodo: ICaixaMetodoModel;
     function SetState(Value: ICaixaMetodoModel): ICaixaModel;
+    function Entidade: TCaixa;
+    function DAO: IContainerObjectSet<TCaixa>;
 
     // ICaixaMetodoModel
     function Abrir: ICaixaMetodoAbrirModel;
@@ -32,7 +39,8 @@ type
 implementation
 
 uses
-  Caixa_Metodo_Factory.Model, Caixa_State_Factory.Model;
+  Caixa_Metodo_Factory.Model, Caixa_State_Factory.Model, PDVUpdates.Model,
+  ormbr.container.objectset;
 
 { TCaixaModel }
 
@@ -53,10 +61,23 @@ begin
   Result := Self;
 end;
 
+function TCaixaModel.Entidade: TCaixa;
+begin
+  Result := FEntidade;
+end;
+
 constructor TCaixaModel.Create;
 begin
+  FConn     := TPDVUpdatesModel.New.Conexao;
+  FEntidade := TPDVUpdatesModel.New.Entidade.Caixa;
+  FDAO      := TContainerObjectSet<TCaixa>.Create(FConn.Connection, 15);
   FState := TCaixaStateFactoryModel.New.Fechado;
   { TODO -oWelliton -cCaixa : Verificar Estado do último Caixa no Banco }
+end;
+
+function TCaixaModel.DAO: IContainerObjectSet<TCaixa>;
+begin
+  Result := FDAO;
 end;
 
 function TCaixaModel.Desbloquear: ICaixaMetodoDesbloquearModel;

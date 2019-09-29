@@ -7,13 +7,14 @@ uses
   System.SysUtils, System.Classes, MVCBr.Interf, System.JSON,
   MVCBr.View, MVCBr.FormView, MVCBr.Controller, FMX.Types, FMX.Controls,
   FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls, FMX.ListBox, FMX.Edit,
-  PDVUpdates_Type.Controller, System.Generics.Collections;
+  PDVUpdates_Type.Controller, System.Generics.Collections,
+  Entidade_Usuario.Model;
 
 type
   IUsuarioSenhaView = interface(IView)
     ['{14D77D20-F3D7-490E-AFF1-7F66A3497F12}']
     procedure ExibirForm(Title, TextConfir, TextCancel: String;
-      Lista: TList<TRecordSenha>; var Result: TRecordSenha);
+      Lista: TObjectList<TUsuario>; var Result: TUsuario);
   end;
 
   TUsuarioSenhaView = class(TFMXFormFactory { TFORM } , IView,
@@ -31,7 +32,7 @@ type
     procedure Button2Click(Sender: TObject);
   private
     FInited: boolean;
-    procedure PreencherCombo(Lista: TList<TRecordSenha>);
+    procedure PreencherCombo(Lista: TObjectList<TUsuario>);
   protected
     function Controller(const aController: IController): IView; override;
   public
@@ -42,7 +43,7 @@ type
     function ShowView(const AProc: TProc<IView>): integer; override;
 
     procedure ExibirForm(Title, TextConfir, TextCancel: String;
-      Lista: TList<TRecordSenha>; var Result: TRecordSenha);
+      Lista: TObjectList<TUsuario>; var Result: TUSUARIO);
   end;
 
 Implementation
@@ -58,7 +59,7 @@ begin
 end;
 
 procedure TUsuarioSenhaView.ExibirForm(Title, TextConfir, TextCancel: String;
-  Lista: TList<TRecordSenha>; var Result: TRecordSenha);
+  Lista: TObjectList<TUsuario>; var Result: TUSUARIO);
 begin
   PreencherCombo(Lista);
   Label1.Text := Title;
@@ -68,8 +69,7 @@ begin
   if (self.ShowModal = mrCancel) then
     raise Exception.Create('Operação cancelada pelo usuário');
 
-  Result.Nome := ComboBox1.Items[ComboBox1.ItemIndex];
-  Result.Senha := Edit1.Text;
+  Result := TUSUARIO(ComboBox1.Items.Objects[ComboBox1.ItemIndex]);
 end;
 
 class function TUsuarioSenhaView.New(aController: IController): IUsuarioSenhaView;
@@ -78,12 +78,12 @@ begin
 //  Result.Controller(aController);
 end;
 
-procedure TUsuarioSenhaView.PreencherCombo(Lista: TList<TRecordSenha>);
+procedure TUsuarioSenhaView.PreencherCombo(Lista: TObjectList<TUsuario>);
 var
   I: Integer;
 begin
   for I := 0 to Pred(Lista.Count) do
-    ComboBox1.Items.Add(Lista[I].Nome);
+    ComboBox1.Items.AddObject(Lista[I].Nome, Lista[I]);
 
   ComboBox1.ItemIndex := 0;
 end;

@@ -3,7 +3,9 @@ unit Caixa.Model.interf;
 interface
 
 uses
-  Usuario.Model.Interf;
+  Usuario.Model.Interf,
+  Entidade_Caixa.Model,
+  ormbr.container.objectset.interfaces;
 
 type
   ICaixaModel = interface;
@@ -20,7 +22,8 @@ type
     ['{437844E1-00F0-4BF3-AF3B-2E7F24AD1E84}']
     function Metodo: ICaixaMetodoModel;
     function SetState(Value: ICaixaMetodoModel): ICaixaModel;
-//    FEntidade: TCaixa;
+    function Entidade: TCaixa;
+    function DAO: IContainerObjectSet<TCaixa>;
   end;
 
   ICaixaMetodoModel = interface
