@@ -3,7 +3,8 @@ unit Caixa_Metodo_Bloquear.Model;
 interface
 
 uses
-  Caixa.Model.interf, Usuario.Model.Interf;
+  Caixa.Model.interf,
+  Usuario.Model.Interf;
 
 type
   TCaixaMetodoBloquearModel = class(TInterfacedObject, ICaixaMetodoBloquearModel)
@@ -21,14 +22,25 @@ type
 implementation
 
 uses
-  Caixa_State_Factory.Model;
+  Caixa_State_Factory.Model,
+  Entidade_Caixa.Model,
+  PDVUpdates_Type.Controller, System.SysUtils;
 
 { TCaixaMetodoBloquearModel }
 
 function TCaixaMetodoBloquearModel.&End: ICaixaMetodoModel;
+var
+  CAIXA: TCAIXA;
 begin
   Result := FParent.Metodo;
-  { TODO -oWelliton -cCaixa : Executar o processo de Bloquear }
+
+  if (FAutorizador.Entidade.GUUID <> FParent.Entidade.OPERADOR) then
+    raise Exception.Create('Favor entrar com a senha do Operador atual');
+
+  CAIXA := FParent.Entidade;
+  FParent.DAO.Modify(CAIXA);
+  CAIXA.STATUS := Integer(tsBloqueado);
+  FParent.DAO.Update(CAIXA);
   FParent.SetState(TCaixaStateFactoryModel.New.Bloquado);
 end;
 
