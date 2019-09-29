@@ -5,7 +5,8 @@ interface
 uses
   Entidade_Usuario.Model,
   Entidade_Caixa.Model,
-  Entidade_CaixaOperacoes.Model;
+  Entidade_CaixaOperacoes.Model,
+  Entidade_Venda.Model;
 
 type
 
@@ -14,6 +15,7 @@ type
     function Usuario: TUsuario;
     function Caixa: TCaixa;
     function CaixaOperacoes: TCAIXAOPERACOES;
+    function Venda: TVenda;
   end;
 
 implementation

@@ -3,7 +3,8 @@ unit Venda.Model.Inerf;
 interface
 
 uses
-  Cliente.Model.Interf, Item.Model.Interf, Pagamento.Model.Interf;
+  Cliente.Model.Interf, Item.Model.Interf, Pagamento.Model.Interf,
+  Entidade_Venda.Model, ormbr.container.objectset.interfaces;
 
 type
   IVendaModel = interface;
@@ -20,6 +21,9 @@ type
     function Cliente(Value: IClienteModel): IVendaModel; overload;
     function Itens: IItemModel;
     function Pagamentos: IPagamentoModel;
+    function Entidade: TVENDA; overload;
+    function Entidade(Value: TVENDA): IVendaModel; overload;
+    function DAO: IContainerObjectSet<TVENDA>;
   end;
 
   IVendaMetodoModel = interface

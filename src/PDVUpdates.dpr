@@ -157,7 +157,8 @@ uses
   Conexao_Driver_Firedac.Model in 'Models\Conexao\Driver\Conexao_Driver_Firedac.Model.pas',
   Usuario_Funcoes.Model in 'Models\Usuario\Usuario_Funcoes.Model.pas',
   Entidade_Caixa.Model in 'Models\Entidade\Entidade_Caixa.Model.pas',
-  Entidade_CaixaOperacoes.Model in 'Models\Entidade\Entidade_CaixaOperacoes.Model.pas';
+  Entidade_CaixaOperacoes.Model in 'Models\Entidade\Entidade_CaixaOperacoes.Model.pas',
+  Entidade_Venda.Model in 'Models\Entidade\Entidade_Venda.Model.pas';
 
 {$R *.res}
 

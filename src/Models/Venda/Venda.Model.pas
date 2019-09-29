@@ -4,11 +4,16 @@ interface
 
 uses
   Venda.Model.Inerf,
-  Cliente.Model.Interf, Item.Model.Interf, Pagamento.Model.Interf;
+  Cliente.Model.Interf, Item.Model.Interf, Pagamento.Model.Interf,
+  Entidade_Venda.Model, ormbr.container.objectset.interfaces,
+  Conexao.Model.Interf;
 
 type
   TVendaModel = class(TInterfacedObject, IVendaModel, IVendaMetodoModel)
   private
+    FConn: IConexaoModel;
+    FEntidade: TVENDA;
+    FDAO: IContainerObjectSet<TVENDA>;
     FState: IVendaMetodoModel;
     FCliente: IClienteModel;
     FItens: IItemModel;
@@ -25,6 +30,9 @@ type
     function Cliente(Value: IClienteModel): IVendaModel; overload;
     function Itens: IItemModel;
     function Pagamentos: IPagamentoModel;
+    function Entidade: TVENDA; overload;
+    function Entidade(Value: TVENDA): IVendaModel; overload;
+    function DAO: IContainerObjectSet<TVENDA>;
 
     // VendaMetodoModel
     function Abrir: IVendaMetodoAbrirModel;
@@ -36,7 +44,8 @@ type
 implementation
 
 uses
-  Venda_Metodo_Factory.Model, Venda_State_Factory.Model, PDVUpdates.Model;
+  Venda_Metodo_Factory.Model, Venda_State_Factory.Model, PDVUpdates.Model,
+  ormbr.container.objectset;
 
 { TVendaModel }
 
@@ -49,6 +58,17 @@ end;
 function TVendaModel.&End: IVendaModel;
 begin
   Result := Self;
+end;
+
+function TVendaModel.Entidade: TVENDA;
+begin
+  Result := FEntidade;
+end;
+
+function TVendaModel.Entidade(Value: TVENDA): IVendaModel;
+begin
+  Result := Self;
+  FEntidade := Value;
 end;
 
 function TVendaModel.Cliente: IClienteModel;
@@ -64,10 +84,18 @@ end;
 
 constructor TVendaModel.Create;
 begin
-  FState   := TVendaStateFactoryModel.New.Fechado;
-  FCliente := TPDVUpdatesModel.New.Cliente;
-  FItens   := TPDVUpdatesModel.New.Item;
+  FConn       := TPDVUpdatesModel.New.Conexao;
+  FEntidade   := TPDVUpdatesModel.New.Entidade.Venda;
+  FDAO        := TContainerObjectSet<TVenda>.Create(FConn.Connection, 15);
+  FState      := TVendaStateFactoryModel.New.Fechado;
+  FCliente    := TPDVUpdatesModel.New.Cliente;
+  FItens      := TPDVUpdatesModel.New.Item;
   FPagamentos := TPDVUpdatesModel.New.Pagamento;
+end;
+
+function TVendaModel.DAO: IContainerObjectSet<TVENDA>;
+begin
+  Result := FDAO;
 end;
 
 destructor TVendaModel.Destroy;
