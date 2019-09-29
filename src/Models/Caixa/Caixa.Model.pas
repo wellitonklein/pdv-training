@@ -14,6 +14,8 @@ type
     FState: ICaixaMetodoModel;
     FEntidade: TCAIXA;
     FDAO: IContainerObjectSet<TCaixa>;
+    function SetStatusCaixa: ICaixaMetodoModel;
+    procedure RecuperarCaixa;
   public
     constructor Create;
     destructor Destroy; override;
@@ -41,7 +43,7 @@ implementation
 
 uses
   Caixa_Metodo_Factory.Model, Caixa_State_Factory.Model, PDVUpdates.Model,
-  ormbr.container.objectset;
+  ormbr.container.objectset, PDVUpdates_Type.Controller;
 
 { TCaixaModel }
 
@@ -78,7 +80,7 @@ begin
   FConn     := TPDVUpdatesModel.New.Conexao;
   FEntidade := TPDVUpdatesModel.New.Entidade.Caixa;
   FDAO      := TContainerObjectSet<TCaixa>.Create(FConn.Connection, 15);
-  FState := TCaixaStateFactoryModel.New.Fechado;
+  FState    := SetStatusCaixa;
   { TODO -oWelliton -cCaixa : Verificar Estado do último Caixa no Banco }
 end;
 
@@ -113,6 +115,21 @@ end;
 class function TCaixaModel.New: ICaixaModel;
 begin
   Result := Self.Create;
+end;
+
+procedure TCaixaModel.RecuperarCaixa;
+begin
+  FEntidade := FDAO.FindWhere('', 'DATAABERTURA DESC').Items[0];
+end;
+
+function TCaixaModel.SetStatusCaixa: ICaixaMetodoModel;
+begin
+  RecuperarCaixa;
+  case TTypeCaixaStatus(FEntidade.STATUS) of
+    tsAberto: Result := TCaixaStateFactoryModel.New.Aberto;
+    tsBloqueado: Result := TCaixaStateFactoryModel.New.Bloquado;
+    tsFechado: Result := TCaixaStateFactoryModel.New.Fechado;
+  end;
 end;
 
 function TCaixaModel.Sangria: ICaixaMetodoSangriaModel;
