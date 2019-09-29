@@ -39,8 +39,11 @@ begin
   Result := Self;
   FModel.Metodo
     .Abrir
-      .SetOperador(
+      .SetFiscal(
         TUsuarioFactoryController.New.Usuario.Caixa.AbrirCaixa.&End
+      )
+      .SetOperador(
+        TUsuarioFactoryController.New.Usuario.Caixa.DesbloquearCaixa.&End
       )
       .SetValorAbertura(
         FCapturaValor.ExibeForm('Valor da abertura', 'Confirmar', 'Cancelar')

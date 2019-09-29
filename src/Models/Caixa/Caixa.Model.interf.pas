@@ -42,6 +42,7 @@ type
     ['{B8DB372F-7FC1-4100-8344-A69E51D4914C}']
     function SetValorAbertura(Value: Currency): ICaixaMetodoAbrirModel;
     function SetOperador(Value: IUsuarioModel): ICaixaMetodoAbrirModel;
+    function SetFiscal(Value: IUsuarioModel): ICaixaMetodoAbrirModel;
     function &End: ICaixaMetodoModel;
   end;
 
