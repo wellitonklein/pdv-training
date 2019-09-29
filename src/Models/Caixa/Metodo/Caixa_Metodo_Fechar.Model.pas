@@ -39,7 +39,7 @@ begin
   Caixa := FParent.Entidade;
   FParent.DAO.Modify(Caixa);
   Caixa.DATAFECHAMENTO := Now;
-  Caixa.STATUS := Integer(tcFechado);
+  Caixa.STATUS := Integer(tsFechado);
   Caixa.VALORFECHAMENTO := Self.FValor;
   Caixa.FISCAL_FECHAMENTO := FFiscal.Entidade.GUUID;
   FParent.DAO.Update(Caixa);

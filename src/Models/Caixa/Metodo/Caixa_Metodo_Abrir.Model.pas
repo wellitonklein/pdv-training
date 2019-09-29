@@ -40,7 +40,7 @@ begin
   FParent.Entidade.VALORABERTURA := Self.FValor;
   FParent.Entidade.FISCAL_ABERTURA  := FFiscal.Entidade.GUUID;
   FParent.Entidade.OPERADOR := FOperador.Entidade.GUUID;
-  FParent.Entidade.STATUS  := Integer(tcAberto);
+  FParent.Entidade.STATUS  := Integer(tsAberto);
   FParent.DAO.Insert(FParent.Entidade);
 
   FParent.SetState(TCaixaStateFactoryModel.New.Aberto);

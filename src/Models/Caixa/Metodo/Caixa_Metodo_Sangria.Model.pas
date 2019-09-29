@@ -22,12 +22,27 @@ type
 
 implementation
 
+uses
+  Entidade_Caixa.Model,
+  PDVUpdates.Model,
+  PDVUpdates_Type.Controller;
+
 { TCaixaMetodoSangriaModel }
 
 function TCaixaMetodoSangriaModel.&End: ICaixaMetodoModel;
+var
+  CAIXA: TCAIXA;
 begin
   Result := FParent.Metodo;
-  { TODO -oWelliton -cCaixa : Executar o processo de Sangria }
+
+  CAIXA := FParent.Entidade;
+  FParent.DAO.Modify(CAIXA);
+  CAIXA.OPERACOES.Add(TPDVUpdatesModel.New.Entidade.CaixaOperacoes);
+  CAIXA.OPERACOES.Last.CAIXA := FParent.Entidade.GUUID;
+  CAIXA.OPERACOES.Last.TIPO := Integer(toSangria);
+  CAIXA.OPERACOES.Last.VALOR := Self.FValor;
+  CAIXA.OPERACOES.Last.FISCAL := Self.FAutorizador.Entidade.GUUID;
+  FParent.DAO.Update(CAIXA);
 end;
 
 constructor TCaixaMetodoSangriaModel.Create(Parent: ICaixaModel);

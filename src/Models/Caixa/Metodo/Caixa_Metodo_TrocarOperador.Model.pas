@@ -22,12 +22,21 @@ type
 
 implementation
 
+uses
+  Entidade_Caixa.Model;
+
 { TCaixaMetodoTrocarOperadorModel }
 
 function TCaixaMetodoTrocarOperadorModel.&End: ICaixaMetodoModel;
+var
+  CAIXA: TCAIXA;
 begin
   Result := FParent.Metodo;
-  { TODO -oWelliton -cCaixa : Executar o processo de Trocar de Operador }
+
+  CAIXA := FParent.Entidade;
+  FParent.DAO.Modify(CAIXA);
+  CAIXA.OPERADOR := FOperador.Entidade.GUUID;
+  FParent.DAO.Update(CAIXA);
 end;
 
 constructor TCaixaMetodoTrocarOperadorModel.Create(Parent: ICaixaModel);

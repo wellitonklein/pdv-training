@@ -15,7 +15,7 @@ uses
   ormbr.types.nullable,
   ormbr.mapping.Classes,
   ormbr.mapping.register,
-  ormbr.mapping.attributes;
+  ormbr.mapping.attributes, Entidade_CaixaOperacoes.Model;
 
 type
   [Entity]
@@ -34,11 +34,15 @@ type
     FFISCAL_FECHAMENTO: Nullable<String>;
     FOPERADOR: Nullable<String>;
     FDATAALTERACAO: TDateTime;
+    FOPERACOES: TObjectList<TCAIXAOPERACOES>;
     function GetDATAABERTURA: TDateTime;
     function GetDATAALTERACAO: TDateTime;
     function GetGUUID: String;
   public
     { Public declarations }
+    constructor Create;
+    destructor Destroy; override;
+
     [Restrictions([NotNull])]
     [Column('GUUID', ftString, 64)]
     [Dictionary('GUUID', 'Mensagem de validação', '', '', '', taLeftJustify)]
@@ -79,11 +83,26 @@ type
     [Column('DATAALTERACAO', ftDateTime)]
     [Dictionary('DATAALTERACAO', 'Mensagem de validação', '', '', '', taCenter)]
     property DATAALTERACAO: TDateTime read GetDATAALTERACAO write FDATAALTERACAO;
+
+    [Association(OneToMany, 'GUUID', 'CAIXAOPERACOES', 'CAIXA')]
+    [CascadeActions([CascadeInsert, CascadeUpdate, CascadeDelete])]
+    property OPERACOES: TObjectList<TCAIXAOPERACOES> read FOPERACOES write FOPERACOES;
   end;
 
 implementation
 
 { TCAIXA }
+
+constructor TCAIXA.Create;
+begin
+  FOPERACOES := TObjectList<TCAIXAOPERACOES>.Create;
+end;
+
+destructor TCAIXA.Destroy;
+begin
+  FreeAndNil(FOPERACOES);
+  inherited;
+end;
 
 function TCAIXA.GetDATAABERTURA: TDateTime;
 begin

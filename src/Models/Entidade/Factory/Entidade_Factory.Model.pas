@@ -5,7 +5,8 @@ interface
 uses
   Entidade.Model.Interf,
   Entidade_Usuario.Model,
-  Entidade_Caixa.Model;
+  Entidade_Caixa.Model,
+  Entidade_CaixaOperacoes.Model;
 
 type
   TEntidadeFactoryModel = class(TInterfacedObject, IEntidadeFactoryModel)
@@ -16,6 +17,7 @@ type
     class function New : IEntidadeFactoryModel;
     function Usuario: TUsuario;
     function Caixa: TCaixa;
+    function CaixaOperacoes: TCAIXAOPERACOES;
   end;
 
 implementation
@@ -25,6 +27,11 @@ implementation
 function TEntidadeFactoryModel.Caixa: TCaixa;
 begin
   Result := TCaixa.Create;
+end;
+
+function TEntidadeFactoryModel.CaixaOperacoes: TCAIXAOPERACOES;
+begin
+  Result := TCAIXAOPERACOES.Create;
 end;
 
 constructor TEntidadeFactoryModel.Create;

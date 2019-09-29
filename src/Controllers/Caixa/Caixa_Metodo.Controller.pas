@@ -144,7 +144,7 @@ begin
   FModel.Metodo
     .TrocarOperador
       .SetOperador(
-        TUsuarioFactoryController.New.Usuario.Caixa.&End
+        TUsuarioFactoryController.New.Usuario.Caixa.DesbloquearCaixa.&End
       )
       .SetAutorizador(
         TUsuarioFactoryController.New.Usuario.Caixa.TrocarOperador.&End

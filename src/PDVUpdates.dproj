@@ -315,6 +315,7 @@
         <DCCReference Include="Models\Conexao\Driver\Conexao_Driver_Firedac.Model.pas"/>
         <DCCReference Include="Models\Usuario\Usuario_Funcoes.Model.pas"/>
         <DCCReference Include="Models\Entidade\Entidade_Caixa.Model.pas"/>
+        <DCCReference Include="Models\Entidade\Entidade_CaixaOperacoes.Model.pas"/>
         <None Include="mvcbr.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

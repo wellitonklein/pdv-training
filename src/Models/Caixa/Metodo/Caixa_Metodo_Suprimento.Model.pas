@@ -4,7 +4,7 @@ interface
 
 uses
   Caixa.Model.interf,
-  Usuario.Model.Interf;
+  Usuario.Model.Interf, PDVUpdates.Model, PDVUpdates_Type.Controller;
 
 type
   TCaixaMetodoSuprimentoModel = class(TInterfacedObject, ICaixaMetodoSuprimentoModel)
@@ -23,17 +23,30 @@ type
 
 implementation
 
+uses
+  Entidade_Caixa.Model;
+
 { TCaixaMetodoSuprimentoModel }
 
 function TCaixaMetodoSuprimentoModel.&End: ICaixaMetodoModel;
+var
+  CAIXA: TCAIXA;
 begin
   Result := FParent.Metodo;
+
+  CAIXA := FParent.Entidade;
+  FParent.DAO.Modify(CAIXA);
+  CAIXA.OPERACOES.Add(TPDVUpdatesModel.New.Entidade.CaixaOperacoes);
+  CAIXA.OPERACOES.Last.CAIXA := FParent.Entidade.GUUID;
+  CAIXA.OPERACOES.Last.TIPO := Integer(toSuprimento);
+  CAIXA.OPERACOES.Last.VALOR := Self.FValor;
+  CAIXA.OPERACOES.Last.FISCAL := Self.FAutorizador.Entidade.GUUID;
+  FParent.DAO.Update(CAIXA);
 end;
 
 constructor TCaixaMetodoSuprimentoModel.Create(Parent: ICaixaModel);
 begin
   FParent := Parent;
-  { TODO -oWelliton -cCaixa : Executar o processo de Suprimento }
 end;
 
 destructor TCaixaMetodoSuprimentoModel.Destroy;
