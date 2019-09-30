@@ -170,7 +170,14 @@ uses
   Produto_Metodo_Factory.Model.Interf in 'Models\Produto\Metodo\Factory\Produto_Metodo_Factory.Model.Interf.pas',
   Produto_Metodo_Factory.Model in 'Models\Produto\Metodo\Factory\Produto_Metodo_Factory.Model.pas',
   Entidade_VendaPagamentos.Model in 'Models\Entidade\Entidade_VendaPagamentos.Model.pas',
-  Pagamento_Tipo_Factory.Model.Interf in 'Models\Pagamento\Tipo\Factory\Pagamento_Tipo_Factory.Model.Interf.pas';
+  Pagamento_Tipo_Factory.Model.Interf in 'Models\Pagamento\Tipo\Factory\Pagamento_Tipo_Factory.Model.Interf.pas',
+  Fiscal.Model.Interf in 'Models\Fiscal\Fiscal.Model.Interf.pas',
+  Fiscal_Factory.Model in 'Models\Fiscal\Factory\Fiscal_Factory.Model.pas',
+  Fiscal_NFCe_Componentes.Model in 'Models\Fiscal\NFCe\Componentes\Fiscal_NFCe_Componentes.Model.pas',
+  Fiscal_NFCe.Model.Interf in 'Models\Fiscal\NFCe\Fiscal_NFCe.Model.Interf.pas',
+  Fiscal_NFCe_Factory.Model in 'Models\Fiscal\NFCe\Factory\Fiscal_NFCe_Factory.Model.pas',
+  Fiscal.Model in 'Models\Fiscal\Fiscal.Model.pas',
+  Fiscal_NFCe_Componentes.Model.Interf in 'Models\Fiscal\NFCe\Componentes\Fiscal_NFCe_Componentes.Model.Interf.pas';
 
 {$R *.res}
 
