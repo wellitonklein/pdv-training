@@ -9,7 +9,8 @@ uses
   Entidade_Venda.Model,
   Entidade_Cliente.Model,
   Entidade_Produto.Model,
-  Entidade_VendaItens.Model;
+  Entidade_VendaItens.Model,
+  Entidade_VendaPagamentos.Model;
 
 type
 
@@ -22,6 +23,7 @@ type
     function Cliente: TCliente;
     function Produto: TPRODUTO;
     function VendaItens: TVENDAITENS;
+    function VendaPagamentos: TVENDAPAGAMENTOS;
   end;
 
 implementation

@@ -2,6 +2,10 @@ unit Pagamento.Model.Interf;
 
 interface
 
+uses
+  Entidade_VendaPagamentos.Model,
+  ormbr.container.objectset.interfaces;
+
 type
   IPagamentoModel = interface;
   IPagamentoIteratorModel = interface;
@@ -15,6 +19,9 @@ type
     ['{30E5FEE9-B3B0-4FFD-BD6A-0CD552E310B4}']
     function Tipo: IPagamentoTipoModel;
     function Iterator: IPagamentoIteratorModel;
+    function Entidade: TVENDAPAGAMENTOS; overload;
+    function Entidade(Value: TVENDAPAGAMENTOS): IPagamentoModel; overload;
+    function DAO: IContainerObjectSet<TVENDAPAGAMENTOS>;
   end;
 
   IPagamentoIteratorModel = interface

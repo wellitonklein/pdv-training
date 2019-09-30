@@ -168,7 +168,8 @@ uses
   Produto_Factory.Model in 'Models\Produto\Factory\Produto_Factory.Model.pas',
   Produto_Metodo_Buscar.Model in 'Models\Produto\Metodo\Produto_Metodo_Buscar.Model.pas',
   Produto_Metodo_Factory.Model.Interf in 'Models\Produto\Metodo\Factory\Produto_Metodo_Factory.Model.Interf.pas',
-  Produto_Metodo_Factory.Model in 'Models\Produto\Metodo\Factory\Produto_Metodo_Factory.Model.pas';
+  Produto_Metodo_Factory.Model in 'Models\Produto\Metodo\Factory\Produto_Metodo_Factory.Model.pas',
+  Entidade_VendaPagamentos.Model in 'Models\Entidade\Entidade_VendaPagamentos.Model.pas';
 
 {$R *.res}
 
