@@ -3,7 +3,8 @@ unit Venda_Factory.Controller;
 interface
 
 uses
-  Venda_Factory.Controller.Interf, Venda.Controller.Interf;
+  Venda_Factory.Controller.Interf, Venda.Controller.Interf,
+  Caixa.Controller.Interf;
 
 type
   TVendaFactoryController = class(TInterfacedObject, IVendaFactoryController)
@@ -12,7 +13,7 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New : IVendaFactoryController;
-    function Venda: IVendaController;
+    function Venda(Caixa: ICaixaController): IVendaController;
   end;
 
 implementation
@@ -38,9 +39,9 @@ begin
   Result := Self.Create;
 end;
 
-function TVendaFactoryController.Venda: IVendaController;
+function TVendaFactoryController.Venda(Caixa: ICaixaController): IVendaController;
 begin
-  Result := TVendaController.New;
+  Result := TVendaController.New(Caixa);
 end;
 
 end.

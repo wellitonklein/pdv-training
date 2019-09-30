@@ -28,7 +28,7 @@ begin
   Result := FParent.Metodo;
 
   FParent.Entidade(TPDVUpdatesModel.New.Entidade.Venda);
-//  FParent.Entidade.CAIXA := FParent
+  FParent.Entidade.CAIXA := FParent.Caixa.Entidade.GUUID;
 //  FParent.Entidade.CLIENTE := FParent.Cliente
   FParent.Entidade.STATUS  := Integer(tvsAberto);
   FParent.DAO.Insert(FParent.Entidade);

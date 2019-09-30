@@ -26,7 +26,7 @@ type
     function Item: IItemModel;
     function Cliente: IClienteModel;
     function Pagamento: IPagamentoModel;
-    function Venda: IVendaModel;
+    function Venda(Caixa: ICaixaModel): IVendaModel;
   end;
 
 implementation
@@ -94,9 +94,9 @@ begin
   Result := TUsuarioFactoryModel.New.Usuario;
 end;
 
-function TPDVUpdatesModel.Venda: IVendaModel;
+function TPDVUpdatesModel.Venda(Caixa: ICaixaModel): IVendaModel;
 begin
-  Result := TVendaFactoryModel.New.Venda;
+  Result := TVendaFactoryModel.New.Venda(Caixa);
 end;
 
 end.

@@ -22,6 +22,7 @@ type
     function Bloquear: ICaixaMetodoController;
     function Desbloquear: ICaixaMetodoController;
     function TrocarOperador: ICaixaMetodoController;
+    function Model: ICaixaModel;
     function &End: ICaixaController;
   end;
 
@@ -103,6 +104,11 @@ begin
         FCapturaValor.ExibeForm('Valor do fechamento', 'Confirmar', 'Cancelar')
       )
     .&End;
+end;
+
+function TCaixaMetodoController.Model: ICaixaModel;
+begin
+  Result := FModel;
 end;
 
 class function TCaixaMetodoController.New(Parent: ICaixaController): ICaixaMetodoController;

@@ -2,6 +2,9 @@ unit Caixa.Controller.Interf;
 
 interface
 
+uses
+  Caixa.Model.interf;
+
 type
   ICaixaController = interface;
   ICaixaMetodoController = interface;
@@ -20,6 +23,7 @@ type
     function Bloquear: ICaixaMetodoController;
     function Desbloquear: ICaixaMetodoController;
     function TrocarOperador: ICaixaMetodoController;
+    function Model: ICaixaModel;
     function &End: ICaixaController;
   end;
 

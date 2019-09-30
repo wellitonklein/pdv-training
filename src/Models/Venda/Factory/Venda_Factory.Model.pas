@@ -3,7 +3,7 @@ unit Venda_Factory.Model;
 interface
 
 uses
-  Venda_Factory.Model.Inerf, Venda.Model.Inerf;
+  Venda_Factory.Model.Inerf, Venda.Model.Inerf, Caixa.Model.interf;
 
 type
   TVendaFactoryModel = class(TInterfacedObject, IVendaFactoryModel)
@@ -12,7 +12,7 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New : IVendaFactoryModel;
-    function Venda: IVendaModel;
+    function Venda(Caixa: ICaixaModel): IVendaModel;
   end;
 
 implementation
@@ -38,9 +38,9 @@ begin
   Result := Self.Create;
 end;
 
-function TVendaFactoryModel.Venda: IVendaModel;
+function TVendaFactoryModel.Venda(Caixa: ICaixaModel): IVendaModel;
 begin
-  Result := TVendaModel.New;
+  Result := TVendaModel.New(Caixa);
 end;
 
 end.

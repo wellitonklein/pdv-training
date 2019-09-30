@@ -23,7 +23,7 @@ type
     function Item: IItemModel;
     function Cliente: IClienteModel;
     function Pagamento: IPagamentoModel;
-    function Venda: IVendaModel;
+    function Venda(Caixa: ICaixaModel): IVendaModel;
   end;
 
 implementation

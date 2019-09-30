@@ -16,7 +16,7 @@ type
     function Item: IItemController;
     function Cliente: IClienteController;
     function Pagamento: IPagamentoController;
-    function Venda: IVendaController;
+    function Venda(Caixa: ICaixaController): IVendaController;
   end;
 
 Implementation

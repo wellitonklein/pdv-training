@@ -34,7 +34,7 @@ type
     function Item: IItemController;
     function Cliente: IClienteController;
     function Pagamento: IPagamentoController;
-    function Venda: IVendaController;
+    function Venda(Caixa: ICaixaController): IVendaController;
   end;
 
 implementation
@@ -104,9 +104,9 @@ begin
   Result := TUsuarioFactoryController.New.Usuario;
 end;
 
-function TPDVUpdatesController.Venda: IVendaController;
+function TPDVUpdatesController.Venda(Caixa: ICaixaController): IVendaController;
 begin
-  Result := TVendaFactoryController.New.Venda;
+  Result := TVendaFactoryController.New.Venda(Caixa);
 end;
 
 procedure TPDVUpdatesController.init;

@@ -4,7 +4,8 @@ interface
 
 uses
   Cliente.Model.Interf, Item.Model.Interf, Pagamento.Model.Interf,
-  Entidade_Venda.Model, ormbr.container.objectset.interfaces;
+  Entidade_Venda.Model, ormbr.container.objectset.interfaces,
+  Caixa.Model.interf;
 
 type
   IVendaModel = interface;
@@ -17,6 +18,7 @@ type
     ['{0BD6FAA7-C17B-4795-B6F4-D39DF786FDA7}']
     function Metodo: IVendaMetodoModel;
     function SetState(Value: IVendaMetodoModel): IVendaMetodoModel;
+    function Caixa: ICaixaModel;
     function Cliente: IClienteModel; overload;
     function Cliente(Value: IClienteModel): IVendaModel; overload;
     function Itens: IItemModel;

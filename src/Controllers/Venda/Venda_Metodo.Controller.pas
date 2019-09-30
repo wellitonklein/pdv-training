@@ -4,17 +4,18 @@ interface
 
 uses
   Venda.Controller.Interf,
-  Venda.Model.Inerf;
+  Venda.Model.Inerf, Caixa.Controller.Interf;
 
 type
   TVendaMetodoController = class(TInterfacedObject, IVendaMetodoController)
   private
     FParent: IVendaController;
     FVendaModel: IVendaModel;
+    FCaixaController: ICaixaController;
   public
-    constructor Create(Parent: IVendaController);
+    constructor Create(Parent: IVendaController; Caixa: ICaixaController);
     destructor Destroy; override;
-    class function New(Parent: IVendaController): IVendaMetodoController;
+    class function New(Parent: IVendaController; Caixa: ICaixaController): IVendaMetodoController;
     function Abrir: IVendaMetodoController;
     function Pagar: IVendaMetodoController;
     function Fechar: IVendaMetodoController;
@@ -76,10 +77,11 @@ begin
   Result := FParent;
 end;
 
-constructor TVendaMetodoController.Create(Parent: IVendaController);
+constructor TVendaMetodoController.Create(Parent: IVendaController; Caixa: ICaixaController);
 begin
   FParent       := Parent;
-  FVendaModel   := TPDVUpdatesModel.New.Venda;
+  FCaixaController := Caixa;
+  FVendaModel   := TPDVUpdatesModel.New.Venda(FCaixaController.Metodo.Model);
 end;
 
 destructor TVendaMetodoController.Destroy;
@@ -114,9 +116,9 @@ begin
   );
 end;
 
-class function TVendaMetodoController.New(Parent: IVendaController): IVendaMetodoController;
+class function TVendaMetodoController.New(Parent: IVendaController; Caixa: ICaixaController): IVendaMetodoController;
 begin
-  Result := Self.Create(Parent);
+  Result := Self.Create(Parent, Caixa);
 end;
 
 function TVendaMetodoController.Pagar: IVendaMetodoController;
