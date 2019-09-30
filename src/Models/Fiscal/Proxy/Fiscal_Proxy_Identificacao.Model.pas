@@ -9,6 +9,7 @@ type
   TFiscalProxyIdentificacaoModel = class(TInterfacedObject, IFiscalProxyIdentificacaoModel)
   private
     FParent: IFiscalProxyModel;
+    FSerie: SmallInt;
     FNumero: SmallInt;
     FData: TDateTime;
   public
@@ -17,6 +18,8 @@ type
     class function New(Parent: IFiscalProxyModel): IFiscalProxyIdentificacaoModel;
     function Numero(Value: SmallInt): IFiscalProxyIdentificacaoModel; overload;
     function Data(Value: TDateTime): IFiscalProxyIdentificacaoModel; overload;
+    function Serie(Value: SmallInt): IFiscalProxyIdentificacaoModel; overload;
+    function Serie: SmallInt; overload;
     function Numero: SmallInt; overload;
     function Data: TDateTime; overload;
     function &End: IFiscalProxyModel;
@@ -62,6 +65,18 @@ end;
 function TFiscalProxyIdentificacaoModel.Numero: SmallInt;
 begin
   Result := FNumero;
+end;
+
+function TFiscalProxyIdentificacaoModel.Serie(
+  Value: SmallInt): IFiscalProxyIdentificacaoModel;
+begin
+  Result := Self;
+  FSerie := Value;
+end;
+
+function TFiscalProxyIdentificacaoModel.Serie: SmallInt;
+begin
+  Result := FSerie;
 end;
 
 function TFiscalProxyIdentificacaoModel.Numero(

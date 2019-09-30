@@ -28,6 +28,8 @@ type
     ['{39400A8E-D161-419E-8DAB-8F519F4B2218}']
     function Numero(Value: SmallInt): IFiscalProxyIdentificacaoModel; overload;
     function Data(Value: TDateTime): IFiscalProxyIdentificacaoModel; overload;
+    function Serie(Value: SmallInt): IFiscalProxyIdentificacaoModel; overload;
+    function Serie: SmallInt; overload;
     function Numero: SmallInt; overload;
     function Data: TDateTime; overload;
     function &End: IFiscalProxyModel;
@@ -37,29 +39,43 @@ type
     ['{DCC7B58A-E94B-4654-BA7B-882076E47790}']
     function Nome(Value: string): IFiscalProxyContribuinteModel<T>; overload;
     function CPFCNPJ(Value: string): IFiscalProxyContribuinteModel<T>; overload;
+    function Fantasia(Value: string): IFiscalProxyContribuinteModel<T>; overload;
     function IE(Value: string): IFiscalProxyContribuinteModel<T>; overload;
     function TeleFone(Value: string): IFiscalProxyContribuinteModel<T>; overload;
+    function IEST(Value: string): IFiscalProxyContribuinteModel<T>; overload;
+    function IM(Value: string): IFiscalProxyContribuinteModel<T>; overload;
+    function CNAE(Value: string): IFiscalProxyContribuinteModel<T>; overload;
+    function CRT(Value: SmallInt): IFiscalProxyContribuinteModel<T>; overload;
     function Nome: string; overload;
+    function Fantasia: string; overload;
     function CPFCNPJ: string; overload;
     function IE: string; overload;
     function TeleFone: string; overload;
+    function IEST: string; overload;
+    function IM: string; overload;
+    function CNAE: string; overload;
+    function CRT: SmallInt; overload;
     function &End: T;
   end;
 
   IFiscalProxyEnderecoModel<T> = interface
     ['{43BD0828-5BFD-450A-A1E7-C31CE1D74310}']
     function Logradouro(Value: string): IFiscalProxyEnderecoModel<T>; overload;
-    function Numero(Value: SmallInt): IFiscalProxyEnderecoModel<T>; overload;
+    function Numero(Value: string): IFiscalProxyEnderecoModel<T>; overload;
     function Bairro(Value: string): IFiscalProxyEnderecoModel<T>; overload;
+    function Complemento(Value: string): IFiscalProxyEnderecoModel<T>; overload;
     function Cidade(Value: string): IFiscalProxyEnderecoModel<T>; overload;
+    function cMunFG(Value: Integer): IFiscalProxyEnderecoModel<T>; overload;
     function UF(Value: string): IFiscalProxyEnderecoModel<T>; overload;
-    function CEP(Value: string): IFiscalProxyEnderecoModel<T>; overload;
+    function CEP(Value: Integer): IFiscalProxyEnderecoModel<T>; overload;
     function Logradouro: string; overload;
-    function Numero: SmallInt; overload;
+    function Numero: string; overload;
     function Bairro: string; overload;
+    function Complemento: string; overload;
     function Cidade: string; overload;
+    function cMunFG: Integer; overload;
     function UF: string; overload;
-    function CEP: string; overload;
+    function CEP: Integer; overload;
     function &End: T;
   end;
 
