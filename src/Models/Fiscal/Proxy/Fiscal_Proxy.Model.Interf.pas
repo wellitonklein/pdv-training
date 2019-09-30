@@ -77,15 +77,24 @@ type
 
   IFiscalProxyProdutoModel = interface
     ['{AA8530AD-61E3-48E4-A665-F7840FB453BC}']
-    function Descricao(Value: string): IFiscalProxyProdutoModel;
-    function cEAN(Value: string): IFiscalProxyProdutoModel;
-    function Qtde(Value: Currency): IFiscalProxyProdutoModel;
-    function vUnit(Value: Currency): IFiscalProxyProdutoModel;
-    function NCM(Value: string): IFiscalProxyProdutoModel;
-    function Aliquota(Value: Currency): IFiscalProxyProdutoModel;
-    function ST(Value: Boolean): IFiscalProxyProdutoModel;
-    function CEST(Value: string): IFiscalProxyProdutoModel;
-    function UND(Value: string): IFiscalProxyProdutoModel;
+    function Descricao(Value: string): IFiscalProxyProdutoModel; overload;
+    function cEAN(Value: string): IFiscalProxyProdutoModel; overload;
+    function Qtde(Value: Currency): IFiscalProxyProdutoModel; overload;
+    function vUnit(Value: Currency): IFiscalProxyProdutoModel; overload;
+    function NCM(Value: string): IFiscalProxyProdutoModel; overload;
+    function Aliquota(Value: Currency): IFiscalProxyProdutoModel; overload;
+    function ST(Value: Boolean): IFiscalProxyProdutoModel; overload;
+    function CEST(Value: string): IFiscalProxyProdutoModel; overload;
+    function UND(Value: string): IFiscalProxyProdutoModel; overload;
+    function Descricao: string; overload;
+    function cEAN: string; overload;
+    function Qtde: Currency; overload;
+    function vUnit: Currency; overload;
+    function NCM: string; overload;
+    function Aliquota: Currency; overload;
+    function ST: Boolean; overload;
+    function CEST: string; overload;
+    function UND: string; overload;
     function &End: IFiscalProxyModel;
   end;
 
