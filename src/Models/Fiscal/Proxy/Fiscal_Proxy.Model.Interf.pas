@@ -17,9 +17,9 @@ type
     function Identificacao: IFiscalProxyIdentificacaoModel;
     function Emitente: IFiscalProxyEmitenteModel;
     function Destinatario: IFiscalProxyDestinatarioModel;
-    function Produto: IFiscalProxyProdutoModel;
-    function Pagamento: IFiscalProxyPagamentoModel;
-    function Exec: IFiscalProxyModel;
+//    function Produto: IFiscalProxyProdutoModel;
+//    function Pagamento: IFiscalProxyPagamentoModel;
+//    function Exec: IFiscalProxyModel;
   end;
 
   IFiscalProxyIdentificacaoModel = interface

@@ -346,6 +346,7 @@
         <DCCReference Include="Models\Fiscal\Proxy\Fiscal_Proxy_Pagamento.Model.pas"/>
         <DCCReference Include="Models\Fiscal\Proxy\Factory\Fiscal_Proxy_Factory.Model.Interf.pas"/>
         <DCCReference Include="Models\Fiscal\Proxy\Factory\Fiscal_Proxy_Factory.Model.pas"/>
+        <DCCReference Include="Models\Fiscal\Proxy\Fiscal_Proxy.Model.pas"/>
         <None Include="mvcbr.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
