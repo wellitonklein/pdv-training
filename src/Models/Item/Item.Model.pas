@@ -4,7 +4,8 @@ interface
 
 uses
   Item.Model.Interf, Entidade_VendaItens.Model,
-  ormbr.container.objectset.interfaces, Conexao.Model.Interf;
+  ormbr.container.objectset.interfaces, Conexao.Model.Interf,
+  Produto.Model.Interf;
 
 type
   TItemModel = class(TInterfacedObject, IItemModel, IItemMetodoModel)
@@ -14,6 +15,7 @@ type
     FIterator: IItemIteratorModel;
     FEntidade: TVENDAITENS;
     FDAO: IContainerObjectSet<TVENDAITENS>;
+    FProduto: IProdutoModel;
   public
     constructor Create;
     destructor Destroy; override;
@@ -26,6 +28,7 @@ type
     function Entidade: TVENDAITENS; overload;
     function Entidade(Value: TVENDAITENS): IItemModel; overload;
     function DAO: IContainerObjectSet<TVENDAITENS>;
+    function Produto: IProdutoModel;
 
     // IItemMetodoModel
     function Vender: IItemMetodoVenderModel;
@@ -84,6 +87,7 @@ begin
   FDAO      := TContainerObjectSet<TVENDAITENS>.Create(FConn.Connection, 15);
   FState    := TItemStateFactoryModel.New.Ativo;
   FIterator := TItemFactoryModel.New.Iterator(Self);
+  FProduto  := TPDVUpdatesModel.New.Produto;
 end;
 
 function TItemModel.DAO: IContainerObjectSet<TVENDAITENS>;
@@ -111,6 +115,11 @@ end;
 class function TItemModel.New: IItemModel;
 begin
   Result := Self.Create;
+end;
+
+function TItemModel.Produto: IProdutoModel;
+begin
+  Result := FProduto;
 end;
 
 function TItemModel.Repetir: IItemMetodoRepetirModel;

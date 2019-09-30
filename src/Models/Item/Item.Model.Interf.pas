@@ -2,7 +2,8 @@ unit Item.Model.Interf;
 
 interface
 
-uses Entidade_VendaItens.Model, ormbr.container.objectset.interfaces;
+uses Entidade_VendaItens.Model, ormbr.container.objectset.interfaces,
+  Produto.Model.Interf;
 
 type
   IItemModel = interface;
@@ -22,6 +23,7 @@ type
     function Entidade: TVENDAITENS; overload;
     function Entidade(Value: TVENDAITENS): IItemModel; overload;
     function DAO: IContainerObjectSet<TVENDAITENS>;
+    function Produto: IProdutoModel;
   end;
 
   IItemIteratorModel = interface

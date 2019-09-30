@@ -26,6 +26,7 @@ type
     { Private declarations }
     FGUUID: String;
     FDESCRICAO: Nullable<String>;
+    FCODIGO: Nullable<String>;
     FPRECO: Nullable<Double>;
     FNCM: Nullable<Integer>;
     FALIQUOTA: Nullable<Double>;
@@ -40,6 +41,10 @@ type
     [Column('GUUID', ftString, 64)]
     [Dictionary('GUUID', 'Mensagem de validação', '', '', '', taLeftJustify)]
     property GUUID: String read GetGUUID write FGUUID;
+
+    [Column('CODIGO', ftString, 20)]
+    [Dictionary('CODIGO', 'Mensagem de validação', '', '', '', taLeftJustify)]
+    property CODIGO: Nullable<String> read FCODIGO write FCODIGO;
 
     [Column('DESCRICAO', ftString, 128)]
     [Dictionary('DESCRICAO', 'Mensagem de validação', '', '', '', taLeftJustify)]

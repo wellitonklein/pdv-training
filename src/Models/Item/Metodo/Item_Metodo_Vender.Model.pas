@@ -21,14 +21,30 @@ type
 implementation
 
 uses
-  Item_State_Factory.Model;
+  Item_State_Factory.Model, System.Generics.Collections, Entidade_Produto.Model,
+  System.SysUtils, PDVUpdates.Model;
 
 { TItemMetodoVenderModel }
 
 function TItemMetodoVenderModel.&End: IItemMetodoModel;
+var
+  ListaProduto: TObjectList<TPRODUTO>;
 begin
   Result := FParent.Metodo;
-  { TODO -oWelliton -cItem : Implementar método de Vender Item }
+
+  ListaProduto := FParent.Produto.DAO.FindWhere(
+    'CODIGO = ' + QuotedStr(IntToStr(FItem))
+  );
+
+  if (ListaProduto.Count <= 0) then
+    raise Exception.Create('Produto não localizado');
+
+  FParent.Entidade(TPDVUpdatesModel.New.Entidade.VendaItens);
+  FParent.Produto.Entidade(ListaProduto[0]);
+  FParent.Entidade.PRODUTO := ListaProduto[0].GUUID;
+  FParent.Entidade.PRECO := ListaProduto[0].PRECO;
+  FParent.DAO.Insert(FParent.Entidade);
+
   FParent.SetState(TItemStateFactoryModel.New.Vendido);
 end;
 
