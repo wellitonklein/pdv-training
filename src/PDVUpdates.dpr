@@ -185,7 +185,9 @@ uses
   Fiscal_Proxy_Emitente.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Emitente.Model.pas',
   Fiscal_Proxy_Destinatario.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Destinatario.Model.pas',
   Fiscal_Proxy_Produto.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Produto.Model.pas',
-  Fiscal_Proxy_Pagamento.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Pagamento.Model.pas';
+  Fiscal_Proxy_Pagamento.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Pagamento.Model.pas',
+  Fiscal_Proxy_Factory.Model.Interf in 'Models\Fiscal\Proxy\Factory\Fiscal_Proxy_Factory.Model.Interf.pas',
+  Fiscal_Proxy_Factory.Model in 'Models\Fiscal\Proxy\Factory\Fiscal_Proxy_Factory.Model.pas';
 
 {$R *.res}
 
