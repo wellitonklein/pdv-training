@@ -6,7 +6,7 @@ uses
   Pagamento.Model.Interf,
   Entidade_VendaPagamentos.Model,
   ormbr.container.objectset.interfaces,
-  Conexao.Model.Interf;
+  Conexao.Model.Interf, Venda.Model.Inerf;
 
 type
   TPagamentoModel = class(TInterfacedObject, IPagamentoModel, IPagamentoTipoModel)
@@ -15,10 +15,11 @@ type
     FIterator: IPagamentoIteratorModel;
     FEntidade: TVENDAPAGAMENTOS;
     FDAO: IContainerObjectSet<TVENDAPAGAMENTOS>;
+    FVenda: IVendaModel;
   public
-    constructor Create;
+    constructor Create(Venda: IVendaModel);
     destructor Destroy; override;
-    class function New : IPagamentoModel;
+    class function New(Venda: IVendaModel): IPagamentoModel;
 
     // IPagamentoModel
     function Tipo: IPagamentoTipoModel;
@@ -44,11 +45,12 @@ uses
 
 function TPagamentoModel.CartaoCredito: IPagamentoTipoMetodoModel;
 begin
-  Result := TPagamentoTipoFactoryModel.New.CartaoCredito(Self);
+  Result := TPagamentoTipoFactoryModel.New.CartaoCredito(Self, FVenda);
 end;
 
-constructor TPagamentoModel.Create;
+constructor TPagamentoModel.Create(Venda: IVendaModel);
 begin
+  FVenda    := Venda;
   FConn     := TPDVUpdatesModel.New.Conexao;
   FEntidade := TPDVUpdatesModel.New.Entidade.VendaPagamentos;
   FDAO      := TContainerObjectSet<TVENDAPAGAMENTOS>.Create(FConn.Connection, 15);
@@ -68,7 +70,7 @@ end;
 
 function TPagamentoModel.Dinheiro: IPagamentoTipoMetodoModel;
 begin
-  Result := TPagamentoTipoFactoryModel.New.Dinheiro(Self);
+  Result := TPagamentoTipoFactoryModel.New.Dinheiro(Self, FVenda);
 end;
 
 function TPagamentoModel.Entidade: TVENDAPAGAMENTOS;
@@ -87,9 +89,9 @@ begin
   Result := FIterator;
 end;
 
-class function TPagamentoModel.New: IPagamentoModel;
+class function TPagamentoModel.New(Venda: IVendaModel): IPagamentoModel;
 begin
-  Result := Self.Create;
+  Result := Self.Create(Venda);
 end;
 
 function TPagamentoModel.Tipo: IPagamentoTipoModel;

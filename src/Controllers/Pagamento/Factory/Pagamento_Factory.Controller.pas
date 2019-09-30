@@ -5,7 +5,7 @@ interface
 uses
   Pagamento_Factory.Controller.Interf,
   Pagamento.Controller.Interf,
-  Pagamento_Operacoes.Controller.Interf;
+  Pagamento_Operacoes.Controller.Interf, Venda.Controller.Interf;
 
 type
   TPagamentoFactoryController = class(TInterfacedObject, IPagamentoFactoryController)
@@ -14,7 +14,7 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New : IPagamentoFactoryController;
-    function Pagamento: IPagamentoController;
+    function Pagamento(Venda: IVendaController): IPagamentoController;
     function Operacoes: IPagamentoOperacoesController;
   end;
 
@@ -46,9 +46,9 @@ begin
   Result := TPagamentoOperacoesController.New;
 end;
 
-function TPagamentoFactoryController.Pagamento: IPagamentoController;
+function TPagamentoFactoryController.Pagamento(Venda: IVendaController): IPagamentoController;
 begin
-  Result := TPagamentoController.New;
+  Result := TPagamentoController.New(Venda);
 end;
 
 end.

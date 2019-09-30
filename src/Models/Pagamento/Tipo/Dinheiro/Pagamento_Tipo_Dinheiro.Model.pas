@@ -3,16 +3,17 @@ unit Pagamento_Tipo_Dinheiro.Model;
 interface
 
 uses
-  Pagamento.Model.Interf;
+  Pagamento.Model.Interf, Venda.Model.Inerf;
 
 type
   TPagamentoTipoDinheiroModel = class(TInterfacedObject, IPagamentoTipoMetodoModel)
   private
     FParent: IPagamentoModel;
+    FVenda: IVendaModel;
   public
-    constructor Create(Parent: IPagamentoModel);
+    constructor Create(Parent: IPagamentoModel; Venda: IVendaModel);
     destructor Destroy; override;
-    class function New(Parent: IPagamentoModel): IPagamentoTipoMetodoModel;
+    class function New(Parent: IPagamentoModel; Venda: IVendaModel): IPagamentoTipoMetodoModel;
     function Executar: IPagamentoMetodoExecutarModel;
     function Estornar: IPagamentoMetodoEstornarModel;
     function &End: IPagamentoModel;
@@ -30,9 +31,10 @@ begin
   Result := FParent;
 end;
 
-constructor TPagamentoTipoDinheiroModel.Create(Parent: IPagamentoModel);
+constructor TPagamentoTipoDinheiroModel.Create(Parent: IPagamentoModel; Venda: IVendaModel);
 begin
   FParent := Parent;
+  FVenda  := Venda;
 end;
 
 destructor TPagamentoTipoDinheiroModel.Destroy;
@@ -48,12 +50,12 @@ end;
 
 function TPagamentoTipoDinheiroModel.Executar: IPagamentoMetodoExecutarModel;
 begin
-  Result := TPagamentoTipoDinheiroMetodoFactoryModel.New.Executar(Self);
+  Result := TPagamentoTipoDinheiroMetodoFactoryModel.New.Executar(Self, FVenda);
 end;
 
-class function TPagamentoTipoDinheiroModel.New(Parent: IPagamentoModel): IPagamentoTipoMetodoModel;
+class function TPagamentoTipoDinheiroModel.New(Parent: IPagamentoModel; Venda: IVendaModel): IPagamentoTipoMetodoModel;
 begin
-  Result := Self.Create(Parent);
+  Result := Self.Create(Parent, Venda);
 end;
 
 end.

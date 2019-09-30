@@ -3,17 +3,18 @@ unit Pagamento_Tipo_CartaoCredito.Controller;
 interface
 
 uses
-  Pagamento.Controller.Interf, Pagamento.Model.Interf;
+  Pagamento.Controller.Interf, Pagamento.Model.Interf, Venda.Controller.Interf;
 
 type
   TPagamentoTipoCartaoCreditoController = class(TInterfacedObject, IPagamentoMetodoController)
   private
     FParent: IPagamentoController;
     FModel: IPagamentoModel;
+    FVenda: IVendaController;
   public
-    constructor Create(Parent: IPagamentoController);
+    constructor Create(Parent: IPagamentoController; Venda: IVendaController);
     destructor Destroy; override;
-    class function New(Parent: IPagamentoController): IPagamentoMetodoController;
+    class function New(Parent: IPagamentoController; Venda: IVendaController): IPagamentoMetodoController;
     function Executar: IPagamentoMetodoController;
     function Estornar: IPagamentoMetodoController;
     function SelecaoPagamento: IPagamentoMetodoController;
@@ -32,10 +33,11 @@ begin
   Result := FParent;
 end;
 
-constructor TPagamentoTipoCartaoCreditoController.Create(Parent: IPagamentoController);
+constructor TPagamentoTipoCartaoCreditoController.Create(Parent: IPagamentoController; Venda: IVendaController);
 begin
   FParent := Parent;
-  FModel  := TPDVUpdatesModel.New.Pagamento;
+  FVenda  := Venda;
+  FModel  := TPDVUpdatesModel.New.Pagamento(FVenda.Model);
 end;
 
 destructor TPagamentoTipoCartaoCreditoController.Destroy;
@@ -76,9 +78,9 @@ begin
     .&End
 end;
 
-class function TPagamentoTipoCartaoCreditoController.New(Parent: IPagamentoController): IPagamentoMetodoController;
+class function TPagamentoTipoCartaoCreditoController.New(Parent: IPagamentoController; Venda: IVendaController): IPagamentoMetodoController;
 begin
-  Result := Self.Create(Parent);
+  Result := Self.Create(Parent, Venda);
 end;
 
 function TPagamentoTipoCartaoCreditoController.SelecaoPagamento: IPagamentoMetodoController;

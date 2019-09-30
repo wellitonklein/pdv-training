@@ -10,7 +10,6 @@ type
   IPagamentoModel = interface;
   IPagamentoIteratorModel = interface;
   IPagamentoTipoModel = interface;
-  IPagamentoTipoFactoryModel = interface;
   IPagamentoTipoMetodoModel = interface;
   IPagamentoMetodoExecutarModel = interface;
   IPagamentoMetodoEstornarModel = interface;
@@ -55,12 +54,6 @@ type
     ['{1405A6B7-8630-4528-8FCF-589332347EAF}']
     function SetIndex(Value: SmallInt): IPagamentoMetodoEstornarModel;
     function &End: IPagamentoTipoMetodoModel;
-  end;
-
-  IPagamentoTipoFactoryModel = interface
-    ['{F9B50FE5-0A54-4FDF-80A1-2E89AC72A202}']
-    function Dinheiro(Parent: IPagamentoModel): IPagamentoTipoMetodoModel;
-    function CartaoCredito(Parent: IPagamentoModel): IPagamentoTipoMetodoModel;
   end;
 
 implementation

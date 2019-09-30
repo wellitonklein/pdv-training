@@ -33,7 +33,7 @@ type
     function Caixa: ICaixaController;
     function Item(Venda: IVendaController): IItemController;
     function Cliente: IClienteController;
-    function Pagamento: IPagamentoController;
+    function Pagamento(Venda: IVendaController): IPagamentoController;
     function Venda(Caixa: ICaixaController): IVendaController;
   end;
 
@@ -70,9 +70,9 @@ begin
   result := Self.Create;
 end;
 
-function TPDVUpdatesController.Pagamento: IPagamentoController;
+function TPDVUpdatesController.Pagamento(Venda: IVendaController): IPagamentoController;
 begin
-  Result := TPagamentoFactoryController.New.Pagamento;
+  Result := TPagamentoFactoryController.New.Pagamento(Venda);
 end;
 
 //class function TPDVUpdatesController.New(const AView: IView;

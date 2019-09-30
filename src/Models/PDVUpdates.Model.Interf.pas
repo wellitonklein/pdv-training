@@ -23,7 +23,7 @@ type
     function Usuario: IUsuarioModel;
     function Item(Venda: IVendaModel): IItemModel;
     function Cliente: IClienteModel;
-    function Pagamento: IPagamentoModel;
+    function Pagamento(Venda: IVendaModel): IPagamentoModel;
     function Venda(Caixa: ICaixaModel): IVendaModel;
     function Produto: IProdutoModel;
   end;

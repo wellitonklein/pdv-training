@@ -105,7 +105,7 @@ begin
   FVenda     := TPDVUpdatesController.New.Venda(FCaixa);
   FItem      := TPDVUpdatesController.New.Item(FVenda);
   FCliente   := TPDVUpdatesController.New.Cliente;
-  FPagamento := TPDVUpdatesController.New.Pagamento;
+  FPagamento := TPDVUpdatesController.New.Pagamento(FVenda);
 end;
 
 procedure TPDVUpdatesView.ListBoxItem10Click(Sender: TObject);

@@ -50,7 +50,7 @@ begin
     .Iterator
       .Add(
         TPDVUpdatesController.New
-          .Pagamento
+          .Pagamento(FParent)
             .Estornar.&End
           .Model
       )
@@ -64,7 +64,7 @@ begin
     .Iterator
       .Add(
         TPDVUpdatesController.New
-          .Pagamento
+          .Pagamento(FParent)
             .Executar.&End
           .Model
       )

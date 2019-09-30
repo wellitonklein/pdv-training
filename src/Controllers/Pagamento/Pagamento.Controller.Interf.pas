@@ -3,7 +3,7 @@ unit Pagamento.Controller.Interf;
 interface
 
 uses
-  Pagamento.Model.Interf;
+  Pagamento.Model.Interf, Venda.Controller.Interf;
 
 type
   IPagamentoController = interface;
@@ -14,6 +14,7 @@ type
     function Model: IPagamentoModel;
     function Executar: IPagamentoMetodoController;
     function Estornar: IPagamentoMetodoController;
+    function Venda: IVendaController;
   end;
 
   IPagamentoMetodoController = interface

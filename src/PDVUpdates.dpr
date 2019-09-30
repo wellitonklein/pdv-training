@@ -169,7 +169,8 @@ uses
   Produto_Metodo_Buscar.Model in 'Models\Produto\Metodo\Produto_Metodo_Buscar.Model.pas',
   Produto_Metodo_Factory.Model.Interf in 'Models\Produto\Metodo\Factory\Produto_Metodo_Factory.Model.Interf.pas',
   Produto_Metodo_Factory.Model in 'Models\Produto\Metodo\Factory\Produto_Metodo_Factory.Model.pas',
-  Entidade_VendaPagamentos.Model in 'Models\Entidade\Entidade_VendaPagamentos.Model.pas';
+  Entidade_VendaPagamentos.Model in 'Models\Entidade\Entidade_VendaPagamentos.Model.pas',
+  Pagamento_Tipo_Factory.Model.Interf in 'Models\Pagamento\Tipo\Factory\Pagamento_Tipo_Factory.Model.Interf.pas';
 
 {$R *.res}
 

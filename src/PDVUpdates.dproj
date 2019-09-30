@@ -328,6 +328,7 @@
         <DCCReference Include="Models\Produto\Metodo\Factory\Produto_Metodo_Factory.Model.Interf.pas"/>
         <DCCReference Include="Models\Produto\Metodo\Factory\Produto_Metodo_Factory.Model.pas"/>
         <DCCReference Include="Models\Entidade\Entidade_VendaPagamentos.Model.pas"/>
+        <DCCReference Include="Models\Pagamento\Tipo\Factory\Pagamento_Tipo_Factory.Model.Interf.pas"/>
         <None Include="mvcbr.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

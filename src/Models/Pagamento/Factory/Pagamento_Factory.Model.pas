@@ -3,7 +3,7 @@ unit Pagamento_Factory.Model;
 interface
 
 uses
-  Pagamento_Factory.Model.Interf, Pagamento.Model.Interf;
+  Pagamento_Factory.Model.Interf, Pagamento.Model.Interf, Venda.Model.Inerf;
 
 type
   TPagamentoFactoryModel = class(TInterfacedObject, IPagamentoFactoryModel)
@@ -12,7 +12,7 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New : IPagamentoFactoryModel;
-    function Pagamento: IPagamentoModel;
+    function Pagamento(Venda: IVendaModel): IPagamentoModel;
     function Iterator(Parent: IPagamentoModel): IPagamentoIteratorModel;
   end;
 
@@ -45,9 +45,9 @@ begin
   Result := Self.Create;
 end;
 
-function TPagamentoFactoryModel.Pagamento: IPagamentoModel;
+function TPagamentoFactoryModel.Pagamento(Venda: IVendaModel): IPagamentoModel;
 begin
-  Result := TPagamentoModel.New;
+  Result := TPagamentoModel.New(Venda);
 end;
 
 end.

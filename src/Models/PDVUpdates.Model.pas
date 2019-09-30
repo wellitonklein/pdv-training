@@ -27,7 +27,7 @@ type
     function Usuario: IUsuarioModel;
     function Item(Venda: IVendaModel): IItemModel;
     function Cliente: IClienteModel;
-    function Pagamento: IPagamentoModel;
+    function Pagamento(Venda: IVendaModel): IPagamentoModel;
     function Venda(Caixa: ICaixaModel): IVendaModel;
     function Produto: IProdutoModel;
   end;
@@ -87,9 +87,9 @@ begin
   Result := Self.Create;
 end;
 
-function TPDVUpdatesModel.Pagamento: IPagamentoModel;
+function TPDVUpdatesModel.Pagamento(Venda: IVendaModel): IPagamentoModel;
 begin
-  Result := TPagamentoFactoryModel.New.Pagamento;
+  Result := TPagamentoFactoryModel.New.Pagamento(Venda);
 end;
 
 function TPDVUpdatesModel.Produto: IProdutoModel;

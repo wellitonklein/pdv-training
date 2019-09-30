@@ -107,7 +107,7 @@ begin
   FCaixa      := Caixa;
   FCliente    := TPDVUpdatesModel.New.Cliente;
   FItens      := TPDVUpdatesModel.New.Item(Self);
-  FPagamentos := TPDVUpdatesModel.New.Pagamento;
+  FPagamentos := TPDVUpdatesModel.New.Pagamento(Self);
 end;
 
 function TVendaModel.DAO: IContainerObjectSet<TVENDA>;

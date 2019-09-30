@@ -4,19 +4,21 @@ interface
 
 uses
   Pagamento.Controller.Interf,
-  Pagamento.Model.Interf;
+  Pagamento.Model.Interf, Venda.Controller.Interf;
 
 type
   TPagamentoController = class(TInterfacedObject, IPagamentoController)
   private
     FModel: IPagamentoModel;
+    FVenda: IVendaController;
   public
-    constructor Create;
+    constructor Create(Venda: IVendaController);
     destructor Destroy; override;
-    class function New : IPagamentoController;
+    class function New(Venda: IVendaController): IPagamentoController;
     function Model: IPagamentoModel;
     function Executar: IPagamentoMetodoController;
     function Estornar: IPagamentoMetodoController;
+    function Venda: IVendaController;
   end;
 
 implementation
@@ -29,9 +31,10 @@ uses
 
 { TPagamentoController }
 
-constructor TPagamentoController.Create;
+constructor TPagamentoController.Create(Venda: IVendaController);
 begin
-  FModel := TPDVUpdatesModel.New.Pagamento;
+  FVenda := Venda;
+  FModel := TPDVUpdatesModel.New.Pagamento(Venda.Model);
 end;
 
 destructor TPagamentoController.Destroy;
@@ -53,9 +56,9 @@ begin
 
   case FPagamento.Tipo of
     tpDinheiro:
-      Result := TPagamentoTipoFactoryController.New.Dinheiro(Self).Estornar;
+      Result := TPagamentoTipoFactoryController.New.Dinheiro(Self, FVenda).Estornar;
     tpCartaoCredito:
-      Result := TPagamentoTipoFactoryController.New.CartaoCredito(Self).Estornar;
+      Result := TPagamentoTipoFactoryController.New.CartaoCredito(Self, FVenda).Estornar;
   end;
 end;
 
@@ -72,9 +75,9 @@ begin
 
   case FPagamento.Tipo of
     tpDinheiro:
-      Result := TPagamentoTipoFactoryController.New.Dinheiro(Self).Executar;
+      Result := TPagamentoTipoFactoryController.New.Dinheiro(Self, FVenda).Executar;
     tpCartaoCredito:
-      Result := TPagamentoTipoFactoryController.New.CartaoCredito(Self).Executar;
+      Result := TPagamentoTipoFactoryController.New.CartaoCredito(Self, FVenda).Executar;
   end;
 end;
 
@@ -83,9 +86,14 @@ begin
   Result := FModel;
 end;
 
-class function TPagamentoController.New: IPagamentoController;
+class function TPagamentoController.New(Venda: IVendaController): IPagamentoController;
 begin
-  Result := Self.Create;
+  Result := Self.Create(Venda);
+end;
+
+function TPagamentoController.Venda: IVendaController;
+begin
+  Result := FVenda;
 end;
 
 end.

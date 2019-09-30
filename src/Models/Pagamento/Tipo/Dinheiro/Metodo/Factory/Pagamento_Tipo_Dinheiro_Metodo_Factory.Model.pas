@@ -3,16 +3,17 @@ unit Pagamento_Tipo_Dinheiro_Metodo_Factory.Model;
 interface
 
 uses
-  Pagamento_Tipo_Dinheiro_Metodo_Factory.Model.Interf, Pagamento.Model.Interf;
+  Pagamento_Tipo_Dinheiro_Metodo_Factory.Model.Interf, Pagamento.Model.Interf,
+  Venda.Model.Inerf;
 
 type
-  TPagamentoTipoDinheiroMetodoFactoryModel = class(TInterfacedObject, IPagamentoTipoDinheirometodoModel)
+  TPagamentoTipoDinheiroMetodoFactoryModel = class(TInterfacedObject, IPagamentoTipoDinheiroMetodoFactoryModel)
   private
   public
     constructor Create;
     destructor Destroy; override;
-    class function New : IPagamentoTipoDinheirometodoModel;
-    function Executar(Parent: IPagamentoTipoMetodoModel): IPagamentoMetodoExecutarModel;
+    class function New : IPagamentoTipoDinheiroMetodoFactoryModel;
+    function Executar(Parent: IPagamentoTipoMetodoModel; Venda: IVendaModel): IPagamentoMetodoExecutarModel;
     function Estornar(Parent: IPagamentoTipoMetodoModel): IPagamentoMetodoEstornarModel;
   end;
 
@@ -41,13 +42,12 @@ begin
   Result := TPagamentoTipoDinheiroMetodoEstornarModel.New(Parent);
 end;
 
-function TPagamentoTipoDinheiroMetodoFactoryModel.Executar(
-  Parent: IPagamentoTipoMetodoModel): IPagamentoMetodoExecutarModel;
+function TPagamentoTipoDinheiroMetodoFactoryModel.Executar(Parent: IPagamentoTipoMetodoModel; Venda: IVendaModel): IPagamentoMetodoExecutarModel;
 begin
-  Result := TPagamentoTipoDinheiroMetodoExecutarModel.New(Parent);
+  Result := TPagamentoTipoDinheiroMetodoExecutarModel.New(Parent, Venda);
 end;
 
-class function TPagamentoTipoDinheiroMetodoFactoryModel.New: IPagamentoTipoDinheirometodoModel;
+class function TPagamentoTipoDinheiroMetodoFactoryModel.New: IPagamentoTipoDinheiroMetodoFactoryModel;
 begin
   Result := Self.Create;
 end;

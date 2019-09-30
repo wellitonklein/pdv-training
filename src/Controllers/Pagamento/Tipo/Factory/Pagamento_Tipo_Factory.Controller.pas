@@ -3,7 +3,8 @@ unit Pagamento_Tipo_Factory.Controller;
 interface
 
 uses
-  Pagamento_Tipo_Factory.Controller.Interf, Pagamento.Controller.Interf;
+  Pagamento_Tipo_Factory.Controller.Interf, Pagamento.Controller.Interf,
+  Venda.Controller.Interf;
 
 type
   TPagamentoTipoFactoryController = class(TInterfacedObject, IPagamentoTipoFactoryController)
@@ -12,8 +13,8 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New : IPagamentoTipoFactoryController;
-    function Dinheiro(Parent: IPagamentoController): IPagamentoMetodoController;
-    function CartaoCredito(Parent: IPagamentoController): IPagamentoMetodoController;
+    function Dinheiro(Parent: IPagamentoController; Venda: IVendaController): IPagamentoMetodoController;
+    function CartaoCredito(Parent: IPagamentoController; Venda: IVendaController): IPagamentoMetodoController;
   end;
 
 implementation
@@ -24,9 +25,9 @@ uses
 
 { TPagamentoTipoFactoryController }
 
-function TPagamentoTipoFactoryController.CartaoCredito(Parent: IPagamentoController): IPagamentoMetodoController;
+function TPagamentoTipoFactoryController.CartaoCredito(Parent: IPagamentoController; Venda: IVendaController): IPagamentoMetodoController;
 begin
-  Result := TPagamentoTipoCartaoCreditoController.New(Parent);
+  Result := TPagamentoTipoCartaoCreditoController.New(Parent, Venda);
 end;
 
 constructor TPagamentoTipoFactoryController.Create;
@@ -40,9 +41,9 @@ begin
   inherited;
 end;
 
-function TPagamentoTipoFactoryController.Dinheiro(Parent: IPagamentoController): IPagamentoMetodoController;
+function TPagamentoTipoFactoryController.Dinheiro(Parent: IPagamentoController; Venda: IVendaController): IPagamentoMetodoController;
 begin
-  Result := TPagamentoTipoDinheiroController.New(Parent);
+  Result := TPagamentoTipoDinheiroController.New(Parent, Venda);
 end;
 
 class function TPagamentoTipoFactoryController.New: IPagamentoTipoFactoryController;
