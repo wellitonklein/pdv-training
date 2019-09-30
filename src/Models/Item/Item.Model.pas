@@ -3,13 +3,17 @@ unit Item.Model;
 interface
 
 uses
-  Item.Model.Interf;
+  Item.Model.Interf, Entidade_VendaItens.Model,
+  ormbr.container.objectset.interfaces, Conexao.Model.Interf;
 
 type
   TItemModel = class(TInterfacedObject, IItemModel, IItemMetodoModel)
   private
+    FConn: IConexaoModel;
     FState: IItemMetodoModel;
     FIterator: IItemIteratorModel;
+    FEntidade: TVENDAITENS;
+    FDAO: IContainerObjectSet<TVENDAITENS>;
   public
     constructor Create;
     destructor Destroy; override;
@@ -19,6 +23,9 @@ type
     function Metodo: IItemMetodoModel;
     function SetState(Value: IItemMetodoModel): IItemModel;
     function Iterator: IItemIteratorModel;
+    function Entidade: TVENDAITENS; overload;
+    function Entidade(Value: TVENDAITENS): IItemModel; overload;
+    function DAO: IContainerObjectSet<TVENDAITENS>;
 
     // IItemMetodoModel
     function Vender: IItemMetodoVenderModel;
@@ -32,7 +39,8 @@ type
 implementation
 
 uses
-  Item_Metodo_Factory.Model, Item_State_Factory.Model, Item_Factory.Model;
+  Item_Metodo_Factory.Model, Item_State_Factory.Model, Item_Factory.Model,
+  PDVUpdates.Model, ormbr.container.objectset;
 
 { TItemModel }
 
@@ -53,6 +61,17 @@ begin
   Result := Self;
 end;
 
+function TItemModel.Entidade: TVENDAITENS;
+begin
+  Result := FEntidade;
+end;
+
+function TItemModel.Entidade(Value: TVENDAITENS): IItemModel;
+begin
+  Result := Self;
+  FEntidade := Value;
+end;
+
 function TItemModel.Iterator: IItemIteratorModel;
 begin
   Result := FIterator;
@@ -60,8 +79,16 @@ end;
 
 constructor TItemModel.Create;
 begin
+  FConn     := TPDVUpdatesModel.New.Conexao;
+  FEntidade := TPDVUpdatesModel.New.Entidade.VendaItens;
+  FDAO      := TContainerObjectSet<TVENDAITENS>.Create(FConn.Connection, 15);
   FState    := TItemStateFactoryModel.New.Ativo;
   FIterator := TItemFactoryModel.New.Iterator(Self);
+end;
+
+function TItemModel.DAO: IContainerObjectSet<TVENDAITENS>;
+begin
+  Result := FDAO;
 end;
 
 function TItemModel.Desconto: IItemMetodoDescontoModel;

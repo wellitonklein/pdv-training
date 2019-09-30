@@ -8,7 +8,8 @@ uses
   Entidade_CaixaOperacoes.Model,
   Entidade_Venda.Model,
   Entidade_Cliente.Model,
-  Entidade_Produto.Model;
+  Entidade_Produto.Model,
+  Entidade_VendaItens.Model;
 
 type
 
@@ -20,6 +21,7 @@ type
     function Venda: TVenda;
     function Cliente: TCliente;
     function Produto: TPRODUTO;
+    function VendaItens: TVENDAITENS;
   end;
 
 implementation

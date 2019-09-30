@@ -9,7 +9,8 @@ uses
   Entidade_CaixaOperacoes.Model,
   Entidade_Venda.Model,
   Entidade_Cliente.Model,
-  Entidade_Produto.Model;
+  Entidade_Produto.Model,
+  Entidade_VendaItens.Model;
 
 type
   TEntidadeFactoryModel = class(TInterfacedObject, IEntidadeFactoryModel)
@@ -24,6 +25,7 @@ type
     function Venda: TVenda;
     function Cliente: TCliente;
     function Produto: TPRODUTO;
+    function VendaItens: TVENDAITENS;
   end;
 
 implementation
@@ -74,6 +76,11 @@ end;
 function TEntidadeFactoryModel.Venda: TVenda;
 begin
   Result := TVENDA.Create;
+end;
+
+function TEntidadeFactoryModel.VendaItens: TVENDAITENS;
+begin
+  Result := TVENDAITENS.Create;
 end;
 
 end.

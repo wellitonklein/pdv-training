@@ -160,7 +160,8 @@ uses
   Entidade_CaixaOperacoes.Model in 'Models\Entidade\Entidade_CaixaOperacoes.Model.pas',
   Entidade_Venda.Model in 'Models\Entidade\Entidade_Venda.Model.pas',
   Entidade_Cliente.Model in 'Models\Entidade\Entidade_Cliente.Model.pas',
-  Entidade_Produto.Model in 'Models\Entidade\Entidade_Produto.Model.pas';
+  Entidade_Produto.Model in 'Models\Entidade\Entidade_Produto.Model.pas',
+  Entidade_VendaItens.Model in 'Models\Entidade\Entidade_VendaItens.Model.pas';
 
 {$R *.res}
 

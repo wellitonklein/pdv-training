@@ -2,6 +2,8 @@ unit Item.Model.Interf;
 
 interface
 
+uses Entidade_VendaItens.Model, ormbr.container.objectset.interfaces;
+
 type
   IItemModel = interface;
   IItemIteratorModel = interface;
@@ -17,6 +19,9 @@ type
     function Metodo: IItemMetodoModel;
     function SetState(Value: IItemMetodoModel): IItemModel;
     function Iterator: IItemIteratorModel;
+    function Entidade: TVENDAITENS; overload;
+    function Entidade(Value: TVENDAITENS): IItemModel; overload;
+    function DAO: IContainerObjectSet<TVENDAITENS>;
   end;
 
   IItemIteratorModel = interface
