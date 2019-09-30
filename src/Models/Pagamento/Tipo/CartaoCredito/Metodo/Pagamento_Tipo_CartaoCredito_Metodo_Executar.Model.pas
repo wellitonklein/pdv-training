@@ -20,11 +20,20 @@ type
 
 implementation
 
+uses
+  PDVUpdates.Model,
+  PDVUpdates_Type.Controller;
+
 { TPagamentoTipoCartaoCreditoMetodoExecutarModel }
 
 function TPagamentoTipoCartaoCreditoMetodoExecutarModel.&End: IPagamentoTipoMetodoModel;
 begin
   Result := FParent;
+
+  FParent.&End.Entidade(TPDVUpdatesModel.New.Entidade.VendaPagamentos);
+  FParent.&End.Entidade.TIPO  := Integer(tpCartaoCredito);
+  FParent.&End.Entidade.VALOR := FValor;
+  FParent.&End.DAO.Insert(FParent.&End.Entidade);
 end;
 
 constructor TPagamentoTipoCartaoCreditoMetodoExecutarModel.Create(Parent: IPagamentoTipoMetodoModel);
