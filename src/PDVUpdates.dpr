@@ -177,7 +177,8 @@ uses
   Fiscal_NFCe.Model.Interf in 'Models\Fiscal\NFCe\Fiscal_NFCe.Model.Interf.pas',
   Fiscal_NFCe_Factory.Model in 'Models\Fiscal\NFCe\Factory\Fiscal_NFCe_Factory.Model.pas',
   Fiscal.Model in 'Models\Fiscal\Fiscal.Model.pas',
-  Fiscal_NFCe_Componentes.Model.Interf in 'Models\Fiscal\NFCe\Componentes\Fiscal_NFCe_Componentes.Model.Interf.pas';
+  Fiscal_NFCe_Componentes.Model.Interf in 'Models\Fiscal\NFCe\Componentes\Fiscal_NFCe_Componentes.Model.Interf.pas',
+  Fiscal_Proxy.Model.Interf in 'Models\Fiscal\Proxy\Fiscal_Proxy.Model.Interf.pas';
 
 {$R *.res}
 
