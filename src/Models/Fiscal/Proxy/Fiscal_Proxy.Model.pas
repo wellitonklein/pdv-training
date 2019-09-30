@@ -3,21 +3,22 @@ unit Fiscal_Proxy.Model;
 interface
 
 uses
-  Fiscal_Proxy.Model.Interf, System.Generics.Collections;
+  Fiscal_Proxy.Model.Interf, System.Generics.Collections, Fiscal.Model.Interf;
 
 type
   TFiscalProxyModel = class(TInterfacedObject, IFiscalProxyModel,
     IFiscalProxyProdutoListaModel, IFiscalProxyPagamentoListaModel)
   private
+    FParent: IFiscalComponente;
     FIdentificacao: IFiscalProxyIdentificacaoModel;
     FEmitente: IFiscalProxyEmitenteModel;
     FDestinatario: IFiscalProxyDestinatarioModel;
     FProdutoLista: TList<IFiscalProxyProdutoModel>;
     FPagamentoLista: TList<IFiscalProxyPagamentoModel>;
   public
-    constructor Create;
+    constructor Create(Parent: IFiscalComponente);
     destructor Destroy; override;
-    class function New : IFiscalProxyModel;
+    class function New(Parent: IFiscalComponente): IFiscalProxyModel;
 
     // IFiscalProxyModel
     function Identificacao: IFiscalProxyIdentificacaoModel;
@@ -25,7 +26,7 @@ type
     function Destinatario: IFiscalProxyDestinatarioModel;
     function Produto: IFiscalProxyProdutoListaModel;
     function Pagamento: IFiscalProxyPagamentoListaModel;
-//    function Exec: IFiscalProxyModel;
+    function Exec: IFiscalProxyModel;
 
     // IFiscalProxyProdutoListaModel
     function AddProduto: IFiscalProxyProdutoModel;
@@ -64,8 +65,9 @@ begin
   Result := FProdutoLista.Items[Pred(FProdutoLista.Count)];
 end;
 
-constructor TFiscalProxyModel.Create;
+constructor TFiscalProxyModel.Create(Parent: IFiscalComponente);
 begin
+  FParent         := Parent;
   FIdentificacao  := TFiscalProxyFactoryModel.New.Identificacao(Self);
   FEmitente       := TFiscalProxyFactoryModel.New.Emitente(Self);
   FDestinatario   := TFiscalProxyFactoryModel.New.Destinatario(Self);
@@ -100,14 +102,20 @@ begin
   Result := Self;
 end;
 
+function TFiscalProxyModel.Exec: IFiscalProxyModel;
+begin
+  Result := Self;
+  FParent.Emitir(Self);
+end;
+
 function TFiscalProxyModel.Identificacao: IFiscalProxyIdentificacaoModel;
 begin
   Result := FIdentificacao;
 end;
 
-class function TFiscalProxyModel.New: IFiscalProxyModel;
+class function TFiscalProxyModel.New(Parent: IFiscalComponente): IFiscalProxyModel;
 begin
-  Result := Self.Create;
+  Result := Self.Create(Parent);
 end;
 
 function TFiscalProxyModel.Pagamento: IFiscalProxyPagamentoListaModel;

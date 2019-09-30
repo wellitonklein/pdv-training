@@ -10,18 +10,21 @@ uses
   ACBrNFeDANFEClass,
   ACBrDANFCeFortesFr,
 
-  Fiscal_NFCe_Componentes.Model.Interf;
+  Fiscal.Model.Interf,
+  Fiscal_Proxy.Model.Interf;
 
 type
-  TFiscalNFCeComponentesModel = class(TInterfacedObject, IFiscalNFCeComponenteModel<TACBrNFe>)
+  TFiscalNFCeComponentesModel = class(TInterfacedObject, IFiscalComponente)
   private
     FACBrNFe: TACBrNFe;
     FACBrNFeDANFCeFortes: TACBrNFeDANFCeFortes;
+    FProxy: IFiscalProxyModel;
   public
     constructor Create;
     destructor Destroy; override;
-    class function New : IFiscalNFCeComponenteModel<TACBrNFe>;
-    function Driver: TACBrNFe;
+    class function New : IFiscalComponente;
+//    function Driver: TACBrNFe;
+    function Emitir(Proxy: IFiscalProxyModel): IFiscalComponente;
   end;
 
 implementation
@@ -46,12 +49,19 @@ begin
   inherited;
 end;
 
-function TFiscalNFCeComponentesModel.Driver: TACBrNFe;
+//function TFiscalNFCeComponentesModel.Driver: TACBrNFe;
+//begin
+//  Result := FACBrNFe;
+//end;
+
+function TFiscalNFCeComponentesModel.Emitir(
+  Proxy: IFiscalProxyModel): IFiscalComponente;
 begin
-  Result := FACBrNFe;
+  Result := Self;
+  FProxy := Proxy;
 end;
 
-class function TFiscalNFCeComponentesModel.New: IFiscalNFCeComponenteModel<TACBrNFe>;
+class function TFiscalNFCeComponentesModel.New: IFiscalComponente;
 begin
   Result := Self.Create;
 end;
