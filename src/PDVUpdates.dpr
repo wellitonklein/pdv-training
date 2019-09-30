@@ -184,7 +184,8 @@ uses
   Fiscal_Proxy_Endereco.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Endereco.Model.pas',
   Fiscal_Proxy_Emitente.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Emitente.Model.pas',
   Fiscal_Proxy_Destinatario.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Destinatario.Model.pas',
-  Fiscal_Proxy_Produto.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Produto.Model.pas';
+  Fiscal_Proxy_Produto.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Produto.Model.pas',
+  Fiscal_Proxy_Pagamento.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Pagamento.Model.pas';
 
 {$R *.res}
 
