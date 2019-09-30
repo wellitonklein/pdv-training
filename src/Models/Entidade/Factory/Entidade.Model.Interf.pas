@@ -7,7 +7,8 @@ uses
   Entidade_Caixa.Model,
   Entidade_CaixaOperacoes.Model,
   Entidade_Venda.Model,
-  Entidade_Cliente.Model;
+  Entidade_Cliente.Model,
+  Entidade_Produto.Model;
 
 type
 
@@ -18,6 +19,7 @@ type
     function CaixaOperacoes: TCAIXAOPERACOES;
     function Venda: TVenda;
     function Cliente: TCliente;
+    function Produto: TPRODUTO;
   end;
 
 implementation

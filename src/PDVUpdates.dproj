@@ -318,6 +318,7 @@
         <DCCReference Include="Models\Entidade\Entidade_CaixaOperacoes.Model.pas"/>
         <DCCReference Include="Models\Entidade\Entidade_Venda.Model.pas"/>
         <DCCReference Include="Models\Entidade\Entidade_Cliente.Model.pas"/>
+        <DCCReference Include="Models\Entidade\Entidade_Produto.Model.pas"/>
         <None Include="mvcbr.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
