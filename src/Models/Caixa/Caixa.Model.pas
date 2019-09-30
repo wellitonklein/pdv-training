@@ -43,7 +43,7 @@ implementation
 
 uses
   Caixa_Metodo_Factory.Model, Caixa_State_Factory.Model, PDVUpdates.Model,
-  ormbr.container.objectset, PDVUpdates_Type.Controller;
+  ormbr.container.objectset, PDVUpdates_Type.Controller, System.SysUtils;
 
 { TCaixaModel }
 
@@ -97,7 +97,7 @@ end;
 
 destructor TCaixaModel.Destroy;
 begin
-
+  FreeAndNil(FEntidade);
   inherited;
 end;
 

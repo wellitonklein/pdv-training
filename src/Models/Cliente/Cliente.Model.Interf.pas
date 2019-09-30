@@ -2,6 +2,9 @@ unit Cliente.Model.Interf;
 
 interface
 
+uses
+  Entidade_Cliente.Model, ormbr.container.objectset.interfaces;
+
 type
   IClienteModel = interface;
   IClienteMetodoModel = interface;
@@ -12,6 +15,9 @@ type
     ['{E0DA49D3-2B59-4929-84A8-62F8F2B9E9CC}']
     function Metodo: IClienteMetodoModel;
     function SetState(Value: IClienteMetodoModel): IClienteModel;
+    function Entidade: TCLIENTE; overload;
+    function Entidade(Value: TCLIENTE): IClienteModel; overload;
+    function DAO: IContainerObjectSet<TCLIENTE>;
   end;
 
   IClienteMetodoModel = interface

@@ -86,9 +86,16 @@ begin
 end;
 
 function TVendaModel.Cliente(Value: IClienteModel): IVendaModel;
+var
+  VENDA: TVENDA;
 begin
   Result := Self;
   FCliente := Value;
+
+  VENDA := FEntidade;
+  FDAO.Modify(VENDA);
+  VENDA.CLIENTE := FCliente.Entidade.GUUID;
+  FDAO.Update(VENDA);
 end;
 
 constructor TVendaModel.Create(Caixa: ICaixaModel);

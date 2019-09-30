@@ -23,7 +23,7 @@ type
 implementation
 
 uses
-  PDVUpdates.Model, Captura_ValorView;
+  PDVUpdates.Model, Captura_ValorView, System.SysUtils;
 
 { TClienteMetodoController }
 
@@ -37,7 +37,12 @@ begin
   Result := Self;
   FModel.Metodo
     .Buscar
-      .PorCPF('')
+      .PorCPF(
+        FormatCurr(
+          '###########',
+          TCapturaValorView.New(nil).ExibeForm('Informe o CPF do cliente', 'Confirmar', 'Cancelar')
+        )
+      )
     .&End;
 end;
 

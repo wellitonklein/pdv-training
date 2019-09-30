@@ -158,7 +158,8 @@ uses
   Usuario_Funcoes.Model in 'Models\Usuario\Usuario_Funcoes.Model.pas',
   Entidade_Caixa.Model in 'Models\Entidade\Entidade_Caixa.Model.pas',
   Entidade_CaixaOperacoes.Model in 'Models\Entidade\Entidade_CaixaOperacoes.Model.pas',
-  Entidade_Venda.Model in 'Models\Entidade\Entidade_Venda.Model.pas';
+  Entidade_Venda.Model in 'Models\Entidade\Entidade_Venda.Model.pas',
+  Entidade_Cliente.Model in 'Models\Entidade\Entidade_Cliente.Model.pas';
 
 {$R *.res}
 

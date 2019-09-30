@@ -20,11 +20,20 @@ type
 
 implementation
 
+uses
+  System.Generics.Collections, Entidade_Cliente.Model, System.SysUtils;
+
 { TClienteMetodoBuscarModel }
 
 function TClienteMetodoBuscarModel.&End: IClienteMetodoModel;
+var
+  Lista: TObjectList<TCLIENTE>;
 begin
   Result := FParent.Metodo;
+  Lista := FParent.DAO.FindWhere('CPF = ' + QuotedStr(FCPF));
+  if (Lista.Count <= 0) then
+    raise Exception.Create('Cliente não encontrado');
+  FParent.Entidade(Lista.Items[0]);
 end;
 
 constructor TClienteMetodoBuscarModel.Create(Parent: IClienteModel);
