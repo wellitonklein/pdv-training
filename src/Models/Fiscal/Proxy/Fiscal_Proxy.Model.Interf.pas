@@ -10,6 +10,7 @@ type
   IFiscalProxyEmitenteModel = interface;
   IFiscalProxyDestinatarioModel = interface;
   IFiscalProxyProdutoListaModel = interface;
+  IFiscalProxyProdutoListaIteratorModel = interface;
   IFiscalProxyProdutoModel = interface;
   IFiscalProxyPagamentoListaModel = interface;
   IFiscalProxyPagamentoModel = interface;
@@ -21,7 +22,7 @@ type
     function Destinatario: IFiscalProxyDestinatarioModel;
     function Produto: IFiscalProxyProdutoListaModel;
     function Pagamento: IFiscalProxyPagamentoListaModel;
-//    function Exec: IFiscalProxyModel;
+    function Exec: IFiscalProxyModel;
   end;
 
   IFiscalProxyIdentificacaoModel = interface
@@ -97,9 +98,16 @@ type
 
   IFiscalProxyProdutoListaModel = interface
     ['{2AE34789-BEF3-47A2-B526-E511823AFBD3}']
+    function IteratorProduto: IFiscalProxyProdutoListaIteratorModel;
     function AddProduto: IFiscalProxyProdutoModel;
     function &EndProduto: IFiscalProxyProdutoListaModel;
     function &End: IFiscalProxyModel;
+  end;
+
+  IFiscalProxyProdutoListaIteratorModel = interface
+    ['{F0C6B9AB-851B-469B-8429-DA74F9AFBC79}']
+    function hasNextProduto: Boolean;
+    function NextProduto: IFiscalProxyProdutoModel;
   end;
 
   IFiscalProxyProdutoModel = interface

@@ -7,7 +7,7 @@ uses
 
 type
   TFiscalProxyModel = class(TInterfacedObject, IFiscalProxyModel,
-    IFiscalProxyProdutoListaModel, IFiscalProxyPagamentoListaModel)
+    IFiscalProxyProdutoListaModel, IFiscalProxyPagamentoListaModel, IFiscalProxyProdutoListaIteratorModel)
   private
     FParent: IFiscalComponente;
     FIdentificacao: IFiscalProxyIdentificacaoModel;
@@ -15,6 +15,7 @@ type
     FDestinatario: IFiscalProxyDestinatarioModel;
     FProdutoLista: TList<IFiscalProxyProdutoModel>;
     FPagamentoLista: TList<IFiscalProxyPagamentoModel>;
+    FCountProduto: Integer;
   public
     constructor Create(Parent: IFiscalComponente);
     destructor Destroy; override;
@@ -29,8 +30,13 @@ type
     function Exec: IFiscalProxyModel;
 
     // IFiscalProxyProdutoListaModel
+    function IteratorProduto: IFiscalProxyProdutoListaIteratorModel;
     function AddProduto: IFiscalProxyProdutoModel;
     function &EndProduto: IFiscalProxyProdutoListaModel;
+
+    // IFiscalProxyProdutoListaIteratorModel
+    function hasNextProduto: Boolean;
+    function NextProduto: IFiscalProxyProdutoModel;
 
     // IFiscalProxyPagamentoListaModel
     function AddPagamento: IFiscalProxyPagamentoModel;
@@ -73,6 +79,7 @@ begin
   FDestinatario   := TFiscalProxyFactoryModel.New.Destinatario(Self);
   FProdutoLista   := TList<IFiscalProxyProdutoModel>.Create;
   FPagamentoLista := TList<IFiscalProxyPagamentoModel>.Create;
+  FCountProduto   := 0;
 end;
 
 function TFiscalProxyModel.Destinatario: IFiscalProxyDestinatarioModel;
@@ -108,14 +115,30 @@ begin
   FParent.Emitir(Self);
 end;
 
+function TFiscalProxyModel.hasNextProduto: Boolean;
+begin
+  Result := not (FCountProduto = FProdutoLista.Count);
+end;
+
 function TFiscalProxyModel.Identificacao: IFiscalProxyIdentificacaoModel;
 begin
   Result := FIdentificacao;
 end;
 
+function TFiscalProxyModel.IteratorProduto: IFiscalProxyProdutoListaIteratorModel;
+begin
+  Result := Self;
+end;
+
 class function TFiscalProxyModel.New(Parent: IFiscalComponente): IFiscalProxyModel;
 begin
   Result := Self.Create(Parent);
+end;
+
+function TFiscalProxyModel.NextProduto: IFiscalProxyProdutoModel;
+begin
+  Result := FProdutoLista.Items[FCountProduto];
+  Inc(FCountProduto);
 end;
 
 function TFiscalProxyModel.Pagamento: IFiscalProxyPagamentoListaModel;

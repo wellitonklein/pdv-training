@@ -23,6 +23,7 @@ type
     procedure PreencherIdentificacao;
     procedure PreencherEmitente;
     procedure PreencherDestinatario;
+    procedure PreencherProdutos;
   public
     constructor Create;
     destructor Destroy; override;
@@ -35,7 +36,8 @@ implementation
 uses
   System.SysUtils,
   pcnConversao,
-  pcnConversaoNFe;
+  pcnConversaoNFe,
+  ACBrNFeNotasFiscais;
 
 { TACBrNFCeComponentesModel }
 
@@ -76,71 +78,121 @@ end;
 
 procedure TFiscalNFCeComponentesModel.PreencherDestinatario;
 begin
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.CNPJCPF           := FProxy.Destinatario.Contribuinte.CPFCNPJ;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.IE                := FProxy.Destinatario.Contribuinte.IE;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.ISUF              := FProxy.Destinatario.Contribuinte.ISUF;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.xNome             := FProxy.Destinatario.Contribuinte.Nome;
+  with FACBrNFe.NotasFiscais.Add.NFe.Dest do
+  begin
+    CNPJCPF           := FProxy.Destinatario.Contribuinte.CPFCNPJ;
+    IE                := FProxy.Destinatario.Contribuinte.IE;
+    ISUF              := FProxy.Destinatario.Contribuinte.ISUF;
+    xNome             := FProxy.Destinatario.Contribuinte.Nome;
 
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.Fone    := FProxy.Destinatario.Contribuinte.TeleFone;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.CEP     := FProxy.Destinatario.Endereco.CEP;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.xLgr    := FProxy.Destinatario.Endereco.Logradouro;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.nro     := FProxy.Destinatario.Endereco.Numero;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.xCpl    := FProxy.Destinatario.Endereco.Complemento;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.xBairro := FProxy.Destinatario.Endereco.Bairro;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.cMun    := FProxy.Destinatario.Endereco.cMunFG;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.xMun    := FProxy.Destinatario.Endereco.Cidade;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.UF      := FProxy.Destinatario.Endereco.UF;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.cPais   := 1058;
-  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.xPais   := 'BRASIL';
+    EnderDest.Fone    := FProxy.Destinatario.Contribuinte.TeleFone;
+    EnderDest.CEP     := FProxy.Destinatario.Endereco.CEP;
+    EnderDest.xLgr    := FProxy.Destinatario.Endereco.Logradouro;
+    EnderDest.nro     := FProxy.Destinatario.Endereco.Numero;
+    EnderDest.xCpl    := FProxy.Destinatario.Endereco.Complemento;
+    EnderDest.xBairro := FProxy.Destinatario.Endereco.Bairro;
+    EnderDest.cMun    := FProxy.Destinatario.Endereco.cMunFG;
+    EnderDest.xMun    := FProxy.Destinatario.Endereco.Cidade;
+    EnderDest.UF      := FProxy.Destinatario.Endereco.UF;
+    EnderDest.cPais   := 1058;
+    EnderDest.xPais   := 'BRASIL';
+  end;
 end;
 
 procedure TFiscalNFCeComponentesModel.PreencherEmitente;
 begin
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.CNPJCPF           := FProxy.Emitente.Contribuinte.CPFCNPJ;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.IE                := FProxy.Emitente.Contribuinte.IE;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.xNome             := FProxy.Emitente.Contribuinte.Nome;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.xFant             := FProxy.Emitente.Contribuinte.Fantasia;
+  with FACBrNFe.NotasFiscais.Add.NFe.Emit do
+  begin
+    CNPJCPF           := FProxy.Emitente.Contribuinte.CPFCNPJ;
+    IE                := FProxy.Emitente.Contribuinte.IE;
+    xNome             := FProxy.Emitente.Contribuinte.Nome;
+    xFant             := FProxy.Emitente.Contribuinte.Fantasia;
 
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.EnderEmit.fone    := FProxy.Emitente.Contribuinte.TeleFone;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.EnderEmit.CEP     := FProxy.Emitente.Endereco.CEP;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.EnderEmit.xLgr    := FProxy.Emitente.Endereco.Logradouro;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.EnderEmit.nro     := FProxy.Emitente.Endereco.Numero;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.EnderEmit.xCpl    := FProxy.Emitente.Endereco.Complemento;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.EnderEmit.xBairro := FProxy.Emitente.Endereco.Bairro;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.EnderEmit.cMun    := FProxy.Emitente.Endereco.cMunFG;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.EnderEmit.xMun    := FProxy.Emitente.Endereco.Cidade;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.EnderEmit.UF      := FProxy.Emitente.Endereco.UF;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.enderEmit.cPais   := 1058;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.enderEmit.xPais   := 'BRASIL';
+    EnderEmit.fone    := FProxy.Emitente.Contribuinte.TeleFone;
+    EnderEmit.CEP     := FProxy.Emitente.Endereco.CEP;
+    EnderEmit.xLgr    := FProxy.Emitente.Endereco.Logradouro;
+    EnderEmit.nro     := FProxy.Emitente.Endereco.Numero;
+    EnderEmit.xCpl    := FProxy.Emitente.Endereco.Complemento;
+    EnderEmit.xBairro := FProxy.Emitente.Endereco.Bairro;
+    EnderEmit.cMun    := FProxy.Emitente.Endereco.cMunFG;
+    EnderEmit.xMun    := FProxy.Emitente.Endereco.Cidade;
+    EnderEmit.UF      := FProxy.Emitente.Endereco.UF;
+    enderEmit.cPais   := 1058;
+    enderEmit.xPais   := 'BRASIL';
 
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.IEST              := FProxy.Emitente.Contribuinte.IEST;
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.IM                := FProxy.Emitente.Contribuinte.IM; // Preencher no caso de existir serviços na nota
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.CNAE              := FProxy.Emitente.Contribuinte.CNAE; // Verifique na cidade do emissor da NFe se é permitido
-                                // a inclusão de serviços na NFe
-  FACBrNFe.NotasFiscais.Add.NFe.Emit.CRT               := crtSimplesNacional;// (1-crtSimplesNacional, 2-crtSimplesExcessoReceita, 3-crtRegimeNormal)
+    IEST              := FProxy.Emitente.Contribuinte.IEST;
+    IM                := FProxy.Emitente.Contribuinte.IM; // Preencher no caso de existir serviços na nota
+    CNAE              := FProxy.Emitente.Contribuinte.CNAE; // Verifique na cidade do emissor da NFe se é permitido // a inclusão de serviços na NFe
+    CRT               := crtSimplesNacional;// (1-crtSimplesNacional, 2-crtSimplesExcessoReceita, 3-crtRegimeNormal)
+  end;
 end;
 
 procedure TFiscalNFCeComponentesModel.PreencherIdentificacao;
 begin
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.cNF       := FProxy.Identificacao.Numero; //Caso não seja preenchido será gerado um número aleatório pelo componente
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.natOp     := 'VENDA PRODUCAO DO ESTAB.';
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.indPag    := ipVista;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.modelo    := 65;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.serie     := FProxy.Identificacao.Serie;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.nNF       := FProxy.Identificacao.Numero;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.dEmi      := FProxy.Identificacao.Data;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.dSaiEnt   := Date;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.hSaiEnt   := Now;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.tpNF      := tnSaida;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.tpEmis    := TpcnTipoEmissao.teContingencia;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.tpAmb     := taHomologacao;  //Lembre-se de trocar esta variável quando for para ambiente de produção
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.verProc   := '0.0.0.1'; //Versão do seu sistema
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.cUF       := UFtoCUF(FProxy.Emitente.Endereco.UF);
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.cMunFG    := FProxy.Emitente.Endereco.cMunFG;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.finNFe    := fnNormal;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.tpImp     := tiNFCe;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.indFinal  := cfConsumidorFinal;
-  FACBrNFe.NotasFiscais.Add.NFe.Ide.indPres   := pcPresencial;
+  with FACBrNFe.NotasFiscais.Add.NFe.Ide do
+  begin
+    cNF       := FProxy.Identificacao.Numero; //Caso não seja preenchido será gerado um número aleatório pelo componente
+    natOp     := 'VENDA PRODUCAO DO ESTAB.';
+    indPag    := ipVista;
+    modelo    := 65;
+    serie     := FProxy.Identificacao.Serie;
+    nNF       := FProxy.Identificacao.Numero;
+    dEmi      := FProxy.Identificacao.Data;
+    dSaiEnt   := Date;
+    hSaiEnt   := Now;
+    tpNF      := tnSaida;
+    tpEmis    := TpcnTipoEmissao.teContingencia;
+    tpAmb     := taHomologacao;  //Lembre-se de trocar esta variável quando for para ambiente de produção
+    verProc   := '0.0.0.1'; //Versão do seu sistema
+    cUF       := UFtoCUF(FProxy.Emitente.Endereco.UF);
+    cMunFG    := FProxy.Emitente.Endereco.cMunFG;
+    finNFe    := fnNormal;
+    tpImp     := tiNFCe;
+    indFinal  := cfConsumidorFinal;
+    indPres   := pcPresencial;
+  end;
+end;
+
+procedure TFiscalNFCeComponentesModel.PreencherProdutos;
+var
+  Produto: IFiscalProxyProdutoModel;
+  FCount: SmallInt;
+begin
+  FCount := 1;
+  while FProxy.Produto.IteratorProduto.hasNextProduto do
+  begin
+    Produto := FProxy.Produto.IteratorProduto.NextProduto;
+
+    with FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Prod do
+    begin
+      nItem    := FCount; // Número sequencial, para cada item deve ser incrementado
+      cProd    := '123456';
+      cEAN     := Produto.cEAN;
+      xProd    := Produto.Descricao;
+      NCM      := Produto.NCM; // Tabela NCM disponível em  http://www.receita.fazenda.gov.br/Aliquotas/DownloadArqTIPI.htm
+      EXTIPI   := '';
+      CFOP     := '5101';
+      uCom     := Produto.UND;
+      qCom     := Produto.Qtde;
+      vUnCom   := Produto.vUnit;
+      vProd    := 100;
+
+      cEANTrib  := Produto.cEAN;
+      uTrib     := Produto.UND;
+      qTrib     := Produto.Qtde;
+      vUnTrib   := 100;
+
+      vOutro    := 0;
+      vFrete    := 0;
+      vSeg      := 0;
+      vDesc     := 0;
+
+      CEST := Produto.CEST;
+    end;
+    FACBrNFe.NotasFiscais.Add.NFe.Det.Add.infAdProd := 'Informacao Adicional do Produto';
+
+    Inc(FCount);
+  end;
 end;
 
 end.
