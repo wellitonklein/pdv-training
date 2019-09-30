@@ -4,7 +4,7 @@ interface
 
 uses
   Item_Factory.Model.Interf,
-  Item.Model.Interf;
+  Item.Model.Interf, Venda.Model.Inerf;
 
 type
   TItemFactoryModel = class(TInterfacedObject, IItemFactoryModel)
@@ -13,7 +13,7 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New : IItemFactoryModel;
-    function Item: IItemModel;
+    function Item(Venda: IVendaModel): IItemModel;
     function Iterator(Parent: IItemModel): IItemIteratorModel;
   end;
 
@@ -35,9 +35,9 @@ begin
   inherited;
 end;
 
-function TItemFactoryModel.Item: IItemModel;
+function TItemFactoryModel.Item(Venda: IVendaModel): IItemModel;
 begin
-  Result := TItemModel.New;
+  Result := TItemModel.New(Venda);
 end;
 
 function TItemFactoryModel.Iterator(Parent: IItemModel): IItemIteratorModel;

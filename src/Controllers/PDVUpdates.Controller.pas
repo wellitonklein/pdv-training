@@ -31,7 +31,7 @@ type
 
     function Usuario: IUsuarioController;
     function Caixa: ICaixaController;
-    function Item: IItemController;
+    function Item(Venda: IVendaController): IItemController;
     function Cliente: IClienteController;
     function Pagamento: IPagamentoController;
     function Venda(Caixa: ICaixaController): IVendaController;
@@ -127,9 +127,9 @@ begin
   AfterInit;
 end;
 
-function TPDVUpdatesController.Item: IItemController;
+function TPDVUpdatesController.Item(Venda: IVendaController): IItemController;
 begin
-  Result := TItemFactoryController.New.Item;
+  Result := TItemFactoryController.New.Item(Venda);
 end;
 
 /// Adicionar os modulos e MODELs personalizados

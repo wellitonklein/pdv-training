@@ -101,11 +101,11 @@ end;
 
 procedure TPDVUpdatesView.FormCreate(Sender: TObject);
 begin
-  FCaixa := TPDVUpdatesController.New.Caixa;
-  FItem  := TPDVUpdatesController.New.Item;
-  FCliente := TPDVUpdatesController.New.Cliente;
+  FCaixa     := TPDVUpdatesController.New.Caixa;
+  FVenda     := TPDVUpdatesController.New.Venda(FCaixa);
+  FItem      := TPDVUpdatesController.New.Item(FVenda);
+  FCliente   := TPDVUpdatesController.New.Cliente;
   FPagamento := TPDVUpdatesController.New.Pagamento;
-  FVenda := TPDVUpdatesController.New.Venda(FCaixa);
 end;
 
 procedure TPDVUpdatesView.ListBoxItem10Click(Sender: TObject);

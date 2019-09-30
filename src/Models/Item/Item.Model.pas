@@ -5,7 +5,7 @@ interface
 uses
   Item.Model.Interf, Entidade_VendaItens.Model,
   ormbr.container.objectset.interfaces, Conexao.Model.Interf,
-  Produto.Model.Interf;
+  Produto.Model.Interf, Venda.Model.Inerf;
 
 type
   TItemModel = class(TInterfacedObject, IItemModel, IItemMetodoModel)
@@ -16,10 +16,11 @@ type
     FEntidade: TVENDAITENS;
     FDAO: IContainerObjectSet<TVENDAITENS>;
     FProduto: IProdutoModel;
+    FVenda: IVendaModel;
   public
-    constructor Create;
+    constructor Create(Venda: IVendaModel);
     destructor Destroy; override;
-    class function New : IItemModel;
+    class function New(Venda: IVendaModel): IItemModel;
 
     // IItemModel
     function Metodo: IItemMetodoModel;
@@ -80,8 +81,9 @@ begin
   Result := FIterator;
 end;
 
-constructor TItemModel.Create;
+constructor TItemModel.Create(Venda: IVendaModel);
 begin
+  FVenda    := Venda;
   FConn     := TPDVUpdatesModel.New.Conexao;
   FEntidade := TPDVUpdatesModel.New.Entidade.VendaItens;
   FDAO      := TContainerObjectSet<TVENDAITENS>.Create(FConn.Connection, 15);
@@ -112,9 +114,9 @@ begin
   Result := Self;
 end;
 
-class function TItemModel.New: IItemModel;
+class function TItemModel.New(Venda: IVendaModel): IItemModel;
 begin
-  Result := Self.Create;
+  Result := Self.Create(Venda);
 end;
 
 function TItemModel.Produto: IProdutoModel;
@@ -137,7 +139,7 @@ end;
 function TItemModel.Vender: IItemMetodoVenderModel;
 begin
   FState.Vender;
-  Result := TItemMetodoFactoryModel.New.Vender(Self);
+  Result := TItemMetodoFactoryModel.New.Vender(Self, FVenda);
 end;
 
 end.

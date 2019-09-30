@@ -3,7 +3,7 @@ unit Item_Metodo_Factory.Model;
 interface
 
 uses
-  Item_Metodo_Factory.Model.Interf, Item.Model.Interf;
+  Item_Metodo_Factory.Model.Interf, Item.Model.Interf, Venda.Model.Inerf;
 
 type
   TItemMetodoFactoryModel = class(TInterfacedObject, IItemMetodoFactoryModel)
@@ -12,7 +12,7 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New : IItemMetodoFactoryModel;
-    function Vender(Parent: IItemModel): IItemMetodoVenderModel;
+    function Vender(Parent: IItemModel; Venda: IVendaModel): IItemMetodoVenderModel;
     function Cancelar(Parent: IItemModel): IItemMetodoCancelarModel;
     function Desconto(Parent: IItemModel): IItemMetodoDescontoModel;
     function Acrescimo(Parent: IItemModel): IItemMetodoAcrescimoModel;
@@ -66,9 +66,9 @@ begin
   Result := TItemMetodoRepetirModel.New(Parent);
 end;
 
-function TItemMetodoFactoryModel.Vender(Parent: IItemModel): IItemMetodoVenderModel;
+function TItemMetodoFactoryModel.Vender(Parent: IItemModel; Venda: IVendaModel): IItemMetodoVenderModel;
 begin
-  Result := TItemMetodoVenderModel.New(Parent);
+  Result := TItemMetodoVenderModel.New(Parent, Venda);
 end;
 
 end.

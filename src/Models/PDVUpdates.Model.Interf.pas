@@ -21,7 +21,7 @@ type
     function Entidade: IEntidadeFactoryModel;
     function Caixa: ICaixaModel;
     function Usuario: IUsuarioModel;
-    function Item: IItemModel;
+    function Item(Venda: IVendaModel): IItemModel;
     function Cliente: IClienteModel;
     function Pagamento: IPagamentoModel;
     function Venda(Caixa: ICaixaModel): IVendaModel;

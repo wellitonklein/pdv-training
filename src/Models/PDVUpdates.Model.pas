@@ -25,7 +25,7 @@ type
     function Entidade: IEntidadeFactoryModel;
     function Caixa: ICaixaModel;
     function Usuario: IUsuarioModel;
-    function Item: IItemModel;
+    function Item(Venda: IVendaModel): IItemModel;
     function Cliente: IClienteModel;
     function Pagamento: IPagamentoModel;
     function Venda(Caixa: ICaixaModel): IVendaModel;
@@ -77,9 +77,9 @@ begin
   Result := TEntidadeFactoryModel.New;
 end;
 
-function TPDVUpdatesModel.Item: IItemModel;
+function TPDVUpdatesModel.Item(Venda: IVendaModel): IItemModel;
 begin
-  Result := TItemFactoryModel.New.Item;
+  Result := TItemFactoryModel.New.Item(Venda);
 end;
 
 class function TPDVUpdatesModel.New: IPDVUpdatesModel;

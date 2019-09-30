@@ -4,13 +4,12 @@ interface
 
 uses
   Venda.Controller.Interf,
-  Venda.Model.Inerf, Caixa.Controller.Interf;
+  Caixa.Controller.Interf;
 
 type
   TVendaMetodoController = class(TInterfacedObject, IVendaMetodoController)
   private
     FParent: IVendaController;
-    FVendaModel: IVendaModel;
     FCaixaController: ICaixaController;
   public
     constructor Create(Parent: IVendaController; Caixa: ICaixaController);
@@ -29,17 +28,17 @@ type
 implementation
 
 uses
+  PDVUpdates.Controller,
   PDVUpdates.Model,
-  System.SysUtils,
   Captura_ValorView,
-  PDVUpdates.Controller;
+  System.SysUtils;
 
 { TVendaMetodoController }
 
 function TVendaMetodoController.Abrir: IVendaMetodoController;
 begin
   Result := Self;
-  FVendaModel.Metodo
+  FParent.Model.Metodo
     .Abrir
     .&End;
 end;
@@ -47,7 +46,7 @@ end;
 function TVendaMetodoController.EfetuarEstorno: IVendaMetodoController;
 begin
   Result := Self;
-  FVendaModel.Pagamentos
+  FParent.Model.Pagamentos
     .Iterator
       .Add(
         TPDVUpdatesController.New
@@ -61,7 +60,7 @@ end;
 function TVendaMetodoController.EfetuarPagamento: IVendaMetodoController;
 begin
   Result := Self;
-  FVendaModel.Pagamentos
+  FParent.Model.Pagamentos
     .Iterator
       .Add(
         TPDVUpdatesController.New
@@ -81,7 +80,6 @@ constructor TVendaMetodoController.Create(Parent: IVendaController; Caixa: ICaix
 begin
   FParent       := Parent;
   FCaixaController := Caixa;
-  FVendaModel   := TPDVUpdatesModel.New.Venda(FCaixaController.Metodo.Model);
 end;
 
 destructor TVendaMetodoController.Destroy;
@@ -93,7 +91,7 @@ end;
 function TVendaMetodoController.Fechar: IVendaMetodoController;
 begin
   Result := Self;
-  FVendaModel.Metodo
+  FParent.Model.Metodo
     .Fechar
     .&End;
 end;
@@ -101,7 +99,7 @@ end;
 function TVendaMetodoController.IdentificarCliente: IVendaMetodoController;
 begin
   Result := Self;
-  FVendaModel.Cliente(
+  FParent.Model.Cliente(
     TPDVUpdatesModel.New.Cliente
       .Metodo
         .Buscar
@@ -124,7 +122,7 @@ end;
 function TVendaMetodoController.Pagar: IVendaMetodoController;
 begin
   Result := Self;
-  FVendaModel.Metodo
+  FParent.Model.Metodo
     .Pagar
     .&End;
 end;
@@ -133,10 +131,10 @@ function TVendaMetodoController.VenderItem: IVendaMetodoController;
 begin
   Result := Self;
 
-  FVendaModel.Itens
+  FParent.Model.Itens
     .Iterator
       .Add(
-        TPDVUpdatesModel.New.Item
+        TPDVUpdatesModel.New.Item(FParent.Model)
           .Metodo
             .Vender
               .SetItem(

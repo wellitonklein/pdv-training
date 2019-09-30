@@ -66,7 +66,7 @@ end;
 constructor TItemMetodoController.Create(Parent: IItemController);
 begin
   FParent := Parent;
-  FModel  := TPDVUpdatesModel.New.Item;
+  FModel  := TPDVUpdatesModel.New.Item(FParent.Venda.Model);
 end;
 
 function TItemMetodoController.Desconto: IItemMetodoController;

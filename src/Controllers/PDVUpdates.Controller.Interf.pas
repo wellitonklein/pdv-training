@@ -13,7 +13,7 @@ type
     ['{2E4E7CAB-49F8-4C89-B03C-BE6CF990CB69}']
     function Usuario: IUsuarioController;
     function Caixa: ICaixaController;
-    function Item: IItemController;
+    function Item(Venda: IVendaController): IItemController;
     function Cliente: IClienteController;
     function Pagamento: IPagamentoController;
     function Venda(Caixa: ICaixaController): IVendaController;

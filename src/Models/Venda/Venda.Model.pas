@@ -106,7 +106,7 @@ begin
   FState      := TVendaStateFactoryModel.New.Fechado;
   FCaixa      := Caixa;
   FCliente    := TPDVUpdatesModel.New.Cliente;
-  FItens      := TPDVUpdatesModel.New.Item;
+  FItens      := TPDVUpdatesModel.New.Item(Self);
   FPagamentos := TPDVUpdatesModel.New.Pagamento;
 end;
 

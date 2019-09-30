@@ -3,31 +3,36 @@ unit Venda.Controller;
 interface
 
 uses
-  Venda.Controller.Interf, Caixa.Controller.Interf;
+  Venda.Controller.Interf,
+  Caixa.Controller.Interf,
+  Venda.Model.Inerf;
 
 type
   TVendaController = class(TInterfacedObject, IVendaController)
   private
     FMetodo: IVendaMetodoController;
     FCaixa: ICaixaController;
+    FVendaModel: IVendaModel;
   public
     constructor Create(Caixa: ICaixaController);
     destructor Destroy; override;
     class function New(Caixa: ICaixaController): IVendaController;
     function Metodo: IVendaMetodoController;
+    function Model: IVendaModel;
   end;
 
 implementation
 
 uses
-  Venda_Metodo.Controller;
+  Venda_Metodo.Controller, PDVUpdates.Model;
 
 { TVendaController }
 
 constructor TVendaController.Create(Caixa: ICaixaController);
 begin
-  FCaixa := Caixa;
-  FMetodo := TVendaMetodoController.New(Self, FCaixa);
+  FCaixa      := Caixa;
+  FMetodo     := TVendaMetodoController.New(Self, FCaixa);
+  FVendaModel := TPDVUpdatesModel.New.Venda(FCaixa.Metodo.Model);
 end;
 
 destructor TVendaController.Destroy;
@@ -39,6 +44,11 @@ end;
 function TVendaController.Metodo: IVendaMetodoController;
 begin
   Result := FMetodo;
+end;
+
+function TVendaController.Model: IVendaModel;
+begin
+  Result := FVendaModel;
 end;
 
 class function TVendaController.New(Caixa: ICaixaController): IVendaController;

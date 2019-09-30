@@ -3,7 +3,8 @@ unit Item_Factory.Controller;
 interface
 
 uses
-  Item_Factory.Controller.Interf, Item.Controller.Interf;
+  Item_Factory.Controller.Interf, Item.Controller.Interf,
+  Venda.Controller.Interf;
 
 type
   TItemFactoryController = class(TInterfacedObject, IItemFactoryController)
@@ -12,7 +13,7 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New : IItemFactoryController;
-    function Item: IItemController;
+    function Item(Venda: IVendaController): IItemController;
   end;
 
 implementation
@@ -33,9 +34,9 @@ begin
   inherited;
 end;
 
-function TItemFactoryController.Item: IItemController;
+function TItemFactoryController.Item(Venda: IVendaController): IItemController;
 begin
-  Result := TItemController.New;
+  Result := TItemController.New(Venda);
 end;
 
 class function TItemFactoryController.New: IItemFactoryController;
