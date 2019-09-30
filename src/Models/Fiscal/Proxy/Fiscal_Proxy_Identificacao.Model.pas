@@ -1,4 +1,4 @@
-unit Fiscal_Proxy_Identificacao.Model.Interf;
+unit Fiscal_Proxy_Identificacao.Model;
 
 interface
 
@@ -15,8 +15,10 @@ type
     constructor Create(Parent: IFiscalProxyModel);
     destructor Destroy; override;
     class function New(Parent: IFiscalProxyModel): IFiscalProxyIdentificacaoModel;
-    function Numero(Value: SmallInt): IFiscalProxyIdentificacaoModel;
-    function Data(Value: TDateTime): IFiscalProxyIdentificacaoModel;
+    function Numero(Value: SmallInt): IFiscalProxyIdentificacaoModel; overload;
+    function Data(Value: TDateTime): IFiscalProxyIdentificacaoModel; overload;
+    function Numero: SmallInt; overload;
+    function Data: TDateTime; overload;
     function &End: IFiscalProxyModel;
   end;
 
@@ -41,6 +43,11 @@ begin
   FData := Value;
 end;
 
+function TFiscalProxyIdentificacaoModel.Data: TDateTime;
+begin
+  Result := FData;
+end;
+
 destructor TFiscalProxyIdentificacaoModel.Destroy;
 begin
 
@@ -50,6 +57,11 @@ end;
 class function TFiscalProxyIdentificacaoModel.New(Parent: IFiscalProxyModel): IFiscalProxyIdentificacaoModel;
 begin
   Result := Self.Create(Parent);
+end;
+
+function TFiscalProxyIdentificacaoModel.Numero: SmallInt;
+begin
+  Result := FNumero;
 end;
 
 function TFiscalProxyIdentificacaoModel.Numero(

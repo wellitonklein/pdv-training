@@ -179,7 +179,11 @@ uses
   Fiscal.Model in 'Models\Fiscal\Fiscal.Model.pas',
   Fiscal_NFCe_Componentes.Model.Interf in 'Models\Fiscal\NFCe\Componentes\Fiscal_NFCe_Componentes.Model.Interf.pas',
   Fiscal_Proxy.Model.Interf in 'Models\Fiscal\Proxy\Fiscal_Proxy.Model.Interf.pas',
-  Fiscal_Proxy_Identificacao.Model.Interf in 'Models\Fiscal\Proxy\Fiscal_Proxy_Identificacao.Model.Interf.pas';
+  Fiscal_Proxy_Identificacao.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Identificacao.Model.pas',
+  Fiscal_Proxy_Contribuinte.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Contribuinte.Model.pas',
+  Fiscal_Proxy_Endereco.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Endereco.Model.pas',
+  Fiscal_Proxy_Emitente.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Emitente.Model.pas',
+  Fiscal_Proxy_Destinatario.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Destinatario.Model.pas';
 
 {$R *.res}
 

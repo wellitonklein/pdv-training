@@ -337,7 +337,11 @@
         <DCCReference Include="Models\Fiscal\Fiscal.Model.pas"/>
         <DCCReference Include="Models\Fiscal\NFCe\Componentes\Fiscal_NFCe_Componentes.Model.Interf.pas"/>
         <DCCReference Include="Models\Fiscal\Proxy\Fiscal_Proxy.Model.Interf.pas"/>
-        <DCCReference Include="Models\Fiscal\Proxy\Fiscal_Proxy_Identificacao.Model.Interf.pas"/>
+        <DCCReference Include="Models\Fiscal\Proxy\Fiscal_Proxy_Identificacao.Model.pas"/>
+        <DCCReference Include="Models\Fiscal\Proxy\Fiscal_Proxy_Contribuinte.Model.pas"/>
+        <DCCReference Include="Models\Fiscal\Proxy\Fiscal_Proxy_Endereco.Model.pas"/>
+        <DCCReference Include="Models\Fiscal\Proxy\Fiscal_Proxy_Emitente.Model.pas"/>
+        <DCCReference Include="Models\Fiscal\Proxy\Fiscal_Proxy_Destinatario.Model.pas"/>
         <None Include="mvcbr.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
