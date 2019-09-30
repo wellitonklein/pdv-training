@@ -9,7 +9,9 @@ type
   IFiscalProxyEnderecoModel<T> = interface;
   IFiscalProxyEmitenteModel = interface;
   IFiscalProxyDestinatarioModel = interface;
+  IFiscalProxyProdutoListaModel = interface;
   IFiscalProxyProdutoModel = interface;
+  IFiscalProxyPagamentoListaModel = interface;
   IFiscalProxyPagamentoModel = interface;
 
   IFiscalProxyModel = interface
@@ -17,8 +19,8 @@ type
     function Identificacao: IFiscalProxyIdentificacaoModel;
     function Emitente: IFiscalProxyEmitenteModel;
     function Destinatario: IFiscalProxyDestinatarioModel;
-//    function Produto: IFiscalProxyProdutoModel;
-//    function Pagamento: IFiscalProxyPagamentoModel;
+    function Produto: IFiscalProxyProdutoListaModel;
+    function Pagamento: IFiscalProxyPagamentoListaModel;
 //    function Exec: IFiscalProxyModel;
   end;
 
@@ -75,6 +77,13 @@ type
     function &End: IFiscalProxyModel;
   end;
 
+  IFiscalProxyProdutoListaModel = interface
+    ['{2AE34789-BEF3-47A2-B526-E511823AFBD3}']
+    function AddProduto: IFiscalProxyProdutoModel;
+    function &EndProduto: IFiscalProxyProdutoListaModel;
+    function &End: IFiscalProxyModel;
+  end;
+
   IFiscalProxyProdutoModel = interface
     ['{AA8530AD-61E3-48E4-A665-F7840FB453BC}']
     function Descricao(Value: string): IFiscalProxyProdutoModel; overload;
@@ -95,6 +104,13 @@ type
     function ST: Boolean; overload;
     function CEST: string; overload;
     function UND: string; overload;
+    function &End: IFiscalProxyModel;
+  end;
+
+  IFiscalProxyPagamentoListaModel = interface
+    ['{2AE34789-BEF3-47A2-B526-E511823AFBD3}']
+    function AddPagamento: IFiscalProxyPagamentoModel;
+    function &EndPagamento: IFiscalProxyPagamentoListaModel;
     function &End: IFiscalProxyModel;
   end;
 
