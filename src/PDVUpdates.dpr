@@ -161,7 +161,14 @@ uses
   Entidade_Venda.Model in 'Models\Entidade\Entidade_Venda.Model.pas',
   Entidade_Cliente.Model in 'Models\Entidade\Entidade_Cliente.Model.pas',
   Entidade_Produto.Model in 'Models\Entidade\Entidade_Produto.Model.pas',
-  Entidade_VendaItens.Model in 'Models\Entidade\Entidade_VendaItens.Model.pas';
+  Entidade_VendaItens.Model in 'Models\Entidade\Entidade_VendaItens.Model.pas',
+  Produto.Model.Interf in 'Models\Produto\Produto.Model.Interf.pas',
+  Produto.Model in 'Models\Produto\Produto.Model.pas',
+  Produto_Factory.Model.Interf in 'Models\Produto\Factory\Produto_Factory.Model.Interf.pas',
+  Produto_Factory.Model in 'Models\Produto\Factory\Produto_Factory.Model.pas',
+  Produto_Metodo_Buscar.Model in 'Models\Produto\Metodo\Produto_Metodo_Buscar.Model.pas',
+  Produto_Metodo_Factory.Model.Interf in 'Models\Produto\Metodo\Factory\Produto_Metodo_Factory.Model.Interf.pas',
+  Produto_Metodo_Factory.Model in 'Models\Produto\Metodo\Factory\Produto_Metodo_Factory.Model.pas';
 
 {$R *.res}
 

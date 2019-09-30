@@ -10,7 +10,8 @@ uses
   Pagamento.Model.Interf,
   Venda.Model.Inerf,
   Conexao.Model.Interf,
-  Entidade.Model.Interf;
+  Entidade.Model.Interf,
+  Produto.Model.Interf;
 
 type
 
@@ -24,6 +25,7 @@ type
     function Cliente: IClienteModel;
     function Pagamento: IPagamentoModel;
     function Venda(Caixa: ICaixaModel): IVendaModel;
+    function Produto: IProdutoModel;
   end;
 
 implementation
