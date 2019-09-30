@@ -143,6 +143,10 @@ begin
                     .ExibeForm('Informe o código do Item', 'Confirmar', 'Cancelar')
                 )
               )
+              .SetQuantidade(
+                TCapturaValorView.New(nil)
+                  .ExibeForm('Informe a quantidade do Item', 'Confirmar', 'Cancelar')
+              )
             .&End
           .&End
       )

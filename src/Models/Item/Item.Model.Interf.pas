@@ -47,6 +47,7 @@ type
   IItemMetodoVenderModel = interface
     ['{AD69C371-9992-437D-B435-6B5EF60EDC7C}']
     function SetItem(Value: SmallInt): IItemMetodoVenderModel;
+    function SetQuantidade(Value: Currency): IItemMetodoVenderModel;
     function &End: IItemMetodoModel;
   end;
 

@@ -11,11 +11,13 @@ type
     FParent: IItemModel;
     FVenda: IVendaModel;
     FItem: SmallInt;
+    FQuantidade: Currency;
   public
     constructor Create(Parent: IItemModel; Venda: IVendaModel);
     destructor Destroy; override;
     class function New(Parent: IItemModel; Venda: IVendaModel): IItemMetodoVenderModel;
     function SetItem(Value: SmallInt): IItemMetodoVenderModel;
+    function SetQuantidade(Value: Currency): IItemMetodoVenderModel;
     function &End: IItemMetodoModel;
   end;
 
@@ -42,9 +44,10 @@ begin
 
   FParent.Entidade(TPDVUpdatesModel.New.Entidade.VendaItens);
   FParent.Produto.Entidade(ListaProduto[0]);
-  FParent.Entidade.PRODUTO := ListaProduto[0].GUUID;
-  FParent.Entidade.VENDA   := FVenda.Entidade.GUUID;
-  FParent.Entidade.PRECO := ListaProduto[0].PRECO;
+  FParent.Entidade.PRODUTO    := ListaProduto[0].GUUID;
+  FParent.Entidade.VENDA      := FVenda.Entidade.GUUID;
+  FParent.Entidade.QUANTIDADE := FQuantidade;
+  FParent.Entidade.PRECO      := ListaProduto[0].PRECO;
   FParent.DAO.Insert(FParent.Entidade);
 
   FParent.SetState(TItemStateFactoryModel.New.Vendido);
@@ -72,6 +75,13 @@ function TItemMetodoVenderModel.SetItem(
 begin
   Result := Self;
   FItem := Value;
+end;
+
+function TItemMetodoVenderModel.SetQuantidade(
+  Value: Currency): IItemMetodoVenderModel;
+begin
+  Result := Self;
+  FQuantidade := Value;
 end;
 
 end.
