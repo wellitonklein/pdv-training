@@ -46,6 +46,7 @@ type
     function IM(Value: string): IFiscalProxyContribuinteModel<T>; overload;
     function CNAE(Value: string): IFiscalProxyContribuinteModel<T>; overload;
     function CRT(Value: SmallInt): IFiscalProxyContribuinteModel<T>; overload;
+    function ISUF(Value: string): IFiscalProxyContribuinteModel<T>; overload;
     function Nome: string; overload;
     function Fantasia: string; overload;
     function CPFCNPJ: string; overload;
@@ -55,6 +56,7 @@ type
     function IM: string; overload;
     function CNAE: string; overload;
     function CRT: SmallInt; overload;
+    function ISUF: string; overload;
     function &End: T;
   end;
 

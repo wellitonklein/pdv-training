@@ -22,6 +22,7 @@ type
     procedure GerarNFCe;
     procedure PreencherIdentificacao;
     procedure PreencherEmitente;
+    procedure PreencherDestinatario;
   public
     constructor Create;
     destructor Destroy; override;
@@ -64,11 +65,33 @@ end;
 procedure TFiscalNFCeComponentesModel.GerarNFCe;
 begin
   PreencherIdentificacao;
+  PreencherEmitente;
+  PreencherDestinatario;
 end;
 
 class function TFiscalNFCeComponentesModel.New: IFiscalComponente;
 begin
   Result := Self.Create;
+end;
+
+procedure TFiscalNFCeComponentesModel.PreencherDestinatario;
+begin
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.CNPJCPF           := FProxy.Destinatario.Contribuinte.CPFCNPJ;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.IE                := FProxy.Destinatario.Contribuinte.IE;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.ISUF              := FProxy.Destinatario.Contribuinte.ISUF;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.xNome             := FProxy.Destinatario.Contribuinte.Nome;
+
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.Fone    := FProxy.Destinatario.Contribuinte.TeleFone;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.CEP     := FProxy.Destinatario.Endereco.CEP;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.xLgr    := FProxy.Destinatario.Endereco.Logradouro;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.nro     := FProxy.Destinatario.Endereco.Numero;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.xCpl    := FProxy.Destinatario.Endereco.Complemento;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.xBairro := FProxy.Destinatario.Endereco.Bairro;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.cMun    := FProxy.Destinatario.Endereco.cMunFG;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.xMun    := FProxy.Destinatario.Endereco.Cidade;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.UF      := FProxy.Destinatario.Endereco.UF;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.cPais   := 1058;
+  FACBrNFe.NotasFiscais.Add.NFe.Dest.EnderDest.xPais   := 'BRASIL';
 end;
 
 procedure TFiscalNFCeComponentesModel.PreencherEmitente;

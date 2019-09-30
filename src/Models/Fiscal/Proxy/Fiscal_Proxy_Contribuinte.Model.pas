@@ -18,6 +18,7 @@ type
     FIM: string;
     FCNAE: string;
     FCRT: SmallInt;
+    FISUF: string;
   public
     constructor Create(Parent: T);
     destructor Destroy; override;
@@ -31,6 +32,7 @@ type
     function IM(Value: string): IFiscalProxyContribuinteModel<T>; overload;
     function CNAE(Value: string): IFiscalProxyContribuinteModel<T>; overload;
     function CRT(Value: SmallInt): IFiscalProxyContribuinteModel<T>; overload;
+    function ISUF(Value: string): IFiscalProxyContribuinteModel<T>; overload;
     function Nome: string; overload;
     function Fantasia: string; overload;
     function CPFCNPJ: string; overload;
@@ -40,6 +42,7 @@ type
     function IM: string; overload;
     function CNAE: string; overload;
     function CRT: SmallInt; overload;
+    function ISUF: string; overload;
     function &End: T;
   end;
 
@@ -108,6 +111,18 @@ end;
 function TFiscalProxyContribuinteModel<T>.IM: string;
 begin
   Result := FIM;
+end;
+
+function TFiscalProxyContribuinteModel<T>.ISUF(
+  Value: string): IFiscalProxyContribuinteModel<T>;
+begin
+  Result := Self;
+  FISUF := Value;
+end;
+
+function TFiscalProxyContribuinteModel<T>.ISUF: string;
+begin
+  Result := FISUF;
 end;
 
 function TFiscalProxyContribuinteModel<T>.IM(
