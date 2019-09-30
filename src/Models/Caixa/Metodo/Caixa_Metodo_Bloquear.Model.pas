@@ -39,7 +39,7 @@ begin
 
   CAIXA := FParent.Entidade;
   FParent.DAO.Modify(CAIXA);
-  CAIXA.STATUS := Integer(tsBloqueado);
+  CAIXA.STATUS := Integer(tcsBloqueado);
   FParent.DAO.Update(CAIXA);
   FParent.SetState(TCaixaStateFactoryModel.New.Bloquado);
 end;

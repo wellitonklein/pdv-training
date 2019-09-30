@@ -39,7 +39,7 @@ begin
 
   CAIXA := FParent.Entidade;
   FParent.DAO.Modify(CAIXA);
-  CAIXA.STATUS := Integer(tsAberto);
+  CAIXA.STATUS := Integer(tcsAberto);
   FParent.DAO.Update(CAIXA);
   FParent.SetState(TCaixaStateFactoryModel.New.Aberto);
 end;

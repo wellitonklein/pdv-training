@@ -19,13 +19,19 @@ type
 implementation
 
 uses
-  Venda_State_Factory.Model;
+  Venda_State_Factory.Model, PDVUpdates.Model, PDVUpdates_Type.Controller;
 
 { TVendaMetodoAbrirModel }
 
 function TVendaMetodoAbrirModel.&End: IVendaMetodoModel;
 begin
   Result := FParent.Metodo;
+
+  FParent.Entidade(TPDVUpdatesModel.New.Entidade.Venda);
+//  FParent.Entidade.CAIXA := FParent
+//  FParent.Entidade.CLIENTE := FParent.Cliente
+  FParent.Entidade.STATUS  := Integer(tvsAberto);
+  FParent.DAO.Insert(FParent.Entidade);
 
   FParent.SetState(TVendaStateFactoryModel.New.Aberto);
 end;

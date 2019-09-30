@@ -126,9 +126,9 @@ function TCaixaModel.SetStatusCaixa: ICaixaMetodoModel;
 begin
   RecuperarCaixa;
   case TTypeCaixaStatus(FEntidade.STATUS) of
-    tsAberto: Result := TCaixaStateFactoryModel.New.Aberto;
-    tsBloqueado: Result := TCaixaStateFactoryModel.New.Bloquado;
-    tsFechado: Result := TCaixaStateFactoryModel.New.Fechado;
+    tcsAberto: Result := TCaixaStateFactoryModel.New.Aberto;
+    tcsBloqueado: Result := TCaixaStateFactoryModel.New.Bloquado;
+    tcsFechado: Result := TCaixaStateFactoryModel.New.Fechado;
   end;
 end;
 
