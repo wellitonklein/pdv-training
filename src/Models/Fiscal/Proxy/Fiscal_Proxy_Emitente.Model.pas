@@ -3,7 +3,7 @@ unit Fiscal_Proxy_Emitente.Model;
 interface
 
 uses
-  Fiscal_Proxy.Model.Interf;
+  Fiscal.Model.Interf;
 
 type
   TFiscalProxyEmitenteModel = class(TInterfacedObject, IFiscalProxyEmitenteModel)

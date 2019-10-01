@@ -3,7 +3,7 @@ unit Fiscal_Proxy_Produto.Model;
 interface
 
 uses
-  Fiscal_Proxy.Model.Interf;
+  Fiscal.Model.Interf;
 
 type
   TFiscalProxyProdutoModel = class(TInterfacedObject, IFiscalProxyProdutoModel)

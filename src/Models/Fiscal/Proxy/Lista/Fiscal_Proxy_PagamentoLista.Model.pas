@@ -3,7 +3,7 @@ unit Fiscal_Proxy_PagamentoLista.Model;
 interface
 
 uses
-  Fiscal_Proxy.Model.Interf,
+  Fiscal.Model.Interf,
   System.Generics.Collections;
 
 type

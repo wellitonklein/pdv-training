@@ -3,8 +3,8 @@ unit Fiscal_Proxy_PagamentoIterator.Model;
 interface
 
 uses
-  Fiscal_Proxy.Model.Interf,
-  System.Generics.Collections;
+  System.Generics.Collections,
+  Fiscal.Model.Interf;
 
 type
   TFiscalProxyPagamentoIteratorModel = class(TInterfacedObject, IFiscalProxyPagamentoIteratorModel)

@@ -3,7 +3,7 @@ unit Fiscal_Proxy_Pagamento.Model;
 interface
 
 uses
-  Fiscal_Proxy.Model.Interf;
+  Fiscal.Model.Interf;
 
 type
   TFiscalProxyPagamentoModel = class(TInterfacedObject, IFiscalProxyPagamentoModel)

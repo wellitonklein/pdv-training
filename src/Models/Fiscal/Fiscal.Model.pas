@@ -55,7 +55,7 @@ end;
 
 function TFiscalModel.Proxy(Value: IFiscalComponente): IFiscalProxyModel;
 begin
-  FProxy := TFiscalProxyFactoryModel.New.Proxy(Value);
+  FProxy := TFiscalProxyFactoryModel.New.Proxy(Self).Componente(Value);
   Result := FProxy;
 end;
 

@@ -10,16 +10,17 @@ uses
 type
   TFiscalProxyModel = class(TInterfacedObject, IFiscalProxyModel)
   private
-    FParent: IFiscalComponente;
+    FParent: IFiscalModel;
+    FComponente: IFiscalComponente;
     FIdentificacao: IFiscalProxyIdentificacaoModel;
     FEmitente: IFiscalProxyEmitenteModel;
     FDestinatario: IFiscalProxyDestinatarioModel;
     FProduto: IFiscalProxyProdutoListaModel;
     FPagamento: IFiscalProxyPagamentoListaModel;
   public
-    constructor Create(Parent: IFiscalComponente);
+    constructor Create(Parent: IFiscalModel);
     destructor Destroy; override;
-    class function New(Parent: IFiscalComponente): IFiscalProxyModel;
+    class function New(Parent: IFiscalModel): IFiscalProxyModel;
 
     // IFiscalProxyModel
     function Identificacao: IFiscalProxyIdentificacaoModel;
@@ -27,6 +28,8 @@ type
     function Destinatario: IFiscalProxyDestinatarioModel;
     function Produto: IFiscalProxyProdutoListaModel;
     function Pagamento: IFiscalProxyPagamentoListaModel;
+    function Componente(Value: IFiscalComponente): IFiscalProxyModel;
+    function &End: IFiscalModel;
     function Exec: IFiscalProxyModel;
   end;
 
@@ -38,7 +41,19 @@ uses
 { TFiscalProxyModel }
 
 
-constructor TFiscalProxyModel.Create(Parent: IFiscalComponente);
+function TFiscalProxyModel.&End: IFiscalModel;
+begin
+  Result := FParent;
+end;
+
+function TFiscalProxyModel.Componente(
+  Value: IFiscalComponente): IFiscalProxyModel;
+begin
+  Result := Self;
+  FComponente := Value;
+end;
+
+constructor TFiscalProxyModel.Create(Parent: IFiscalModel);
 begin
   FParent         := Parent;
   FIdentificacao  := TFiscalProxyFactoryModel.New.Identificacao(Self);
@@ -66,7 +81,7 @@ end;
 function TFiscalProxyModel.Exec: IFiscalProxyModel;
 begin
   Result := Self;
-  FParent.Emitir(Self);
+  FParent.NFCe.Emitir(Self);
 end;
 
 function TFiscalProxyModel.Identificacao: IFiscalProxyIdentificacaoModel;
@@ -74,7 +89,7 @@ begin
   Result := FIdentificacao;
 end;
 
-class function TFiscalProxyModel.New(Parent: IFiscalComponente): IFiscalProxyModel;
+class function TFiscalProxyModel.New(Parent: IFiscalModel): IFiscalProxyModel;
 begin
   Result := Self.Create(Parent);
 end;

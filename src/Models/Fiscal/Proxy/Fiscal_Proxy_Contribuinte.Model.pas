@@ -3,7 +3,7 @@ unit Fiscal_Proxy_Contribuinte.Model;
 interface
 
 uses
-  Fiscal_Proxy.Model.Interf;
+  Fiscal.Model.Interf;
 
 type
   TFiscalProxyContribuinteModel<T> = class(TInterfacedObject, IFiscalProxyContribuinteModel<T>)

@@ -14,7 +14,7 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New : IFiscalProxyFactoryModel;
-    function Proxy(Parent: IFiscalComponente): IFiscalProxyModel;
+    function Proxy(Parent: IFiscalModel): IFiscalProxyModel;
     function Identificacao(Parent: IFiscalProxyModel): IFiscalProxyIdentificacaoModel;
     function Emitente(Parent: IFiscalProxyModel): IFiscalProxyEmitenteModel;
     function Destinatario(Parent: IFiscalProxyModel): IFiscalProxyDestinatarioModel;
@@ -111,8 +111,7 @@ begin
   Result := TFiscalProxyProdutoListaModel.New(Parent);
 end;
 
-function TFiscalProxyFactoryModel.Proxy(
-  Parent: IFiscalComponente): IFiscalProxyModel;
+function TFiscalProxyFactoryModel.Proxy(Parent: IFiscalModel): IFiscalProxyModel;
 begin
   Result := TFiscalProxyModel.New(Parent);
 end;

@@ -3,7 +3,7 @@ unit Fiscal_Proxy_Endereco.Model;
 interface
 
 uses
-  Fiscal_Proxy.Model.Interf;
+  Fiscal.Model.Interf;
 
 type
   TFiscalProxyEnderecoModel<T> = class(TInterfacedObject, IFiscalProxyEnderecoModel<T>)

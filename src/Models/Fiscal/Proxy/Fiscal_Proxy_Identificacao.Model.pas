@@ -3,7 +3,7 @@ unit Fiscal_Proxy_Identificacao.Model;
 interface
 
 uses
-  Fiscal_Proxy.Model.Interf;
+  Fiscal.Model.Interf;
 
 type
   TFiscalProxyIdentificacaoModel = class(TInterfacedObject, IFiscalProxyIdentificacaoModel)
