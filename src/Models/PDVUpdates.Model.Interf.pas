@@ -12,7 +12,8 @@ uses
   Conexao.Model.Interf,
   Entidade.Model.Interf,
   Produto.Model.Interf,
-  Fiscal.Model.Interf;
+  Fiscal.Model.Interf,
+  Empresa.Model.Interf;
 
 type
 
@@ -28,6 +29,7 @@ type
     function Venda(Caixa: ICaixaModel): IVendaModel;
     function Produto: IProdutoModel;
     function Fiscal: IFiscalModel;
+    function Empresa: IEmpresaModel;
   end;
 
 implementation

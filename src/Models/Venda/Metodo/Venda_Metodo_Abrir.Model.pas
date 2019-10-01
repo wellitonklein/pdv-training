@@ -43,9 +43,28 @@ var
   Lista: TObjectList<TVenda>;
 begin
   Lista := FParent.DAO.FindWhere('GUUID = ' + QuotedStr(FParent.Entidade.GUUID));
-  FParent.ModalidadeFiscal.Proxy.Identificacao.Numero(Lista[0].NUMERO);
-  FParent.ModalidadeFiscal.Proxy.Identificacao.Serie(Lista[0].SERIE);
-  FParent.ModalidadeFiscal.Proxy.Identificacao.Data(Now);
+
+  with FParent.ModalidadeFiscal.Proxy do
+  begin
+    Identificacao.Numero(Lista[0].NUMERO);
+    Identificacao.Serie(Lista[0].SERIE);
+    Identificacao.Data(Now);
+
+    Emitente.Contribuinte.Nome(FParent.Empresa.Entidade.NOME);
+    Emitente.Contribuinte.CPFCNPJ(FParent.Empresa.Entidade.CPFCNPJ);
+    Emitente.Contribuinte.Fantasia(FParent.Empresa.Entidade.FANTASIA);
+    Emitente.Contribuinte.IE(FParent.Empresa.Entidade.IE);
+    Emitente.Contribuinte.TeleFone(FParent.Empresa.Entidade.TELEFONE);
+
+    Emitente.Endereco.Logradouro(FParent.Empresa.Entidade.LOGRADOURO);
+    Emitente.Endereco.Numero(FParent.Empresa.Entidade.NUMERO);
+    Emitente.Endereco.Bairro(FParent.Empresa.Entidade.BAIRRO);
+    Emitente.Endereco.Complemento(FParent.Empresa.Entidade.COMPLEMENTO);
+    Emitente.Endereco.Cidade(FParent.Empresa.Entidade.CIDADE);
+    Emitente.Endereco.cMunFG(FParent.Empresa.Entidade.CMUNICIPIO);
+    Emitente.Endereco.UF(FParent.Empresa.Entidade.UF);
+    Emitente.Endereco.CEP(FParent.Empresa.Entidade.CEP);
+  end;
 end;
 
 procedure TVendaMetodoAbrirModel.Gravar;

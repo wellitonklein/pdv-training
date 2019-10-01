@@ -10,7 +10,8 @@ uses
   Entidade_Cliente.Model,
   Entidade_Produto.Model,
   Entidade_VendaItens.Model,
-  Entidade_VendaPagamentos.Model;
+  Entidade_VendaPagamentos.Model,
+  Entidade_Empresa.Model;
 
 type
 
@@ -24,6 +25,7 @@ type
     function Produto: TPRODUTO;
     function VendaItens: TVENDAITENS;
     function VendaPagamentos: TVENDAPAGAMENTOS;
+    function Empresa: TEMPRESA;
   end;
 
 implementation

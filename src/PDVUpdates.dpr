@@ -192,7 +192,12 @@ uses
   Fiscal_Proxy_ProdutoLista.Model in 'Models\Fiscal\Proxy\Lista\Fiscal_Proxy_ProdutoLista.Model.pas',
   Fiscal_Proxy_PagamentoIterator.Model in 'Models\Fiscal\Proxy\Iterator\Fiscal_Proxy_PagamentoIterator.Model.pas',
   Fiscal_Proxy_PagamentoLista.Model in 'Models\Fiscal\Proxy\Lista\Fiscal_Proxy_PagamentoLista.Model.pas',
-  Fiscal_NFCe_Factory.Model.Interf in 'Models\Fiscal\NFCe\Factory\Fiscal_NFCe_Factory.Model.Interf.pas';
+  Fiscal_NFCe_Factory.Model.Interf in 'Models\Fiscal\NFCe\Factory\Fiscal_NFCe_Factory.Model.Interf.pas',
+  Entidade_Empresa.Model in 'Models\Entidade\Entidade_Empresa.Model.pas',
+  Empresa.Model in 'Models\Empresa\Empresa.Model.pas',
+  Empresa.Model.Interf in 'Models\Empresa\Empresa.Model.Interf.pas',
+  Empresa_Factory.Model.Interf in 'Models\Empresa\Factory\Empresa_Factory.Model.Interf.pas',
+  Empresa_Factory.Model in 'Models\Empresa\Factory\Empresa_Factory.Model.pas';
 
 {$R *.res}
 

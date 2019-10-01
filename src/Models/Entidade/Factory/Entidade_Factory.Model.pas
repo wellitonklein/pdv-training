@@ -11,7 +11,8 @@ uses
   Entidade_Cliente.Model,
   Entidade_Produto.Model,
   Entidade_VendaItens.Model,
-  Entidade_VendaPagamentos.Model;
+  Entidade_VendaPagamentos.Model,
+  Entidade_Empresa.Model;
 
 type
   TEntidadeFactoryModel = class(TInterfacedObject, IEntidadeFactoryModel)
@@ -28,6 +29,7 @@ type
     function Produto: TPRODUTO;
     function VendaItens: TVENDAITENS;
     function VendaPagamentos: TVENDAPAGAMENTOS;
+    function Empresa: TEMPRESA;
   end;
 
 implementation
@@ -58,6 +60,11 @@ destructor TEntidadeFactoryModel.Destroy;
 begin
 
   inherited;
+end;
+
+function TEntidadeFactoryModel.Empresa: TEMPRESA;
+begin
+  Result := TEmpresa.Create;
 end;
 
 class function TEntidadeFactoryModel.New: IEntidadeFactoryModel;

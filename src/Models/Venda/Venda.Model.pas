@@ -11,7 +11,8 @@ uses
   ormbr.container.objectset.interfaces,
   Conexao.Model.Interf,
   Caixa.Model.interf,
-  Fiscal.Model.Interf;
+  Fiscal.Model.Interf,
+  Empresa.Model.Interf;
 
 type
   TVendaModel = class(TInterfacedObject, IVendaModel, IVendaMetodoModel)
@@ -20,11 +21,12 @@ type
     FEntidade: TVENDA;
     FDAO: IContainerObjectSet<TVENDA>;
     FState: IVendaMetodoModel;
+    FModalidadeFiscal: IFIscalModel;
     FCaixa: ICaixaModel;
     FCliente: IClienteModel;
     FItens: IItemModel;
     FPagamentos: IPagamentoModel;
-    FModalidadeFiscal: IFIscalModel;
+    FEmpresa: IEmpresaModel;
   public
     constructor Create(Caixa: ICaixaModel);
     destructor Destroy; override;
@@ -34,6 +36,7 @@ type
     function Metodo: IVendaMetodoModel;
     function SetState(Value: IVendaMetodoModel): IVendaMetodoModel;
     function Caixa: ICaixaModel;
+    function Empresa: IEmpresaModel;
     function Cliente: IClienteModel; overload;
     function Cliente(Value: IClienteModel): IVendaModel; overload;
     function Itens: IItemModel;
@@ -65,6 +68,11 @@ function TVendaModel.Abrir: IVendaMetodoAbrirModel;
 begin
   FState.Abrir;
   Result := TVendaMetodoFactoryModel.New.Abrir(Self);
+end;
+
+function TVendaModel.Empresa: IEmpresaModel;
+begin
+  Result := FEmpresa;
 end;
 
 function TVendaModel.&End: IVendaModel;
@@ -113,10 +121,11 @@ begin
   FEntidade   := TPDVUpdatesModel.New.Entidade.Venda;
   FDAO        := TContainerObjectSet<TVenda>.Create(FConn.Connection, 15);
   FState      := TVendaStateFactoryModel.New.Fechado;
+  FModalidadeFiscal := TPDVUpdatesModel.New.Fiscal;
   FCliente    := TPDVUpdatesModel.New.Cliente;
   FItens      := TPDVUpdatesModel.New.Item(Self);
   FPagamentos := TPDVUpdatesModel.New.Pagamento(Self);
-  FModalidadeFiscal := TPDVUpdatesModel.New.Fiscal;
+  FEmpresa    := TPDVUpdatesModel.New.Empresa;
 end;
 
 function TVendaModel.DAO: IContainerObjectSet<TVENDA>;
