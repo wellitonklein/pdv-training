@@ -8,33 +8,33 @@ uses
 type
   TFiscalProxyPagamentoModel = class(TInterfacedObject, IFiscalProxyPagamentoModel)
   private
-    FParent: IFiscalProxyModel;
+    FParent: IFiscalProxyPagamentoListaModel;
     FTipo: SmallInt;
     FDescricao: string;
     FValor: Currency;
   public
-    constructor Create(Parent: IFiscalProxyModel);
+    constructor Create(Parent: IFiscalProxyPagamentoListaModel);
     destructor Destroy; override;
-    class function New(Parent: IFiscalProxyModel): IFiscalProxyPagamentoModel;
+    class function New(Parent: IFiscalProxyPagamentoListaModel): IFiscalProxyPagamentoModel;
     function Tipo(Value: SmallInt): IFiscalProxyPagamentoModel; overload;
     function Descricao(Value: string): IFiscalProxyPagamentoModel; overload;
     function Valor(Value: Currency): IFiscalProxyPagamentoModel; overload;
     function Tipo: SmallInt; overload;
     function Descricao: string; overload;
     function Valor: Currency; overload;
-    function &End: IFiscalProxyModel;
+    function &End: IFiscalProxyPagamentoListaModel;
   end;
 
 implementation
 
 { TFiscalProxyPagamentoModel }
 
-function TFiscalProxyPagamentoModel.&End: IFiscalProxyModel;
+function TFiscalProxyPagamentoModel.&End: IFiscalProxyPagamentoListaModel;
 begin
   Result := FParent;
 end;
 
-constructor TFiscalProxyPagamentoModel.Create(Parent: IFiscalProxyModel);
+constructor TFiscalProxyPagamentoModel.Create(Parent: IFiscalProxyPagamentoListaModel);
 begin
   FParent := Parent;
 end;
@@ -57,7 +57,7 @@ begin
   inherited;
 end;
 
-class function TFiscalProxyPagamentoModel.New(Parent: IFiscalProxyModel): IFiscalProxyPagamentoModel;
+class function TFiscalProxyPagamentoModel.New(Parent: IFiscalProxyPagamentoListaModel): IFiscalProxyPagamentoModel;
 begin
   Result := Self.Create(Parent);
 end;

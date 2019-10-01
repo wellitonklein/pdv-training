@@ -3,7 +3,6 @@ unit Fiscal_Proxy.Model;
 interface
 
 uses
-  Fiscal_Proxy.Model.Interf,
   System.Generics.Collections,
   Fiscal.Model.Interf;
 

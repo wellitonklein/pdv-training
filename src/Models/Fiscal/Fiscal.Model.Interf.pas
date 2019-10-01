@@ -2,9 +2,6 @@ unit Fiscal.Model.Interf;
 
 interface
 
-uses
-  Fiscal_Proxy.Model.Interf;
-
 type
   IFiscalModel = interface;
   IFiscalComponente = interface;
@@ -157,7 +154,7 @@ type
     function CEST: string; overload;
     function UND: string; overload;
     function CFOP: string; overload;
-    function &End: IFiscalProxyModel;
+    function &End: IFiscalProxyProdutoListaModel;
   end;
 
   IFiscalProxyPagamentoListaModel = interface
@@ -182,7 +179,7 @@ type
     function Tipo: SmallInt; overload;
     function Descricao: string; overload;
     function Valor: Currency; overload;
-    function &End: IFiscalProxyModel;
+    function &End: IFiscalProxyPagamentoListaModel;
   end;
 
 implementation

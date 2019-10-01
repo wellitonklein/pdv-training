@@ -10,8 +10,7 @@ uses
   ACBrNFeDANFEClass,
   ACBrDANFCeFortesFr,
 
-  Fiscal.Model.Interf,
-  Fiscal_Proxy.Model.Interf;
+  Fiscal.Model.Interf;
 
 type
   TFiscalNFCeACBrModel = class(TInterfacedObject, IFiscalComponente)

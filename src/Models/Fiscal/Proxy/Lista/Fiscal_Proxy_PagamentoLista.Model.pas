@@ -31,7 +31,7 @@ uses
 
 function TFiscalProxyPagamentoListaModel.AddPagamento: IFiscalProxyPagamentoModel;
 begin
-  FLista.Add(TFiscalProxyFactoryModel.New.Pagamento(FParent));
+  FLista.Add(TFiscalProxyFactoryModel.New.Pagamento(Self));
   Result := FLista.Items[Pred(FLista.Count)];
 end;
 

@@ -3,7 +3,6 @@ unit Fiscal_Proxy_Factory.Model.Interf;
 interface
 
 uses
-  Fiscal_Proxy.Model.Interf,
   System.Generics.Collections,
   Fiscal.Model.Interf;
 
@@ -15,8 +14,8 @@ type
     function Identificacao(Parent: IFiscalProxyModel): IFiscalProxyIdentificacaoModel;
     function Emitente(Parent: IFiscalProxyModel): IFiscalProxyEmitenteModel;
     function Destinatario(Parent: IFiscalProxyModel): IFiscalProxyDestinatarioModel;
-    function Produto(Parent: IFiscalProxyModel): IFiscalProxyProdutoModel;
-    function Pagamento(Parent: IFiscalProxyModel): IFiscalProxyPagamentoModel;
+    function Produto(Parent: IFiscalProxyProdutoListaModel): IFiscalProxyProdutoModel;
+    function Pagamento(Parent: IFiscalProxyPagamentoListaModel): IFiscalProxyPagamentoModel;
     function ProdutoLista(Parent: IFiscalProxyModel): IFiscalProxyProdutoListaModel;
     function PagamentoLista(Parent: IFiscalProxyModel): IFiscalProxyPagamentoListaModel;
     function ProdutoIterator(Lista: TList<IFiscalProxyProdutoModel>): IFiscalProxyProdutoIteratorModel;

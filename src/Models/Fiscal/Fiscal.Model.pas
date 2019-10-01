@@ -3,8 +3,7 @@ unit Fiscal.Model;
 interface
 
 uses
-  Fiscal.Model.Interf,
-  Fiscal_Proxy.Model.Interf;
+  Fiscal.Model.Interf;
 
 type
   TFiscalModel = class(TInterfacedObject, IFiscalModel)

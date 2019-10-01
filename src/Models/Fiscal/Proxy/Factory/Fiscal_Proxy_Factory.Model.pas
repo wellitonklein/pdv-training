@@ -4,8 +4,8 @@ interface
 
 uses
   Fiscal_Proxy_Factory.Model.Interf,
-  Fiscal_Proxy.Model.Interf,
-  System.Generics.Collections, Fiscal.Model.Interf;
+  System.Generics.Collections,
+  Fiscal.Model.Interf;
 
 type
   TFiscalProxyFactoryModel = class(TInterfacedObject, IFiscalProxyFactoryModel)
@@ -18,8 +18,8 @@ type
     function Identificacao(Parent: IFiscalProxyModel): IFiscalProxyIdentificacaoModel;
     function Emitente(Parent: IFiscalProxyModel): IFiscalProxyEmitenteModel;
     function Destinatario(Parent: IFiscalProxyModel): IFiscalProxyDestinatarioModel;
-    function Produto(Parent: IFiscalProxyModel): IFiscalProxyProdutoModel;
-    function Pagamento(Parent: IFiscalProxyModel): IFiscalProxyPagamentoModel;
+    function Produto(Parent: IFiscalProxyProdutoListaModel): IFiscalProxyProdutoModel;
+    function Pagamento(Parent: IFiscalProxyPagamentoListaModel): IFiscalProxyPagamentoModel;
     function ProdutoLista(Parent: IFiscalProxyModel): IFiscalProxyProdutoListaModel;
     function PagamentoLista(Parent: IFiscalProxyModel): IFiscalProxyPagamentoListaModel;
     function ProdutoIterator(Lista: TList<IFiscalProxyProdutoModel>): IFiscalProxyProdutoIteratorModel;
@@ -76,7 +76,7 @@ begin
 end;
 
 function TFiscalProxyFactoryModel.Pagamento(
-  Parent: IFiscalProxyModel): IFiscalProxyPagamentoModel;
+  Parent: IFiscalProxyPagamentoListaModel): IFiscalProxyPagamentoModel;
 begin
   Result := TFiscalProxyPagamentoModel.New(Parent);
 end;
@@ -94,7 +94,7 @@ begin
 end;
 
 function TFiscalProxyFactoryModel.Produto(
-  Parent: IFiscalProxyModel): IFiscalProxyProdutoModel;
+  Parent: IFiscalProxyProdutoListaModel): IFiscalProxyProdutoModel;
 begin
   Result := TFiscalProxyProdutoModel.New(Parent);
 end;

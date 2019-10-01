@@ -8,7 +8,7 @@ uses
 type
   TFiscalProxyProdutoModel = class(TInterfacedObject, IFiscalProxyProdutoModel)
   private
-    FParent: IFiscalProxyModel;
+    FParent: IFiscalProxyProdutoListaModel;
     FCodigo: string;
     FDescricao: string;
     FCEAN: string;
@@ -22,9 +22,9 @@ type
     FUND: string;
     FCFOP: string;
   public
-    constructor Create(Parent: IFiscalProxyModel);
+    constructor Create(Parent: IFiscalProxyProdutoListaModel);
     destructor Destroy; override;
-    class function New(Parent: IFiscalProxyModel): IFiscalProxyProdutoModel;
+    class function New(Parent: IFiscalProxyProdutoListaModel): IFiscalProxyProdutoModel;
     function Codigo(Value: string): IFiscalProxyProdutoModel; overload;
     function Descricao(Value: string): IFiscalProxyProdutoModel; overload;
     function cEAN(Value: string): IFiscalProxyProdutoModel; overload;
@@ -49,7 +49,7 @@ type
     function CEST: string; overload;
     function UND: string; overload;
     function CFOP: string; overload;
-    function &End: IFiscalProxyModel;
+    function &End: IFiscalProxyProdutoListaModel;
   end;
 
 implementation
@@ -113,12 +113,12 @@ begin
   Result := FCodigo;
 end;
 
-function TFiscalProxyProdutoModel.&End: IFiscalProxyModel;
+function TFiscalProxyProdutoModel.&End: IFiscalProxyProdutoListaModel;
 begin
   Result := FParent;
 end;
 
-constructor TFiscalProxyProdutoModel.Create(Parent: IFiscalProxyModel);
+constructor TFiscalProxyProdutoModel.Create(Parent: IFiscalProxyProdutoListaModel);
 begin
   FParent := Parent;
 end;
@@ -164,7 +164,7 @@ begin
   Result := FNCM;
 end;
 
-class function TFiscalProxyProdutoModel.New(Parent: IFiscalProxyModel): IFiscalProxyProdutoModel;
+class function TFiscalProxyProdutoModel.New(Parent: IFiscalProxyProdutoListaModel): IFiscalProxyProdutoModel;
 begin
   Result := Self.Create(Parent);
 end;

@@ -31,7 +31,7 @@ uses
 
 function TFiscalProxyProdutoListaModel.AddProduto: IFiscalProxyProdutoModel;
 begin
-  FLista.Add(TFiscalProxyFactoryModel.New.Produto(FParent));
+  FLista.Add(TFiscalProxyFactoryModel.New.Produto(Self));
   Result := FLista.Items[Pred(FLista.Count)];
 end;
 
