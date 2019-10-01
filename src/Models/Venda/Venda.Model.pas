@@ -4,9 +4,14 @@ interface
 
 uses
   Venda.Model.Inerf,
-  Cliente.Model.Interf, Item.Model.Interf, Pagamento.Model.Interf,
-  Entidade_Venda.Model, ormbr.container.objectset.interfaces,
-  Conexao.Model.Interf, Caixa.Model.interf;
+  Cliente.Model.Interf,
+  Item.Model.Interf,
+  Pagamento.Model.Interf,
+  Entidade_Venda.Model,
+  ormbr.container.objectset.interfaces,
+  Conexao.Model.Interf,
+  Caixa.Model.interf,
+  Fiscal.Model.Interf;
 
 type
   TVendaModel = class(TInterfacedObject, IVendaModel, IVendaMetodoModel)
@@ -19,6 +24,7 @@ type
     FCliente: IClienteModel;
     FItens: IItemModel;
     FPagamentos: IPagamentoModel;
+    FModalidadeFiscal: IFIscalModel;
   public
     constructor Create(Caixa: ICaixaModel);
     destructor Destroy; override;
@@ -35,6 +41,8 @@ type
     function Entidade: TVENDA; overload;
     function Entidade(Value: TVENDA): IVendaModel; overload;
     function DAO: IContainerObjectSet<TVENDA>;
+    function ModalidadeFiscal(Value: IFiscalModel): IVendaModel; overload;
+    function ModalidadeFiscal: IFiscalModel; overload;
 
     // VendaMetodoModel
     function Abrir: IVendaMetodoAbrirModel;
@@ -100,14 +108,15 @@ end;
 
 constructor TVendaModel.Create(Caixa: ICaixaModel);
 begin
+  FCaixa      := Caixa;
   FConn       := TPDVUpdatesModel.New.Conexao;
   FEntidade   := TPDVUpdatesModel.New.Entidade.Venda;
   FDAO        := TContainerObjectSet<TVenda>.Create(FConn.Connection, 15);
   FState      := TVendaStateFactoryModel.New.Fechado;
-  FCaixa      := Caixa;
   FCliente    := TPDVUpdatesModel.New.Cliente;
   FItens      := TPDVUpdatesModel.New.Item(Self);
   FPagamentos := TPDVUpdatesModel.New.Pagamento(Self);
+  FModalidadeFiscal := TPDVUpdatesModel.New.Fiscal;
 end;
 
 function TVendaModel.DAO: IContainerObjectSet<TVENDA>;
@@ -135,6 +144,17 @@ end;
 function TVendaModel.Metodo: IVendaMetodoModel;
 begin
   Result := Self;
+end;
+
+function TVendaModel.ModalidadeFiscal(Value: IFiscalModel): IVendaModel;
+begin
+  Result := Self;
+  FModalidadeFiscal := Value;
+end;
+
+function TVendaModel.ModalidadeFiscal: IFiscalModel;
+begin
+  Result := FModalidadeFiscal;
 end;
 
 class function TVendaModel.New(Caixa: ICaixaModel): IVendaModel;

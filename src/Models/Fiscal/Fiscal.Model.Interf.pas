@@ -11,7 +11,8 @@ type
 
   IFiscalModel = interface
     ['{25AC2E32-6DFD-4AFF-A85F-EB80765E6C30}']
-    function Proxy(Value: IFiscalComponente): IFiscalProxyModel;
+    function Proxy(Value: IFiscalComponente): IFiscalProxyModel; overload;
+    function Proxy: IFiscalProxyModel; overload;
     function NFCe: IFiscalComponente;
   end;
 

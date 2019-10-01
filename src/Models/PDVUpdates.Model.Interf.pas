@@ -11,7 +11,8 @@ uses
   Venda.Model.Inerf,
   Conexao.Model.Interf,
   Entidade.Model.Interf,
-  Produto.Model.Interf;
+  Produto.Model.Interf,
+  Fiscal.Model.Interf;
 
 type
 
@@ -26,6 +27,7 @@ type
     function Pagamento(Venda: IVendaModel): IPagamentoModel;
     function Venda(Caixa: ICaixaModel): IVendaModel;
     function Produto: IProdutoModel;
+    function Fiscal: IFiscalModel;
   end;
 
 implementation

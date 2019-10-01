@@ -12,7 +12,7 @@ uses
   Venda.Model.Inerf,
   Conexao.Model.Interf,
   Entidade.Model.Interf,
-  Produto.Model.Interf;
+  Produto.Model.Interf, Fiscal.Model.Interf;
 
 type
   TPDVUpdatesModel = class(TInterfacedObject, IPDVUpdatesModel)
@@ -30,6 +30,7 @@ type
     function Pagamento(Venda: IVendaModel): IPagamentoModel;
     function Venda(Caixa: ICaixaModel): IVendaModel;
     function Produto: IProdutoModel;
+    function Fiscal: IFiscalModel;
   end;
 
 implementation
@@ -42,7 +43,9 @@ uses
   Pagamento_Factory.Model,
   Venda_Factory.Model,
   Conexao_Factory.Model,
-  Entidade_Factory.Model, Produto_Factory.Model;
+  Entidade_Factory.Model,
+  Produto_Factory.Model,
+  Fiscal.Model;
 
 { TPDVUpdatesModel }
 
@@ -75,6 +78,11 @@ end;
 function TPDVUpdatesModel.Entidade: IEntidadeFactoryModel;
 begin
   Result := TEntidadeFactoryModel.New;
+end;
+
+function TPDVUpdatesModel.Fiscal: IFiscalModel;
+begin
+  Result := TFiscalModel.New;
 end;
 
 function TPDVUpdatesModel.Item(Venda: IVendaModel): IItemModel;

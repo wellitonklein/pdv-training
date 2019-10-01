@@ -5,7 +5,7 @@ interface
 uses
   Cliente.Model.Interf, Item.Model.Interf, Pagamento.Model.Interf,
   Entidade_Venda.Model, ormbr.container.objectset.interfaces,
-  Caixa.Model.interf;
+  Caixa.Model.interf, Fiscal.Model.Interf;
 
 type
   IVendaModel = interface;
@@ -26,6 +26,8 @@ type
     function Entidade: TVENDA; overload;
     function Entidade(Value: TVENDA): IVendaModel; overload;
     function DAO: IContainerObjectSet<TVENDA>;
+    function ModalidadeFiscal(Value: IFiscalModel): IVendaModel; overload;
+    function ModalidadeFiscal: IFiscalModel; overload;
   end;
 
   IVendaMetodoModel = interface
