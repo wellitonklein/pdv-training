@@ -24,6 +24,7 @@ type
     procedure PreencherEmitente;
     procedure PreencherDestinatario;
     procedure PreencherProdutos;
+    procedure PreencherPagamentos;
   public
     constructor Create;
     destructor Destroy; override;
@@ -69,6 +70,8 @@ begin
   PreencherIdentificacao;
   PreencherEmitente;
   PreencherDestinatario;
+  PreencherProdutos;
+  PreencherPagamentos;
 end;
 
 class function TFiscalNFCeComponentesModel.New: IFiscalComponente;
@@ -153,38 +156,55 @@ begin
   end;
 end;
 
+procedure TFiscalNFCeComponentesModel.PreencherPagamentos;
+var
+  FPagamento: IFiscalProxyPagamentoModel;
+  FCount: Integer;
+begin
+   FCount := 0;
+   while FProxy.Pagamento.Iterator.hasNext do
+   begin
+     FPagamento := FProxy.Pagamento.Iterator.Next;
+
+     FACBrNFe.NotasFiscais.Add.NFe.pag.Add.tPag := TpcnFormaPagamento(FPagamento.Tipo);
+     FACBrNFe.NotasFiscais.Add.NFe.pag.Add.vPag := FPagamento.Valor;
+
+     Inc(FCount);
+   end;
+end;
+
 procedure TFiscalNFCeComponentesModel.PreencherProdutos;
 var
-  Produto: IFiscalProxyProdutoModel;
+  FProduto: IFiscalProxyProdutoModel;
   FCount: SmallInt;
 begin
   FCount := 1;
   while FProxy.Produto.Iterator.hasNext do
   begin
-    Produto := FProxy.Produto.Iterator.Next;
+    FProduto := FProxy.Produto.Iterator.Next;
 
     with FACBrNFe.NotasFiscais.Add.NFe.Det.Add do
     begin
       Prod.nItem    := FCount; // Número sequencial, para cada item deve ser incrementado
-      Prod.cProd    := Produto.Codigo;
-      Prod.cEAN     := Produto.cEAN;
-      Prod.xProd    := Produto.Descricao;
-      Prod.NCM      := Produto.NCM; // Tabela NCM disponível em  http://www.receita.fazenda.gov.br/Aliquotas/DownloadArqTIPI.htm
+      Prod.cProd    := FProduto.Codigo;
+      Prod.cEAN     := FProduto.cEAN;
+      Prod.xProd    := FProduto.Descricao;
+      Prod.NCM      := FProduto.NCM; // Tabela NCM disponível em  http://www.receita.fazenda.gov.br/Aliquotas/DownloadArqTIPI.htm
       Prod.EXTIPI   := '';
-      Prod.CFOP     := Produto.CFOP;
-      Prod.uCom     := Produto.UND;
-      Prod.qCom     := Produto.Qtde;
-      Prod.vUnCom   := Produto.vUnit;
-      Prod.vProd    := (Produto.Qtde * Produto.vUnit);
-      Prod.cEANTrib  := Produto.cEAN;
-      Prod.uTrib     := Produto.UND;
-      Prod.qTrib     := Produto.Qtde;
-      Prod.vUnTrib   := Produto.vUnit;
+      Prod.CFOP     := FProduto.CFOP;
+      Prod.uCom     := FProduto.UND;
+      Prod.qCom     := FProduto.Qtde;
+      Prod.vUnCom   := FProduto.vUnit;
+      Prod.vProd    := (FProduto.Qtde * FProduto.vUnit);
+      Prod.cEANTrib  := FProduto.cEAN;
+      Prod.uTrib     := FProduto.UND;
+      Prod.qTrib     := FProduto.Qtde;
+      Prod.vUnTrib   := FProduto.vUnit;
       Prod.vOutro    := 0;
       Prod.vFrete    := 0;
       Prod.vSeg      := 0;
-      Prod.vDesc     := Produto.Desconto;
-      Prod.CEST := Produto.CEST;
+      Prod.vDesc     := FProduto.Desconto;
+      Prod.CEST := FProduto.CEST;
       infAdProd := 'Informacao Adicional do Produto';
 
       // Imposto
@@ -195,9 +215,9 @@ begin
         CST     := cst00;
         orig    := oeNacional;
         modBC   := dbiValorOperacao;
-        vBC     := (Produto.Qtde * Produto.vUnit);
-        pICMS   := Produto.Aliquota;
-        vICMS   := (((Produto.Qtde * Produto.vUnit) * Produto.Aliquota) / 100);
+        vBC     := (FProduto.Qtde * FProduto.vUnit);
+        pICMS   := FProduto.Aliquota;
+        vICMS   := (((FProduto.Qtde * FProduto.vUnit) * FProduto.Aliquota) / 100);
         modBCST := dbisMargemValorAgregado;
         pMVAST  := 0;
         pRedBCST:= 0;

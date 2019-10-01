@@ -156,8 +156,10 @@ type
 
   IFiscalProxyPagamentoModel = interface
     ['{E99D79D7-5951-4B12-95C8-196F57C8D829}']
+    function Tipo(Value: SmallInt): IFiscalProxyPagamentoModel; overload;
     function Descricao(Value: string): IFiscalProxyPagamentoModel; overload;
     function Valor(Value: Currency): IFiscalProxyPagamentoModel; overload;
+    function Tipo: SmallInt; overload;
     function Descricao: string; overload;
     function Valor: Currency; overload;
     function &End: IFiscalProxyModel;

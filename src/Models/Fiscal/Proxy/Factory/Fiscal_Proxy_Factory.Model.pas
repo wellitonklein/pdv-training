@@ -4,7 +4,8 @@ interface
 
 uses
   Fiscal_Proxy_Factory.Model.Interf,
-  Fiscal_Proxy.Model.Interf, System.Generics.Collections;
+  Fiscal_Proxy.Model.Interf,
+  System.Generics.Collections;
 
 type
   TFiscalProxyFactoryModel = class(TInterfacedObject, IFiscalProxyFactoryModel)
@@ -33,7 +34,8 @@ uses
   Fiscal_Proxy_Pagamento.Model,
   Fiscal_Proxy_Produto.Model,
   Fiscal_Proxy_PagamentoLista.Model,
-  Fiscal_Proxy_ProdutoLista.Model, Fiscal_Proxy_ProdutoIterator.Model,
+  Fiscal_Proxy_ProdutoLista.Model,
+  Fiscal_Proxy_ProdutoIterator.Model,
   Fiscal_Proxy_PagamentoIterator.Model;
 
 { TFiscalProxyFactoryModel }
