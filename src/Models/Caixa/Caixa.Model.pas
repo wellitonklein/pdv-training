@@ -119,7 +119,11 @@ end;
 
 procedure TCaixaModel.RecuperarCaixa;
 begin
-  FEntidade := FDAO.FindWhere('', 'DATAABERTURA DESC').Items[0];
+  try
+    FEntidade := FDAO.FindWhere('', 'DATAABERTURA DESC').Items[0];
+  except
+    FEntidade.STATUS := -1;
+  end;
 end;
 
 function TCaixaModel.SetStatusCaixa: ICaixaMetodoModel;
@@ -127,8 +131,9 @@ begin
   RecuperarCaixa;
   case TTypeCaixaStatus(FEntidade.STATUS) of
     tcsAberto: Result := TCaixaStateFactoryModel.New.Aberto;
-    tcsBloqueado: Result := TCaixaStateFactoryModel.New.Bloquado;
+    tcsBloqueado: Result := TCaixaStateFactoryModel.New.Bloqueado;
     tcsFechado: Result := TCaixaStateFactoryModel.New.Fechado;
+    else Result := TCaixaStateFactoryModel.New.Fechado;
   end;
 end;
 

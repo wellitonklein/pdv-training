@@ -15,7 +15,7 @@ type
     class function New : ICaixaStateFactoryModel;
     function Aberto: ICaixaMetodoModel;
     function Fechado: ICaixaMetodoModel;
-    function Bloquado: ICaixaMetodoModel;
+    function Bloqueado: ICaixaMetodoModel;
   end;
 
 implementation
@@ -32,7 +32,7 @@ begin
   Result := TCaixaStateAbertoModel.New;
 end;
 
-function TCaixaStateFactoryModel.Bloquado: ICaixaMetodoModel;
+function TCaixaStateFactoryModel.Bloqueado: ICaixaMetodoModel;
 begin
   Result := TCaixaStateBloqueadoModel.New;
 end;

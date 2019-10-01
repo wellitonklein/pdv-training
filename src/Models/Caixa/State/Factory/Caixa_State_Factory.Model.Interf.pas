@@ -11,7 +11,7 @@ type
     ['{87C3D2EB-A85C-4829-9C13-1EC1ADC9A4A3}']
     function Aberto: ICaixaMetodoModel;
     function Fechado: ICaixaMetodoModel;
-    function Bloquado: ICaixaMetodoModel;
+    function Bloqueado: ICaixaMetodoModel;
   end;
 
 implementation

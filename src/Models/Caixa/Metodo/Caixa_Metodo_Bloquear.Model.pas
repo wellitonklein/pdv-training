@@ -41,7 +41,7 @@ begin
   FParent.DAO.Modify(CAIXA);
   CAIXA.STATUS := Integer(tcsBloqueado);
   FParent.DAO.Update(CAIXA);
-  FParent.SetState(TCaixaStateFactoryModel.New.Bloquado);
+  FParent.SetState(TCaixaStateFactoryModel.New.Bloqueado);
 end;
 
 constructor TCaixaMetodoBloquearModel.Create(Parent: ICaixaModel);

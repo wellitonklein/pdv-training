@@ -27,11 +27,13 @@ type
     FGUUID: String;
     FCAIXA: Nullable<String>;
     FCLIENTE: Nullable<String>;
+    FNUMERO: SmallInt;
+    FSERIE: SmallInt;
     FDATAABERTURA: TDateTime;
-    FDATAFECHAMENTO: Nullable<TDateTime>;
+    FDATAFECHAMENTO: TDateTime;
     FSTATUS: SmallInt;
-    function GetGUUID: String;
     function GetDATAABERTURA: TDateTime;
+    function GetGUUID: String;
   public
     { Public declarations }
     [Restrictions([NotNull])]
@@ -47,13 +49,21 @@ type
     [Dictionary('CLIENTE', 'Mensagem de validação', '', '', '', taLeftJustify)]
     property CLIENTE: Nullable<String> read FCLIENTE write FCLIENTE;
 
+    [Column('NUMERO', ftSmallint)]
+    [Dictionary('NUMERO', 'Mensagem de validação', '', '', '', taCenter)]
+    property NUMERO: SmallInt read FNUMERO write FNUMERO;
+
+    [Column('SERIE', ftSmallint)]
+    [Dictionary('SERIE', 'Mensagem de validação', '', '', '', taCenter)]
+    property SERIE: SmallInt read FSERIE write FSERIE;
+
     [Column('DATAABERTURA', ftDateTime)]
     [Dictionary('DATAABERTURA', 'Mensagem de validação', '', '', '', taCenter)]
     property DATAABERTURA: TDateTime read GetDATAABERTURA write FDATAABERTURA;
 
     [Column('DATAFECHAMENTO', ftDateTime)]
     [Dictionary('DATAFECHAMENTO', 'Mensagem de validação', '', '', '', taCenter)]
-    property DATAFECHAMENTO: Nullable<TDateTime> read FDATAFECHAMENTO write FDATAFECHAMENTO;
+    property DATAFECHAMENTO: TDateTime read FDATAFECHAMENTO write FDATAFECHAMENTO;
 
     [Column('STATUS', ftSmallint)]
     [Dictionary('STATUS', 'Mensagem de validação', '', '', '', taCenter)]

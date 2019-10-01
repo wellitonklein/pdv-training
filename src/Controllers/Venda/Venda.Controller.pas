@@ -32,7 +32,16 @@ constructor TVendaController.Create(Caixa: ICaixaController);
 begin
   FCaixa      := Caixa;
   FMetodo     := TVendaMetodoController.New(Self, FCaixa);
-  FVendaModel := TPDVUpdatesModel.New.Venda(FCaixa.Metodo.Model);
+  FVendaModel :=
+    TPDVUpdatesModel.New
+      .Venda(
+        FCaixa.Metodo.Model
+      )
+      .ModalidadeFiscal(
+        TPDVUpdatesModel.New.Fiscal.Proxy(
+          TPDVUpdatesModel.New.Fiscal.NFCe
+        ).&End
+      );
 end;
 
 destructor TVendaController.Destroy;
