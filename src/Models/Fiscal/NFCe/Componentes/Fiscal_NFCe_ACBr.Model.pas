@@ -30,7 +30,6 @@ type
     procedure PreencherEmitente;
     procedure PreencherDestinatario;
     procedure PreencherProdutos;
-    procedure ArmazenaTotais(const DetItem: TDetCollectionItem);
     procedure PreencherPagamentos;
     procedure PreencherTotais;
     procedure PreencherTransporte;
@@ -50,16 +49,6 @@ uses
   ACBrNFeNotasFiscais;
 
 { TACBrNFCeComponentesModel }
-
-procedure TFiscalNFCeACBrModel.ArmazenaTotais(const DetItem: TDetCollectionItem);
-begin
-  FTotalNFCe := (
-    FTotalNFCe + DetItem.Prod.vProd - DetItem.Prod.vDesc
-  );
-  FTotalProduto   := (FTotalProduto + DetItem.Prod.vProd);
-  FTotalDesconto  := (FTotalDesconto + DetItem.Prod.vDesc);
-  FTotalICMS      := (FTotalICMS + DetItem.Imposto.ICMS.vICMS);
-end;
 
 constructor TFiscalNFCeACBrModel.Create;
 begin
@@ -201,15 +190,16 @@ procedure TFiscalNFCeACBrModel.PreencherPagamentos;
 var
   FPagamento: IFiscalProxyPagamentoModel;
   FPagamentoIterator: IFiscalProxyPagamentoIteratorModel;
-  FPagamentoAdd: TpagCollectionItem;
 begin
-  FPagamentoAdd := FNFe.pag.Add;
   FPagamentoIterator := FProxy.Pagamento.Iterator;
   while FPagamentoIterator.hasNext do
   begin
     FPagamento := FPagamentoIterator.Next;
-    FPagamentoAdd.tPag := TpcnFormaPagamento(FPagamento.Tipo);
-    FPagamentoAdd.vPag := FPagamento.Valor;
+    with FNFe.pag.Add do
+    begin
+      tPag := TpcnFormaPagamento(FPagamento.Tipo);
+      vPag := FPagamento.Valor;
+    end;
   end;
 end;
 
@@ -218,15 +208,13 @@ var
   FProduto: IFiscalProxyProdutoModel;
   FProdutoIterator: IFiscalProxyProdutoIteratorModel;
   FCount: SmallInt;
-  FDetItem: TDetCollectionItem;
 begin
   FCount := 1;
-  FDetItem := FNFe.Det.Add;
   FProdutoIterator := FProxy.Produto.Iterator;
   while FProdutoIterator.hasNext do
   begin
     FProduto := FProdutoIterator.Next;
-    with FDetItem do
+    with FNFe.Det.Add do
     begin
       Prod.nItem     := FCount; // Número sequencial, para cada item deve ser incrementado
       Prod.cProd     := FProduto.Codigo;
@@ -270,7 +258,12 @@ begin
       end;
 
       // Armazenando Valores
-      ArmazenaTotais(FDetItem);
+      FTotalNFCe := (
+        FTotalNFCe + Prod.vProd - Prod.vDesc
+      );
+      FTotalProduto   := (FTotalProduto + Prod.vProd);
+      FTotalDesconto  := (FTotalDesconto + Prod.vDesc);
+      FTotalICMS      := (FTotalICMS + Imposto.ICMS.vICMS);
     end;
     Inc(FCount);
   end;
