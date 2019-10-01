@@ -347,6 +347,10 @@
         <DCCReference Include="Models\Fiscal\Proxy\Factory\Fiscal_Proxy_Factory.Model.Interf.pas"/>
         <DCCReference Include="Models\Fiscal\Proxy\Factory\Fiscal_Proxy_Factory.Model.pas"/>
         <DCCReference Include="Models\Fiscal\Proxy\Fiscal_Proxy.Model.pas"/>
+        <DCCReference Include="Models\Fiscal\Proxy\Iterator\Fiscal_Proxy_ProdutoIterator.Model.pas"/>
+        <DCCReference Include="Models\Fiscal\Proxy\Lista\Fiscal_Proxy_ProdutoLista.Model.pas"/>
+        <DCCReference Include="Models\Fiscal\Proxy\Iterator\Fiscal_Proxy_PagamentoIterator.Model.pas"/>
+        <DCCReference Include="Models\Fiscal\Proxy\Lista\Fiscal_Proxy_PagamentoLista.Model.pas"/>
         <None Include="mvcbr.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

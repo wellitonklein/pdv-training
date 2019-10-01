@@ -10,9 +10,10 @@ type
   IFiscalProxyEmitenteModel = interface;
   IFiscalProxyDestinatarioModel = interface;
   IFiscalProxyProdutoListaModel = interface;
-  IFiscalProxyProdutoListaIteratorModel = interface;
+  IFiscalProxyProdutoIteratorModel = interface;
   IFiscalProxyProdutoModel = interface;
   IFiscalProxyPagamentoListaModel = interface;
+  IFiscalProxyPagamentoIteratorModel = interface;
   IFiscalProxyPagamentoModel = interface;
 
   IFiscalProxyModel = interface
@@ -98,16 +99,16 @@ type
 
   IFiscalProxyProdutoListaModel = interface
     ['{2AE34789-BEF3-47A2-B526-E511823AFBD3}']
-    function IteratorProduto: IFiscalProxyProdutoListaIteratorModel;
+    function Iterator: IFiscalProxyProdutoIteratorModel;
     function AddProduto: IFiscalProxyProdutoModel;
     function &EndProduto: IFiscalProxyProdutoListaModel;
     function &End: IFiscalProxyModel;
   end;
 
-  IFiscalProxyProdutoListaIteratorModel = interface
+  IFiscalProxyProdutoIteratorModel = interface
     ['{F0C6B9AB-851B-469B-8429-DA74F9AFBC79}']
-    function hasNextProduto: Boolean;
-    function NextProduto: IFiscalProxyProdutoModel;
+    function hasNext: Boolean;
+    function Next: IFiscalProxyProdutoModel;
   end;
 
   IFiscalProxyProdutoModel = interface
@@ -141,9 +142,16 @@ type
 
   IFiscalProxyPagamentoListaModel = interface
     ['{2AE34789-BEF3-47A2-B526-E511823AFBD3}']
+    function Iterator: IFiscalProxyPagamentoIteratorModel;
     function AddPagamento: IFiscalProxyPagamentoModel;
     function &EndPagamento: IFiscalProxyPagamentoListaModel;
     function &End: IFiscalProxyModel;
+  end;
+
+  IFiscalProxyPagamentoIteratorModel = interface
+    ['{F0C6B9AB-851B-469B-8429-DA74F9AFBC79}']
+    function hasNext: Boolean;
+    function Next: IFiscalProxyPagamentoModel;
   end;
 
   IFiscalProxyPagamentoModel = interface

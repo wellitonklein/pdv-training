@@ -188,7 +188,11 @@ uses
   Fiscal_Proxy_Pagamento.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Pagamento.Model.pas',
   Fiscal_Proxy_Factory.Model.Interf in 'Models\Fiscal\Proxy\Factory\Fiscal_Proxy_Factory.Model.Interf.pas',
   Fiscal_Proxy_Factory.Model in 'Models\Fiscal\Proxy\Factory\Fiscal_Proxy_Factory.Model.pas',
-  Fiscal_Proxy.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy.Model.pas';
+  Fiscal_Proxy.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy.Model.pas',
+  Fiscal_Proxy_ProdutoIterator.Model in 'Models\Fiscal\Proxy\Iterator\Fiscal_Proxy_ProdutoIterator.Model.pas',
+  Fiscal_Proxy_ProdutoLista.Model in 'Models\Fiscal\Proxy\Lista\Fiscal_Proxy_ProdutoLista.Model.pas',
+  Fiscal_Proxy_PagamentoIterator.Model in 'Models\Fiscal\Proxy\Iterator\Fiscal_Proxy_PagamentoIterator.Model.pas',
+  Fiscal_Proxy_PagamentoLista.Model in 'Models\Fiscal\Proxy\Lista\Fiscal_Proxy_PagamentoLista.Model.pas';
 
 {$R *.res}
 

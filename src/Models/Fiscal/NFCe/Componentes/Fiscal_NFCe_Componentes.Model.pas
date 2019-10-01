@@ -159,9 +159,9 @@ var
   FCount: SmallInt;
 begin
   FCount := 1;
-  while FProxy.Produto.IteratorProduto.hasNextProduto do
+  while FProxy.Produto.Iterator.hasNext do
   begin
-    Produto := FProxy.Produto.IteratorProduto.NextProduto;
+    Produto := FProxy.Produto.Iterator.Next;
 
     with FACBrNFe.NotasFiscais.Add.NFe.Det.Add do
     begin
@@ -207,7 +207,6 @@ begin
         pRedBC  := 0;
       end;
     end;
-
     Inc(FCount);
   end;
 end;
