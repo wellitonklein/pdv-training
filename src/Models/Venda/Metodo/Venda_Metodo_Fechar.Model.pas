@@ -26,7 +26,7 @@ uses
 function TVendaMetodoFecharModel.&End: IVendaMetodoModel;
 begin
   Result := FParent.Metodo;
-
+  FParent.ModalidadeFiscal.Proxy.Exec;
   FParent.SetState(TVendaStateFactoryModel.New.Fechado);
 end;
 

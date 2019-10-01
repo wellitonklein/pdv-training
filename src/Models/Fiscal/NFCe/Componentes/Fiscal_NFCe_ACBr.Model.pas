@@ -193,30 +193,28 @@ end;
 procedure TFiscalNFCeACBrModel.PreencherPagamentos;
 var
   FPagamento: IFiscalProxyPagamentoModel;
-  FCount: Integer;
+  FPagamentoIterator: IFiscalProxyPagamentoIteratorModel;
 begin
-   FCount := 0;
-   while FProxy.Pagamento.Iterator.hasNext do
+   FPagamentoIterator := FProxy.Pagamento.Iterator;
+   while FPagamentoIterator.hasNext do
    begin
-     FPagamento := FProxy.Pagamento.Iterator.Next;
-
+     FPagamento := FPagamentoIterator.Next;
      FACBrNFe.NotasFiscais.Add.NFe.pag.Add.tPag := TpcnFormaPagamento(FPagamento.Tipo);
      FACBrNFe.NotasFiscais.Add.NFe.pag.Add.vPag := FPagamento.Valor;
-
-     Inc(FCount);
    end;
 end;
 
 procedure TFiscalNFCeACBrModel.PreencherProdutos;
 var
   FProduto: IFiscalProxyProdutoModel;
+  FProdutoIterator: IFiscalProxyProdutoIteratorModel;
   FCount: SmallInt;
 begin
   FCount := 1;
-  while FProxy.Produto.Iterator.hasNext do
+  FProdutoIterator := FProxy.Produto.Iterator;
+  while FProdutoIterator.hasNext do
   begin
-    FProduto := FProxy.Produto.Iterator.Next;
-
+    FProduto := FProdutoIterator.Next;
     with FACBrNFe.NotasFiscais.Add.NFe.Det.Add do
     begin
       Prod.nItem    := FCount; // Número sequencial, para cada item deve ser incrementado
