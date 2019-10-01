@@ -1,4 +1,4 @@
-unit Fiscal_NFCe_Componentes.Model;
+unit Fiscal_NFCe_ACBr.Model;
 
 interface
 
@@ -14,7 +14,7 @@ uses
   Fiscal_Proxy.Model.Interf;
 
 type
-  TFiscalNFCeComponentesModel = class(TInterfacedObject, IFiscalComponente)
+  TFiscalNFCeACBrModel = class(TInterfacedObject, IFiscalComponente)
   private
     FACBrNFe: TACBrNFe;
     FACBrNFeDANFCeFortes: TACBrNFeDANFCeFortes;
@@ -50,7 +50,7 @@ uses
 
 { TACBrNFCeComponentesModel }
 
-procedure TFiscalNFCeComponentesModel.ArmazenaTotais;
+procedure TFiscalNFCeACBrModel.ArmazenaTotais;
 begin
   FTotalNFCe := (
     FTotalNFCe + FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Prod.vProd
@@ -61,7 +61,7 @@ begin
   FTotalICMS := (FTotalICMS + FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Imposto.ICMS.vICMS);
 end;
 
-constructor TFiscalNFCeComponentesModel.Create;
+constructor TFiscalNFCeACBrModel.Create;
 begin
   FACBrNFe := TACBrNFe.Create(nil);
   FACBrNFeDANFCeFortes := TACBrNFeDANFCeFortes.Create(nil);
@@ -70,14 +70,14 @@ begin
   FTotalNFCe := 0;
 end;
 
-destructor TFiscalNFCeComponentesModel.Destroy;
+destructor TFiscalNFCeACBrModel.Destroy;
 begin
   FreeAndNil(FACBrNFe);
   FreeAndNil(FACBrNFeDANFCeFortes);
   inherited;
 end;
 
-function TFiscalNFCeComponentesModel.Emitir(
+function TFiscalNFCeACBrModel.Emitir(
   Proxy: IFiscalProxyModel): IFiscalComponente;
 const
   Sincrono: Boolean = False;
@@ -96,7 +96,7 @@ begin
   FACBrNFe.Enviar(vNumLote, True, Sincrono);
 end;
 
-procedure TFiscalNFCeComponentesModel.GerarNFCe;
+procedure TFiscalNFCeACBrModel.GerarNFCe;
 begin
   PreencherIdentificacao;
   PreencherEmitente;
@@ -109,12 +109,12 @@ begin
   FACBrNFe.NotasFiscais.GerarNFe;
 end;
 
-class function TFiscalNFCeComponentesModel.New: IFiscalComponente;
+class function TFiscalNFCeACBrModel.New: IFiscalComponente;
 begin
   Result := Self.Create;
 end;
 
-procedure TFiscalNFCeComponentesModel.PreencherDestinatario;
+procedure TFiscalNFCeACBrModel.PreencherDestinatario;
 begin
   with FACBrNFe.NotasFiscais.Add.NFe.Dest do
   begin
@@ -137,7 +137,7 @@ begin
   end;
 end;
 
-procedure TFiscalNFCeComponentesModel.PreencherEmitente;
+procedure TFiscalNFCeACBrModel.PreencherEmitente;
 begin
   with FACBrNFe.NotasFiscais.Add.NFe.Emit do
   begin
@@ -165,7 +165,7 @@ begin
   end;
 end;
 
-procedure TFiscalNFCeComponentesModel.PreencherIdentificacao;
+procedure TFiscalNFCeACBrModel.PreencherIdentificacao;
 begin
   with FACBrNFe.NotasFiscais.Add.NFe.Ide do
   begin
@@ -191,7 +191,7 @@ begin
   end;
 end;
 
-procedure TFiscalNFCeComponentesModel.PreencherPagamentos;
+procedure TFiscalNFCeACBrModel.PreencherPagamentos;
 var
   FPagamento: IFiscalProxyPagamentoModel;
   FCount: Integer;
@@ -208,7 +208,7 @@ begin
    end;
 end;
 
-procedure TFiscalNFCeComponentesModel.PreencherProdutos;
+procedure TFiscalNFCeACBrModel.PreencherProdutos;
 var
   FProduto: IFiscalProxyProdutoModel;
   FCount: SmallInt;
@@ -268,7 +268,7 @@ begin
   end;
 end;
 
-procedure TFiscalNFCeComponentesModel.PreencherTotais;
+procedure TFiscalNFCeACBrModel.PreencherTotais;
 begin
   with FACBrNFe.NotasFiscais.Add.NFe.Total do
   begin
@@ -300,7 +300,7 @@ begin
   end;
 end;
 
-procedure TFiscalNFCeComponentesModel.PreencherTransporte;
+procedure TFiscalNFCeACBrModel.PreencherTransporte;
 begin
   FACBrNFe.NotasFiscais.Add.NFe.Transp.modFrete := mfSemFrete;
 end;

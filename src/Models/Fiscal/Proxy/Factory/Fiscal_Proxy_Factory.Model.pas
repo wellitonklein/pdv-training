@@ -5,7 +5,7 @@ interface
 uses
   Fiscal_Proxy_Factory.Model.Interf,
   Fiscal_Proxy.Model.Interf,
-  System.Generics.Collections;
+  System.Generics.Collections, Fiscal.Model.Interf;
 
 type
   TFiscalProxyFactoryModel = class(TInterfacedObject, IFiscalProxyFactoryModel)
@@ -14,6 +14,7 @@ type
     constructor Create;
     destructor Destroy; override;
     class function New : IFiscalProxyFactoryModel;
+    function Proxy(Parent: IFiscalComponente): IFiscalProxyModel;
     function Identificacao(Parent: IFiscalProxyModel): IFiscalProxyIdentificacaoModel;
     function Emitente(Parent: IFiscalProxyModel): IFiscalProxyEmitenteModel;
     function Destinatario(Parent: IFiscalProxyModel): IFiscalProxyDestinatarioModel;
@@ -36,7 +37,7 @@ uses
   Fiscal_Proxy_PagamentoLista.Model,
   Fiscal_Proxy_ProdutoLista.Model,
   Fiscal_Proxy_ProdutoIterator.Model,
-  Fiscal_Proxy_PagamentoIterator.Model;
+  Fiscal_Proxy_PagamentoIterator.Model, Fiscal_Proxy.Model;
 
 { TFiscalProxyFactoryModel }
 
@@ -108,6 +109,12 @@ function TFiscalProxyFactoryModel.ProdutoLista(
   Parent: IFiscalProxyModel): IFiscalProxyProdutoListaModel;
 begin
   Result := TFiscalProxyProdutoListaModel.New(Parent);
+end;
+
+function TFiscalProxyFactoryModel.Proxy(
+  Parent: IFiscalComponente): IFiscalProxyModel;
+begin
+  Result := TFiscalProxyModel.New(Parent);
 end;
 
 end.

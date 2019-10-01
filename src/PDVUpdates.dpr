@@ -173,11 +173,10 @@ uses
   Pagamento_Tipo_Factory.Model.Interf in 'Models\Pagamento\Tipo\Factory\Pagamento_Tipo_Factory.Model.Interf.pas',
   Fiscal.Model.Interf in 'Models\Fiscal\Fiscal.Model.Interf.pas',
   Fiscal_Factory.Model in 'Models\Fiscal\Factory\Fiscal_Factory.Model.pas',
-  Fiscal_NFCe_Componentes.Model in 'Models\Fiscal\NFCe\Componentes\Fiscal_NFCe_Componentes.Model.pas',
+  Fiscal_NFCe_ACBr.Model in 'Models\Fiscal\NFCe\Componentes\Fiscal_NFCe_ACBr.Model.pas',
   Fiscal_NFCe.Model.Interf in 'Models\Fiscal\NFCe\Fiscal_NFCe.Model.Interf.pas',
   Fiscal_NFCe_Factory.Model in 'Models\Fiscal\NFCe\Factory\Fiscal_NFCe_Factory.Model.pas',
   Fiscal.Model in 'Models\Fiscal\Fiscal.Model.pas',
-  Fiscal_NFCe_Componentes.Model.Interf in 'Models\Fiscal\NFCe\Componentes\Fiscal_NFCe_Componentes.Model.Interf.pas',
   Fiscal_Proxy.Model.Interf in 'Models\Fiscal\Proxy\Fiscal_Proxy.Model.Interf.pas',
   Fiscal_Proxy_Identificacao.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Identificacao.Model.pas',
   Fiscal_Proxy_Contribuinte.Model in 'Models\Fiscal\Proxy\Fiscal_Proxy_Contribuinte.Model.pas',
@@ -192,7 +191,8 @@ uses
   Fiscal_Proxy_ProdutoIterator.Model in 'Models\Fiscal\Proxy\Iterator\Fiscal_Proxy_ProdutoIterator.Model.pas',
   Fiscal_Proxy_ProdutoLista.Model in 'Models\Fiscal\Proxy\Lista\Fiscal_Proxy_ProdutoLista.Model.pas',
   Fiscal_Proxy_PagamentoIterator.Model in 'Models\Fiscal\Proxy\Iterator\Fiscal_Proxy_PagamentoIterator.Model.pas',
-  Fiscal_Proxy_PagamentoLista.Model in 'Models\Fiscal\Proxy\Lista\Fiscal_Proxy_PagamentoLista.Model.pas';
+  Fiscal_Proxy_PagamentoLista.Model in 'Models\Fiscal\Proxy\Lista\Fiscal_Proxy_PagamentoLista.Model.pas',
+  Fiscal_NFCe_Factory.Model.Interf in 'Models\Fiscal\NFCe\Factory\Fiscal_NFCe_Factory.Model.Interf.pas';
 
 {$R *.res}
 
