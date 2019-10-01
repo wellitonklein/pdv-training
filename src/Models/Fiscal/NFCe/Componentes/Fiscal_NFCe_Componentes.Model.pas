@@ -19,12 +19,20 @@ type
     FACBrNFe: TACBrNFe;
     FACBrNFeDANFCeFortes: TACBrNFeDANFCeFortes;
     FProxy: IFiscalProxyModel;
+
+    FTotalNFCe: Currency;
+    FTotalICMS: Currency;
+    FTotalDesconto: Currency;
+    FTotalProduto: Currency;
     procedure GerarNFCe;
     procedure PreencherIdentificacao;
     procedure PreencherEmitente;
     procedure PreencherDestinatario;
     procedure PreencherProdutos;
+    procedure ArmazenaTotais;
     procedure PreencherPagamentos;
+    procedure PreencherTotais;
+    procedure PreencherTransporte;
   public
     constructor Create;
     destructor Destroy; override;
@@ -42,12 +50,24 @@ uses
 
 { TACBrNFCeComponentesModel }
 
+procedure TFiscalNFCeComponentesModel.ArmazenaTotais;
+begin
+  FTotalNFCe := (
+    FTotalNFCe + FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Prod.vProd
+    - FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Prod.vDesc
+  );
+  FTotalProduto := (FTotalProduto + FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Prod.vProd);
+  FTotalDesconto := (FTotalDesconto + FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Prod.vDesc);
+  FTotalICMS := (FTotalICMS + FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Imposto.ICMS.vICMS);
+end;
+
 constructor TFiscalNFCeComponentesModel.Create;
 begin
   FACBrNFe := TACBrNFe.Create(nil);
   FACBrNFeDANFCeFortes := TACBrNFeDANFCeFortes.Create(nil);
-
   FACBrNFe.DANFE := FACBrNFeDANFCeFortes;
+
+  FTotalNFCe := 0;
 end;
 
 destructor TFiscalNFCeComponentesModel.Destroy;
@@ -59,10 +79,21 @@ end;
 
 function TFiscalNFCeComponentesModel.Emitir(
   Proxy: IFiscalProxyModel): IFiscalComponente;
+const
+  Sincrono: Boolean = False;
+var
+  vNumLote: Integer;
 begin
   Result := Self;
+
   FProxy := Proxy;
+
+  FACBrNFe.NotasFiscais.Clear;
+  FACBrNFe.Configuracoes.Geral.ModeloDF := moNFCe;
+  FACBrNFe.Configuracoes.Geral.VersaoDF := ve400;
+
   GerarNFCe;
+  FACBrNFe.Enviar(vNumLote, True, Sincrono);
 end;
 
 procedure TFiscalNFCeComponentesModel.GerarNFCe;
@@ -72,6 +103,10 @@ begin
   PreencherDestinatario;
   PreencherProdutos;
   PreencherPagamentos;
+  PreencherTotais;
+  PreencherTransporte;
+
+  FACBrNFe.NotasFiscais.GerarNFe;
 end;
 
 class function TFiscalNFCeComponentesModel.New: IFiscalComponente;
@@ -209,7 +244,6 @@ begin
 
       // Imposto
       Imposto.vTotTrib := 0;
-
       with Imposto.ICMS do
       begin
         CST     := cst00;
@@ -226,9 +260,49 @@ begin
         vICMSST := 0;
         pRedBC  := 0;
       end;
+
+      // Armazenando Valores
+      ArmazenaTotais;
     end;
     Inc(FCount);
   end;
+end;
+
+procedure TFiscalNFCeComponentesModel.PreencherTotais;
+begin
+  with FACBrNFe.NotasFiscais.Add.NFe.Total do
+  begin
+    ICMSTot.vBC     := FTotalNFCe;
+    ICMSTot.vICMS   := FTotalICMS;
+    ICMSTot.vBCST   := 0;
+    ICMSTot.vST     := 0;
+    ICMSTot.vProd   := FTotalProduto;
+    ICMSTot.vFrete  := 0;
+    ICMSTot.vSeg    := 0;
+    ICMSTot.vDesc   := FTotalDesconto;
+    ICMSTot.vII     := 0;
+    ICMSTot.vIPI    := 0;
+    ICMSTot.vPIS    := 0;
+    ICMSTot.vCOFINS := 0;
+    ICMSTot.vOutro  := 0;
+    ICMSTot.vNF     := FTotalNFCe;
+
+    // partilha do icms e fundo de probreza
+    ICMSTot.vFCPUFDest   := 0.00;
+    ICMSTot.vICMSUFDest  := 0.00;
+    ICMSTot.vICMSUFRemet := 0.00;
+
+    ISSQNtot.vServ   := 0;
+    ISSQNTot.vBC     := 0;
+    ISSQNTot.vISS    := 0;
+    ISSQNTot.vPIS    := 0;
+    ISSQNTot.vCOFINS := 0;
+  end;
+end;
+
+procedure TFiscalNFCeComponentesModel.PreencherTransporte;
+begin
+  FACBrNFe.NotasFiscais.Add.NFe.Transp.modFrete := mfSemFrete;
 end;
 
 end.
