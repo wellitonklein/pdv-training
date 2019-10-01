@@ -163,33 +163,50 @@ begin
   begin
     Produto := FProxy.Produto.IteratorProduto.NextProduto;
 
-    with FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Prod do
+    with FACBrNFe.NotasFiscais.Add.NFe.Det.Add do
     begin
-      nItem    := FCount; // Número sequencial, para cada item deve ser incrementado
-      cProd    := '123456';
-      cEAN     := Produto.cEAN;
-      xProd    := Produto.Descricao;
-      NCM      := Produto.NCM; // Tabela NCM disponível em  http://www.receita.fazenda.gov.br/Aliquotas/DownloadArqTIPI.htm
-      EXTIPI   := '';
-      CFOP     := '5101';
-      uCom     := Produto.UND;
-      qCom     := Produto.Qtde;
-      vUnCom   := Produto.vUnit;
-      vProd    := 100;
+      Prod.nItem    := FCount; // Número sequencial, para cada item deve ser incrementado
+      Prod.cProd    := Produto.Codigo;
+      Prod.cEAN     := Produto.cEAN;
+      Prod.xProd    := Produto.Descricao;
+      Prod.NCM      := Produto.NCM; // Tabela NCM disponível em  http://www.receita.fazenda.gov.br/Aliquotas/DownloadArqTIPI.htm
+      Prod.EXTIPI   := '';
+      Prod.CFOP     := Produto.CFOP;
+      Prod.uCom     := Produto.UND;
+      Prod.qCom     := Produto.Qtde;
+      Prod.vUnCom   := Produto.vUnit;
+      Prod.vProd    := (Produto.Qtde * Produto.vUnit);
+      Prod.cEANTrib  := Produto.cEAN;
+      Prod.uTrib     := Produto.UND;
+      Prod.qTrib     := Produto.Qtde;
+      Prod.vUnTrib   := Produto.vUnit;
+      Prod.vOutro    := 0;
+      Prod.vFrete    := 0;
+      Prod.vSeg      := 0;
+      Prod.vDesc     := Produto.Desconto;
+      Prod.CEST := Produto.CEST;
+      infAdProd := 'Informacao Adicional do Produto';
 
-      cEANTrib  := Produto.cEAN;
-      uTrib     := Produto.UND;
-      qTrib     := Produto.Qtde;
-      vUnTrib   := 100;
+      // Imposto
+      Imposto.vTotTrib := 0;
 
-      vOutro    := 0;
-      vFrete    := 0;
-      vSeg      := 0;
-      vDesc     := 0;
-
-      CEST := Produto.CEST;
+      with Imposto.ICMS do
+      begin
+        CST     := cst00;
+        orig    := oeNacional;
+        modBC   := dbiValorOperacao;
+        vBC     := (Produto.Qtde * Produto.vUnit);
+        pICMS   := Produto.Aliquota;
+        vICMS   := (((Produto.Qtde * Produto.vUnit) * Produto.Aliquota) / 100);
+        modBCST := dbisMargemValorAgregado;
+        pMVAST  := 0;
+        pRedBCST:= 0;
+        vBCST   := 0;
+        pICMSST := 0;
+        vICMSST := 0;
+        pRedBC  := 0;
+      end;
     end;
-    FACBrNFe.NotasFiscais.Add.NFe.Det.Add.infAdProd := 'Informacao Adicional do Produto';
 
     Inc(FCount);
   end;
