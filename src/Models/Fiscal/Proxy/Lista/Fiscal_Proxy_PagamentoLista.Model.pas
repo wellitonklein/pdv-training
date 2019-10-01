@@ -15,6 +15,7 @@ type
     constructor Create(Parent: IFiscalProxyModel);
     destructor Destroy; override;
     class function New(Parent: IFiscalProxyModel): IFiscalProxyPagamentoListaModel;
+    function ClearLista: IFiscalProxyPagamentoListaModel;
     function Iterator: IFiscalProxyPagamentoIteratorModel;
     function AddPagamento: IFiscalProxyPagamentoModel;
     function &EndPagamento: IFiscalProxyPagamentoListaModel;
@@ -38,6 +39,12 @@ end;
 function TFiscalProxyPagamentoListaModel.&End: IFiscalProxyModel;
 begin
   Result := FParent;
+end;
+
+function TFiscalProxyPagamentoListaModel.ClearLista: IFiscalProxyPagamentoListaModel;
+begin
+  Result := Self;
+  FLista.Clear;
 end;
 
 constructor TFiscalProxyPagamentoListaModel.Create(Parent: IFiscalProxyModel);

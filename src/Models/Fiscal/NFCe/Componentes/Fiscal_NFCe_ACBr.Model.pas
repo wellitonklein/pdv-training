@@ -228,17 +228,17 @@ begin
     FProduto := FProdutoIterator.Next;
     with FDetItem do
     begin
-      Prod.nItem    := FCount; // Número sequencial, para cada item deve ser incrementado
-      Prod.cProd    := FProduto.Codigo;
-      Prod.cEAN     := FProduto.cEAN;
-      Prod.xProd    := FProduto.Descricao;
-      Prod.NCM      := FProduto.NCM; // Tabela NCM disponível em  http://www.receita.fazenda.gov.br/Aliquotas/DownloadArqTIPI.htm
-      Prod.EXTIPI   := '';
-      Prod.CFOP     := FProduto.CFOP;
-      Prod.uCom     := FProduto.UND;
-      Prod.qCom     := FProduto.Qtde;
-      Prod.vUnCom   := FProduto.vUnit;
-      Prod.vProd    := (FProduto.Qtde * FProduto.vUnit);
+      Prod.nItem     := FCount; // Número sequencial, para cada item deve ser incrementado
+      Prod.cProd     := FProduto.Codigo;
+      Prod.cEAN      := FProduto.cEAN;
+      Prod.xProd     := FProduto.Descricao;
+      Prod.NCM       := FProduto.NCM; // Tabela NCM disponível em  http://www.receita.fazenda.gov.br/Aliquotas/DownloadArqTIPI.htm
+      Prod.EXTIPI    := '';
+      Prod.CFOP      := FProduto.CFOP;
+      Prod.uCom      := FProduto.UND;
+      Prod.qCom      := FProduto.Qtde;
+      Prod.vUnCom    := FProduto.vUnit;
+      Prod.vProd     := (FProduto.Qtde * FProduto.vUnit);
       Prod.cEANTrib  := FProduto.cEAN;
       Prod.uTrib     := FProduto.UND;
       Prod.qTrib     := FProduto.Qtde;
@@ -247,8 +247,8 @@ begin
       Prod.vFrete    := 0;
       Prod.vSeg      := 0;
       Prod.vDesc     := FProduto.Desconto;
-      Prod.CEST := FProduto.CEST;
-      infAdProd := 'Informacao Adicional do Produto';
+      Prod.CEST      := FProduto.CEST;
+      infAdProd      := '';
 
       // Imposto
       Imposto.vTotTrib := 0;

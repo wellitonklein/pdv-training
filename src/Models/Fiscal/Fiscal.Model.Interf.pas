@@ -116,6 +116,7 @@ type
 
   IFiscalProxyProdutoListaModel = interface
     ['{2AE34789-BEF3-47A2-B526-E511823AFBD3}']
+    function ClearLista: IFiscalProxyProdutoListaModel;
     function Iterator: IFiscalProxyProdutoIteratorModel;
     function AddProduto: IFiscalProxyProdutoModel;
     function &EndProduto: IFiscalProxyProdutoListaModel;
@@ -159,6 +160,7 @@ type
 
   IFiscalProxyPagamentoListaModel = interface
     ['{2AE34789-BEF3-47A2-B526-E511823AFBD3}']
+    function ClearLista: IFiscalProxyPagamentoListaModel;
     function Iterator: IFiscalProxyPagamentoIteratorModel;
     function AddPagamento: IFiscalProxyPagamentoModel;
     function &EndPagamento: IFiscalProxyPagamentoListaModel;

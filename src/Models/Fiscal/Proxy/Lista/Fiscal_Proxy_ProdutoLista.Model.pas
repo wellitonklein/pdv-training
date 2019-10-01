@@ -15,6 +15,7 @@ type
     constructor Create(Parent: IFiscalProxyModel);
     destructor Destroy; override;
     class function New(Parent: IFiscalProxyModel): IFiscalProxyProdutoListaModel;
+    function ClearLista: IFiscalProxyProdutoListaModel;
     function Iterator: IFiscalProxyProdutoIteratorModel;
     function AddProduto: IFiscalProxyProdutoModel;
     function &EndProduto: IFiscalProxyProdutoListaModel;
@@ -38,6 +39,12 @@ end;
 function TFiscalProxyProdutoListaModel.&End: IFiscalProxyModel;
 begin
   Result := FParent;
+end;
+
+function TFiscalProxyProdutoListaModel.ClearLista: IFiscalProxyProdutoListaModel;
+begin
+  Result := Self;
+  FLista.Clear;
 end;
 
 constructor TFiscalProxyProdutoListaModel.Create(Parent: IFiscalProxyModel);

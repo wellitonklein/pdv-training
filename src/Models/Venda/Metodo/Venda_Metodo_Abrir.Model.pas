@@ -42,8 +42,10 @@ procedure TVendaMetodoAbrirModel.Fiscal;
 var
   Lista: TObjectList<TVenda>;
 begin
-  Lista := FParent.DAO.FindWhere('GUUID = ' + QuotedStr(FParent.Entidade.GUUID));
+  FParent.ModalidadeFiscal.Proxy.Produto.ClearLista;
+  FParent.ModalidadeFiscal.Proxy.Pagamento.ClearLista;
 
+  Lista := FParent.DAO.FindWhere('GUUID = ' + QuotedStr(FParent.Entidade.GUUID));
   with FParent.ModalidadeFiscal.Proxy do
   begin
     Identificacao.Numero(Lista[0].NUMERO);
