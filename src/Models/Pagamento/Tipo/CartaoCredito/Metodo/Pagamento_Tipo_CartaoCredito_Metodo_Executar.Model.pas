@@ -11,6 +11,8 @@ type
     FParent: IPagamentoTipoMetodoModel;
     FVenda: IVendaModel;
     FValor: Currency;
+    procedure Gravar;
+    procedure Fiscal;
   public
     constructor Create(Parent: IPagamentoTipoMetodoModel; Venda: IVendaModel);
     destructor Destroy; override;
@@ -30,10 +32,25 @@ uses
 function TPagamentoTipoCartaoCreditoMetodoExecutarModel.&End: IPagamentoTipoMetodoModel;
 begin
   Result := FParent;
+  Gravar;
+  Fiscal;
+end;
 
+procedure TPagamentoTipoCartaoCreditoMetodoExecutarModel.Fiscal;
+begin
+  FVenda.ModalidadeFiscal.Proxy.Pagamento
+    .AddPagamento
+      .Tipo(Integer(tpCartaoCredito))
+      .Descricao('CARTAO DE CREDITO')
+      .Valor(FValor)
+    .&End.EndPagamento
+end;
+
+procedure TPagamentoTipoCartaoCreditoMetodoExecutarModel.Gravar;
+begin
   FParent.&End.Entidade(TPDVUpdatesModel.New.Entidade.VendaPagamentos);
   FParent.&End.Entidade.VENDA := FVenda.Entidade.GUUID;
-  FParent.&End.Entidade.TIPO  := Integer(tpCartaoCredito);
+  FParent.&End.Entidade.TIPO := Integer(tpCartaoCredito);
   FParent.&End.Entidade.VALOR := FValor;
   FParent.&End.DAO.Insert(FParent.&End.Entidade);
 end;
