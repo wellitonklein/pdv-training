@@ -24,7 +24,7 @@ type
 implementation
 
 uses
-  Venda_Metodo.Controller, PDVUpdates.Model;
+  Venda_Metodo.Controller, PDVUpdates.Model, PDVUpdates.Controller;
 
 { TVendaController }
 
@@ -38,9 +38,7 @@ begin
         FCaixa.Metodo.Model
       )
       .ModalidadeFiscal(
-        TPDVUpdatesModel.New.Fiscal.Proxy(
-          TPDVUpdatesModel.New.Fiscal.NFCe
-        ).&End
+        TPDVUpdatesController.New.Fiscal.ProxyFiscal
       );
 end;
 

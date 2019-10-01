@@ -355,6 +355,10 @@
         <DCCReference Include="Models\Empresa\Empresa.Model.Interf.pas"/>
         <DCCReference Include="Models\Empresa\Factory\Empresa_Factory.Model.Interf.pas"/>
         <DCCReference Include="Models\Empresa\Factory\Empresa_Factory.Model.pas"/>
+        <DCCReference Include="Controllers\Fiscal\Fiscal.Controller.pas"/>
+        <DCCReference Include="Controllers\Fiscal\Fiscal.Controller.Interf.pas"/>
+        <DCCReference Include="Controllers\Fiscal\Factory\Fiscal_Factory.Controller.Interf.pas"/>
+        <DCCReference Include="Controllers\Fiscal\Factory\Fiscal_Factory.Controller.pas"/>
         <None Include="mvcbr.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

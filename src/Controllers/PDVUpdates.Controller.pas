@@ -11,7 +11,8 @@ uses
   System.RTTI, PDVUpdates.Controller.Interf,
   PDVUpdatesView, Usuario.Controller.Interf, Caixa.Controller.Interf,
   Item.Controller.Interf, Cliente.Controller.Interf,
-  Pagamento.Controller.Interf, Venda.Controller.Interf;
+  Pagamento.Controller.Interf, Venda.Controller.Interf,
+  Fiscal.Controller.Interf;
 
 type
 
@@ -23,9 +24,6 @@ type
     Constructor Create; override;
     Destructor Destroy; override;
     class function New: IPDVUpdatesController;
-//    class function New(const AView: IView; const AModel: IModel)
-//      : IController; overload;
-//    class function New(const AModel: IModel): IController; overload;
     function ThisAs: TPDVUpdatesController;
     procedure init; override;
 
@@ -35,6 +33,7 @@ type
     function Cliente: IClienteController;
     function Pagamento(Venda: IVendaController): IPagamentoController;
     function Venda(Caixa: ICaixaController): IVendaController;
+    function Fiscal: IFiscalController;
   end;
 
 implementation
@@ -42,7 +41,8 @@ implementation
 uses
   Usuario_Factory.Controller, Caixa_Factory.Controller,
   Item_Factory.Controller, Cliente_Factory.Controller,
-  Pagamento_Factory.Controller, Venda_Factory.Controller;
+  Pagamento_Factory.Controller, Venda_Factory.Controller,
+  Fiscal_Factory.Controller;
 
 function TPDVUpdatesController.Caixa: ICaixaController;
 begin
@@ -65,6 +65,11 @@ begin
   inherited;
 end;
 
+function TPDVUpdatesController.Fiscal: IFiscalController;
+begin
+  Result := TFiscalFactoryController.New.Fiscal;
+end;
+
 class function TPDVUpdatesController.New(): IPDVUpdatesController;
 begin
   result := Self.Create;
@@ -74,25 +79,6 @@ function TPDVUpdatesController.Pagamento(Venda: IVendaController): IPagamentoCon
 begin
   Result := TPagamentoFactoryController.New.Pagamento(Venda);
 end;
-
-//class function TPDVUpdatesController.New(const AView: IView;
-//  const AModel: IModel): IController;
-//var
-//  vm: IViewModel;
-//begin
-//  result := TPDVUpdatesController.Create as IController;
-//  result.View(AView).Add(AModel);
-//  if assigned(AModel) then
-//    if supports(AModel.This, IViewModel, vm) then
-//    begin
-//      vm.View(AView).Controller(result);
-//    end;
-//end;
-
-//class function TPDVUpdatesController.New(const AModel: IModel): IController;
-//begin
-//  result := New(nil, AModel);
-//end;
 
 function TPDVUpdatesController.ThisAs: TPDVUpdatesController;
 begin

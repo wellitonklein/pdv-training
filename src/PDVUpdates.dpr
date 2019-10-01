@@ -196,7 +196,11 @@ uses
   Empresa.Model in 'Models\Empresa\Empresa.Model.pas',
   Empresa.Model.Interf in 'Models\Empresa\Empresa.Model.Interf.pas',
   Empresa_Factory.Model.Interf in 'Models\Empresa\Factory\Empresa_Factory.Model.Interf.pas',
-  Empresa_Factory.Model in 'Models\Empresa\Factory\Empresa_Factory.Model.pas';
+  Empresa_Factory.Model in 'Models\Empresa\Factory\Empresa_Factory.Model.pas',
+  Fiscal.Controller in 'Controllers\Fiscal\Fiscal.Controller.pas',
+  Fiscal.Controller.Interf in 'Controllers\Fiscal\Fiscal.Controller.Interf.pas',
+  Fiscal_Factory.Controller.Interf in 'Controllers\Fiscal\Factory\Fiscal_Factory.Controller.Interf.pas',
+  Fiscal_Factory.Controller in 'Controllers\Fiscal\Factory\Fiscal_Factory.Controller.pas';
 
 {$R *.res}
 

@@ -6,7 +6,8 @@ uses
   System.SysUtils, {$IFDEF LINUX} {$ELSE} {$IFDEF FMX} FMX.Forms, {$ELSE}VCL.Forms, {$ENDIF} {$ENDIF}
   System.Classes, MVCBr.Interf, Usuario.Controller.Interf,
   Caixa.Controller.Interf, Item.Controller.Interf, Cliente.Controller.Interf,
-  Pagamento.Controller.Interf, Venda.Controller.Interf;
+  Pagamento.Controller.Interf, Venda.Controller.Interf,
+  Fiscal.Controller.Interf;
 
 type
   IPDVUpdatesController = interface(IController)
@@ -17,6 +18,7 @@ type
     function Cliente: IClienteController;
     function Pagamento(Venda: IVendaController): IPagamentoController;
     function Venda(Caixa: ICaixaController): IVendaController;
+    function Fiscal: IFiscalController;
   end;
 
 Implementation

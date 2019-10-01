@@ -10,7 +10,8 @@ uses
   ACBrNFeDANFEClass,
   ACBrDANFCeFortesFr,
 
-  Fiscal.Model.Interf;
+  Fiscal.Model.Interf,
+  pcnNFe;
 
 type
   TFiscalNFCeACBrModel = class(TInterfacedObject, IFiscalComponente)
@@ -18,6 +19,7 @@ type
     FACBrNFe: TACBrNFe;
     FACBrNFeDANFCeFortes: TACBrNFeDANFCeFortes;
     FProxy: IFiscalProxyModel;
+    FNFe: TNFe;
 
     FTotalNFCe: Currency;
     FTotalICMS: Currency;
@@ -28,7 +30,7 @@ type
     procedure PreencherEmitente;
     procedure PreencherDestinatario;
     procedure PreencherProdutos;
-    procedure ArmazenaTotais;
+    procedure ArmazenaTotais(const DetItem: TDetCollectionItem);
     procedure PreencherPagamentos;
     procedure PreencherTotais;
     procedure PreencherTransporte;
@@ -49,15 +51,14 @@ uses
 
 { TACBrNFCeComponentesModel }
 
-procedure TFiscalNFCeACBrModel.ArmazenaTotais;
+procedure TFiscalNFCeACBrModel.ArmazenaTotais(const DetItem: TDetCollectionItem);
 begin
   FTotalNFCe := (
-    FTotalNFCe + FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Prod.vProd
-    - FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Prod.vDesc
+    FTotalNFCe + DetItem.Prod.vProd - DetItem.Prod.vDesc
   );
-  FTotalProduto := (FTotalProduto + FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Prod.vProd);
-  FTotalDesconto := (FTotalDesconto + FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Prod.vDesc);
-  FTotalICMS := (FTotalICMS + FACBrNFe.NotasFiscais.Add.NFe.Det.Add.Imposto.ICMS.vICMS);
+  FTotalProduto   := (FTotalProduto + DetItem.Prod.vProd);
+  FTotalDesconto  := (FTotalDesconto + DetItem.Prod.vDesc);
+  FTotalICMS      := (FTotalICMS + DetItem.Imposto.ICMS.vICMS);
 end;
 
 constructor TFiscalNFCeACBrModel.Create;
@@ -67,6 +68,9 @@ begin
   FACBrNFe.DANFE := FACBrNFeDANFCeFortes;
 
   FTotalNFCe := 0;
+  FTotalICMS := 0;
+  FTotalDesconto := 0;
+  FTotalProduto := 0;
 end;
 
 destructor TFiscalNFCeACBrModel.Destroy;
@@ -93,10 +97,13 @@ begin
 
   GerarNFCe;
   FACBrNFe.Enviar(vNumLote, True, Sincrono);
+  FACBrNFe.NotasFiscais.Imprimir;
 end;
 
 procedure TFiscalNFCeACBrModel.GerarNFCe;
 begin
+  FNFe := FACBrNFe.NotasFiscais.Add.NFe;
+
   PreencherIdentificacao;
   PreencherEmitente;
   PreencherDestinatario;
@@ -115,7 +122,7 @@ end;
 
 procedure TFiscalNFCeACBrModel.PreencherDestinatario;
 begin
-  with FACBrNFe.NotasFiscais.Add.NFe.Dest do
+  with FNFe.Dest do
   begin
     CNPJCPF           := FProxy.Destinatario.Contribuinte.CPFCNPJ;
     IE                := FProxy.Destinatario.Contribuinte.IE;
@@ -138,7 +145,7 @@ end;
 
 procedure TFiscalNFCeACBrModel.PreencherEmitente;
 begin
-  with FACBrNFe.NotasFiscais.Add.NFe.Emit do
+  with FNFe.Emit do
   begin
     CNPJCPF           := FProxy.Emitente.Contribuinte.CPFCNPJ;
     IE                := FProxy.Emitente.Contribuinte.IE;
@@ -166,7 +173,7 @@ end;
 
 procedure TFiscalNFCeACBrModel.PreencherIdentificacao;
 begin
-  with FACBrNFe.NotasFiscais.Add.NFe.Ide do
+  with FNFe.Ide do
   begin
     cNF       := FProxy.Identificacao.Numero; //Caso não seja preenchido será gerado um número aleatório pelo componente
     natOp     := 'VENDA PRODUCAO DO ESTAB.';
@@ -194,14 +201,16 @@ procedure TFiscalNFCeACBrModel.PreencherPagamentos;
 var
   FPagamento: IFiscalProxyPagamentoModel;
   FPagamentoIterator: IFiscalProxyPagamentoIteratorModel;
+  FPagamentoAdd: TpagCollectionItem;
 begin
-   FPagamentoIterator := FProxy.Pagamento.Iterator;
-   while FPagamentoIterator.hasNext do
-   begin
-     FPagamento := FPagamentoIterator.Next;
-     FACBrNFe.NotasFiscais.Add.NFe.pag.Add.tPag := TpcnFormaPagamento(FPagamento.Tipo);
-     FACBrNFe.NotasFiscais.Add.NFe.pag.Add.vPag := FPagamento.Valor;
-   end;
+  FPagamentoAdd := FNFe.pag.Add;
+  FPagamentoIterator := FProxy.Pagamento.Iterator;
+  while FPagamentoIterator.hasNext do
+  begin
+    FPagamento := FPagamentoIterator.Next;
+    FPagamentoAdd.tPag := TpcnFormaPagamento(FPagamento.Tipo);
+    FPagamentoAdd.vPag := FPagamento.Valor;
+  end;
 end;
 
 procedure TFiscalNFCeACBrModel.PreencherProdutos;
@@ -209,13 +218,15 @@ var
   FProduto: IFiscalProxyProdutoModel;
   FProdutoIterator: IFiscalProxyProdutoIteratorModel;
   FCount: SmallInt;
+  FDetItem: TDetCollectionItem;
 begin
   FCount := 1;
+  FDetItem := FNFe.Det.Add;
   FProdutoIterator := FProxy.Produto.Iterator;
   while FProdutoIterator.hasNext do
   begin
     FProduto := FProdutoIterator.Next;
-    with FACBrNFe.NotasFiscais.Add.NFe.Det.Add do
+    with FDetItem do
     begin
       Prod.nItem    := FCount; // Número sequencial, para cada item deve ser incrementado
       Prod.cProd    := FProduto.Codigo;
@@ -259,7 +270,7 @@ begin
       end;
 
       // Armazenando Valores
-      ArmazenaTotais;
+      ArmazenaTotais(FDetItem);
     end;
     Inc(FCount);
   end;
@@ -267,7 +278,7 @@ end;
 
 procedure TFiscalNFCeACBrModel.PreencherTotais;
 begin
-  with FACBrNFe.NotasFiscais.Add.NFe.Total do
+  with FNFe.Total do
   begin
     ICMSTot.vBC     := FTotalNFCe;
     ICMSTot.vICMS   := FTotalICMS;
@@ -299,7 +310,7 @@ end;
 
 procedure TFiscalNFCeACBrModel.PreencherTransporte;
 begin
-  FACBrNFe.NotasFiscais.Add.NFe.Transp.modFrete := mfSemFrete;
+  FNFe.Transp.modFrete := mfSemFrete;
 end;
 
 end.
