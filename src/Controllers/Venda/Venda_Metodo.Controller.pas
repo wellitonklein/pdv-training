@@ -19,7 +19,7 @@ type
     function Pagar: IVendaMetodoController;
     function Fechar: IVendaMetodoController;
     function IdentificarCliente: IVendaMetodoController;
-    function VenderItem: IVendaMetodoController;
+    function VenderItem: IVendaMetodoItemController;
     function EfetuarPagamento: IVendaMetodoController;
     function EfetuarEstorno: IVendaMetodoController;
     function &End: IVendaController;
@@ -31,7 +31,7 @@ uses
   PDVUpdates.Controller,
   PDVUpdates.Model,
   Captura_ValorView,
-  System.SysUtils;
+  System.SysUtils, Venda_Metodo_Factory.Controller;
 
 { TVendaMetodoController }
 
@@ -127,30 +127,9 @@ begin
     .&End;
 end;
 
-function TVendaMetodoController.VenderItem: IVendaMetodoController;
+function TVendaMetodoController.VenderItem: IVendaMetodoItemController;
 begin
-  Result := Self;
-
-  FParent.Model.Itens
-    .Iterator
-      .Add(
-        TPDVUpdatesModel.New.Item(FParent.Model)
-          .Metodo
-            .Vender
-              .SetItem(
-                Trunc(
-                  TCapturaValorView.New(nil)
-                    .ExibeForm('Informe o código do Item', 'Confirmar', 'Cancelar')
-                )
-              )
-              .SetQuantidade(
-                TCapturaValorView.New(nil)
-                  .ExibeForm('Informe a quantidade do Item', 'Confirmar', 'Cancelar')
-              )
-            .&End
-          .&End
-      )
-    .&End;
+  Result := TVendaMetodoFactoryController.New.Item(FParent);
 end;
 
 end.

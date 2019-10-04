@@ -8,6 +8,7 @@ uses
 type
   IVendaController = interface;
   IVendaMetodoController = interface;
+  IVendaMetodoItemController = interface;
 
   IVendaController = interface
     ['{1A6D673C-1A5B-4196-ADA9-21C1F0234E41}']
@@ -21,10 +22,19 @@ type
     function Pagar: IVendaMetodoController;
     function Fechar: IVendaMetodoController;
     function IdentificarCliente: IVendaMetodoController;
-    function VenderItem: IVendaMetodoController;
+    function VenderItem: IVendaMetodoItemController;
     function EfetuarPagamento: IVendaMetodoController;
     function EfetuarEstorno: IVendaMetodoController;
     function &End: IVendaController;
+  end;
+
+  IVendaMetodoItemController = interface
+    ['{81929835-186A-4A7A-A2E3-15212ED5FDBB}']
+    function Codigo(Value: SmallInt): IVendaMetodoItemController;
+    function Quantidade(Value: Currency): IVendaMetodoItemController;
+    function Desconto(Value: Currency): IVendaMetodoItemController;
+    function Executar: IVendaMetodoItemController;
+    function &End: IVendaMetodoController;
   end;
 
 implementation

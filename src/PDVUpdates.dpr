@@ -200,7 +200,13 @@ uses
   Fiscal.Controller in 'Controllers\Fiscal\Fiscal.Controller.pas',
   Fiscal.Controller.Interf in 'Controllers\Fiscal\Fiscal.Controller.Interf.pas',
   Fiscal_Factory.Controller.Interf in 'Controllers\Fiscal\Factory\Fiscal_Factory.Controller.Interf.pas',
-  Fiscal_Factory.Controller in 'Controllers\Fiscal\Factory\Fiscal_Factory.Controller.pas';
+  Fiscal_Factory.Controller in 'Controllers\Fiscal\Factory\Fiscal_Factory.Controller.pas',
+  Venda_Metodo_Item.Controller in 'Controllers\Venda\Metodo\Venda_Metodo_Item.Controller.pas',
+  Venda_Metodo_Factory.Controller.Interf in 'Controllers\Venda\Metodo\Factory\Venda_Metodo_Factory.Controller.Interf.pas',
+  Venda_Metodo_Factory.Controller in 'Controllers\Venda\Metodo\Factory\Venda_Metodo_Factory.Controller.pas',
+  Observer.Controller.Interf in 'Controllers\Observer\Observer.Controller.Interf.pas',
+  Observer_Itens.Controller in 'Controllers\Observer\Observer_Itens.Controller.pas',
+  Venda_Observer.Model in 'Models\Venda\Venda_Observer.Model.pas';
 
 {$R *.res}
 

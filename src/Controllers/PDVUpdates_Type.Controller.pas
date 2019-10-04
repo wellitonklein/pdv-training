@@ -17,6 +17,13 @@ type
     Tipo: TTypePagamento;
   end;
 
+  TRecordItem = record
+    Descricao: string;
+    Quantidade: Currency;
+    ValorUnitario: Currency;
+    ValorTotal: Currency;
+  end;
+
 implementation
 
 end.

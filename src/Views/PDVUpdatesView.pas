@@ -8,7 +8,8 @@ uses
   MVCBr.View, MVCBr.FormView, MVCBr.Controller, Caixa.Controller.Interf,
   FMX.Types, FMX.Controls, FMX.Layouts, FMX.ListBox, Item.Controller.Interf,
   Cliente.Controller.Interf, Pagamento.Controller.Interf,
-  Venda.Controller.Interf;
+  Venda.Controller.Interf, FMX.Objects, FMX.Effects, FMX.Controls.Presentation,
+  FMX.StdCtrls, FMX.Edit;
 
 type
   /// Interface para a VIEW
@@ -18,33 +19,38 @@ type
 
   TPDVUpdatesView = class(TFormFactory { TFORM } , IView,
     IThisAs<TPDVUpdatesView>, IPDVUpdatesView, IViewAs<IPDVUpdatesView>)
+    Layout1: TLayout;
+    Layout2: TLayout;
+    Layout3: TLayout;
+    Rectangle1: TRectangle;
+    Rectangle2: TRectangle;
+    Layout4: TLayout;
+    Layout5: TLayout;
+    Layout6: TLayout;
+    Rectangle3: TRectangle;
+    ShadowEffect1: TShadowEffect;
+    Layout7: TLayout;
+    Rectangle4: TRectangle;
+    ShadowEffect2: TShadowEffect;
+    Layout8: TLayout;
+    Image1: TImage;
+    Label1: TLabel;
+    edtCodigoProd: TEdit;
+    edtQuantidadeProd: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    Edit3: TEdit;
+    Label4: TLabel;
+    Edit4: TEdit;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Layout9: TLayout;
+    Rectangle5: TRectangle;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
     ListBox1: TListBox;
-    ListBoxItem1: TListBoxItem;
-    ListBoxItem2: TListBoxItem;
-    ListBoxItem3: TListBoxItem;
-    ListBoxItem4: TListBoxItem;
-    ListBoxItem5: TListBoxItem;
-    ListBoxItem6: TListBoxItem;
-    ListBoxItem7: TListBoxItem;
-    ListBox2: TListBox;
-    ListBoxItem8: TListBoxItem;
-    ListBoxItem9: TListBoxItem;
-    ListBoxItem10: TListBoxItem;
-    ListBoxItem11: TListBoxItem;
-    ListBoxItem12: TListBoxItem;
-    ListBoxItem13: TListBoxItem;
-    ListBox3: TListBox;
-    ListBoxItem14: TListBoxItem;
-    ListBoxItem15: TListBoxItem;
-    ListBoxItem16: TListBoxItem;
-    ListBoxItem17: TListBoxItem;
-    ListBoxItem18: TListBoxItem;
-    ListBoxItem19: TListBoxItem;
-    ListBoxItem20: TListBoxItem;
-    ListBoxItem21: TListBoxItem;
-    ListBoxItem22: TListBoxItem;
-    ListBoxItem23: TListBoxItem;
-    ListBoxItem24: TListBoxItem;
     procedure FormCreate(Sender: TObject);
     procedure ListBoxItem1Click(Sender: TObject);
     procedure ListBoxItem2Click(Sender: TObject);
@@ -67,9 +73,10 @@ type
     procedure ListBoxItem19Click(Sender: TObject);
     procedure ListBoxItem20Click(Sender: TObject);
     procedure ListBoxItem21Click(Sender: TObject);
-    procedure ListBoxItem22Click(Sender: TObject);
     procedure ListBoxItem23Click(Sender: TObject);
     procedure ListBoxItem24Click(Sender: TObject);
+    procedure Edit4KeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     FInited: boolean;
     FCaixa: ICaixaController;
@@ -77,6 +84,7 @@ type
     FCliente: IClienteController;
     FPagamento: IPagamentoController;
     FVenda: IVendaController;
+    procedure VenderItem;
   protected
     function Controller(const aController: IController): IView; override;
   public
@@ -97,6 +105,13 @@ uses
 function TPDVUpdatesView.ViewAs: IPDVUpdatesView;
 begin
   result := self;
+end;
+
+procedure TPDVUpdatesView.Edit4KeyDown(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  if (KeyChar = #0) then
+    VenderItem;
 end;
 
 procedure TPDVUpdatesView.FormCreate(Sender: TObject);
@@ -173,11 +188,6 @@ begin
   FVenda.Metodo.IdentificarCliente;
 end;
 
-procedure TPDVUpdatesView.ListBoxItem22Click(Sender: TObject);
-begin
-  FVenda.Metodo.VenderItem;
-end;
-
 procedure TPDVUpdatesView.ListBoxItem23Click(Sender: TObject);
 begin
   FVenda.Metodo.EfetuarPagamento;
@@ -252,6 +262,26 @@ end;
 function TPDVUpdatesView.ShowView(const AProc: TProc<IView>): integer;
 begin
   inherited;
+end;
+
+procedure TPDVUpdatesView.VenderItem;
+var
+  FCodigo: Integer;
+  FQtde: Currency;
+begin
+  if not TryStrToInt(edtCodigoProd.Text, FCodigo) then
+    raise Exception.Create('O Código do Produto é inválido');
+
+  if not TryStrToCurr(edtQuantidadeProd.Text, FQtde) then
+    raise Exception.Create('A quantidade informada é inválida');  
+
+  FVenda.Metodo
+    .VenderItem
+      .Codigo(FCodigo)
+      .Quantidade(FQtde)
+      .Desconto(0)
+      .Executar
+    .&End;
 end;
 
 end.

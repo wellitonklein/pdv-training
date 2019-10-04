@@ -359,6 +359,12 @@
         <DCCReference Include="Controllers\Fiscal\Fiscal.Controller.Interf.pas"/>
         <DCCReference Include="Controllers\Fiscal\Factory\Fiscal_Factory.Controller.Interf.pas"/>
         <DCCReference Include="Controllers\Fiscal\Factory\Fiscal_Factory.Controller.pas"/>
+        <DCCReference Include="Controllers\Venda\Metodo\Venda_Metodo_Item.Controller.pas"/>
+        <DCCReference Include="Controllers\Venda\Metodo\Factory\Venda_Metodo_Factory.Controller.Interf.pas"/>
+        <DCCReference Include="Controllers\Venda\Metodo\Factory\Venda_Metodo_Factory.Controller.pas"/>
+        <DCCReference Include="Controllers\Observer\Observer.Controller.Interf.pas"/>
+        <DCCReference Include="Controllers\Observer\Observer_Itens.Controller.pas"/>
+        <DCCReference Include="Models\Venda\Venda_Observer.Model.pas"/>
         <None Include="mvcbr.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

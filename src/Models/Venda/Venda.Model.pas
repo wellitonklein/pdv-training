@@ -27,6 +27,7 @@ type
     FItens: IItemModel;
     FPagamentos: IPagamentoModel;
     FEmpresa: IEmpresaModel;
+    FObservers: IVendaObserverModel;
   public
     constructor Create(Caixa: ICaixaModel);
     destructor Destroy; override;
@@ -46,6 +47,7 @@ type
     function DAO: IContainerObjectSet<TVENDA>;
     function ModalidadeFiscal(Value: IFiscalModel): IVendaModel; overload;
     function ModalidadeFiscal: IFiscalModel; overload;
+    function Observers: IVendaObserverModel;
 
     // VendaMetodoModel
     function Abrir: IVendaMetodoAbrirModel;
@@ -60,7 +62,7 @@ uses
   Venda_Metodo_Factory.Model,
   Venda_State_Factory.Model,
   PDVUpdates.Model,
-  ormbr.container.objectset;
+  ormbr.container.objectset, Venda_Observer.Model;
 
 { TVendaModel }
 
@@ -126,6 +128,7 @@ begin
   FItens      := TPDVUpdatesModel.New.Item(Self);
   FPagamentos := TPDVUpdatesModel.New.Pagamento(Self);
   FEmpresa    := TPDVUpdatesModel.New.Empresa;
+  FObservers  := TVendaObserverModel.New(Self);
 end;
 
 function TVendaModel.DAO: IContainerObjectSet<TVENDA>;
@@ -169,6 +172,11 @@ end;
 class function TVendaModel.New(Caixa: ICaixaModel): IVendaModel;
 begin
   Result := Self.Create(Caixa);
+end;
+
+function TVendaModel.Observers: IVendaObserverModel;
+begin
+  Result := FObservers;
 end;
 
 function TVendaModel.Pagamentos: IPagamentoModel;
