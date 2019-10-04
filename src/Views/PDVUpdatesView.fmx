@@ -2765,6 +2765,45 @@ object PDVUpdatesView: TPDVUpdatesView
       end
     end
   end
+  object RecError: TRectangle
+    Fill.Color = xFFB00020
+    Opacity = 0.899999976158142100
+    Position.X = 24.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 353.000000000000000000
+    Size.Height = 82.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    XRadius = 5.000000000000000000
+    YRadius = 5.000000000000000000
+    OnClick = RecErrorClick
+    object lblError: TLabel
+      Align = Contents
+      StyledSettings = [Family]
+      Size.Width = 353.000000000000000000
+      Size.Height = 82.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Ocorreu um erro'
+      TabOrder = 0
+    end
+    object FloatAnimation1: TFloatAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'Position.Y'
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object ShadowEffect3: TShadowEffect
+      Distance = 3.000000000000000000
+      Direction = 45.000000000000000000
+      Softness = 0.300000011920929000
+      Opacity = 0.200000002980232200
+      ShadowColor = claBlack
+    end
+  end
   object StyleBook1: TStyleBook
     Styles = <
       item
@@ -3190,5 +3229,11 @@ object PDVUpdatesView: TPDVUpdatesView
           61646F7756697369626C65080D41637469766554726967676572070853656C65
           637465640B416374697665436F6C6F720708636C61426C61636B000000}
       end>
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 5000
+    OnTimer = Timer1Timer
+    Left = 64
   end
 end

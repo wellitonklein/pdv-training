@@ -10,7 +10,7 @@ uses
   Cliente.Controller.Interf, Pagamento.Controller.Interf,
   Venda.Controller.Interf, FMX.Objects, FMX.Effects, FMX.Controls.Presentation,
   FMX.StdCtrls, FMX.Edit, Observer.Controller.Interf,
-  PDVUpdates_Type.Controller;
+  PDVUpdates_Type.Controller, FMX.Ani;
 
 type
   /// Interface para a VIEW
@@ -53,9 +53,16 @@ type
     Label10: TLabel;
     ListBox1: TListBox;
     StyleBook1: TStyleBook;
+    RecError: TRectangle;
+    lblError: TLabel;
+    FloatAnimation1: TFloatAnimation;
+    Timer1: TTimer;
+    ShadowEffect3: TShadowEffect;
     procedure FormCreate(Sender: TObject);
     procedure Edit4KeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure Timer1Timer(Sender: TObject);
+    procedure RecErrorClick(Sender: TObject);
   private
     FInited: boolean;
     FCaixa: ICaixaController;
@@ -66,6 +73,8 @@ type
     procedure VenderItem;
     function UpdatesItem(Value: TRecordItem): IObserverItensController;
     procedure HeaderListaItens;
+    procedure ExecutaError(Sender: TObject; E: Exception);
+    procedure CloseError;
   protected
     function Controller(const aController: IController): IView; override;
   public
@@ -95,8 +104,20 @@ begin
     VenderItem;
 end;
 
+procedure TPDVUpdatesView.ExecutaError(Sender: TObject; E: Exception);
+begin
+  lblError.Text := E.Message;
+  RecError.Visible := True;
+  FloatAnimation1.StartValue := 0;
+  FloatAnimation1.StopValue  := 100;
+  FloatAnimation1.Enabled    := True;
+  Timer1.Enabled := True;
+end;
+
 procedure TPDVUpdatesView.FormCreate(Sender: TObject);
 begin
+  RecError.Visible := False;
+
   FCaixa     := TPDVUpdatesController.New.Caixa;
   FVenda     := TPDVUpdatesController.New.Venda(FCaixa);
   FItem      := TPDVUpdatesController.New.Item(FVenda);
@@ -105,6 +126,7 @@ begin
 
   FVenda.ObserverItem.AddObserver(Self);
   HeaderListaItens;
+  Application.OnException := ExecutaError;
 end;
 
 procedure TPDVUpdatesView.HeaderListaItens;
@@ -126,6 +148,11 @@ begin
   result.Controller(aController);
 end;
 
+procedure TPDVUpdatesView.RecErrorClick(Sender: TObject);
+begin
+  CloseError;
+end;
+
 function TPDVUpdatesView.Controller(const aController: IController): IView;
 begin
   result := inherited Controller(aController);
@@ -139,6 +166,11 @@ end;
 function TPDVUpdatesView.ThisAs: TPDVUpdatesView;
 begin
   result := self;
+end;
+
+procedure TPDVUpdatesView.Timer1Timer(Sender: TObject);
+begin
+  CloseError;
 end;
 
 function TPDVUpdatesView.UpdatesItem(
@@ -172,6 +204,14 @@ end;
 function TPDVUpdatesView.ShowView(const AProc: TProc<IView>): integer;
 begin
   inherited;
+end;
+
+procedure TPDVUpdatesView.CloseError;
+begin
+  FloatAnimation1.Enabled := False;
+  RecError.Visible := False;
+  RecError.Position.Y := 0;
+  Timer1.Enabled := False;
 end;
 
 procedure TPDVUpdatesView.VenderItem;
