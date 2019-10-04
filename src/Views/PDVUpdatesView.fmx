@@ -2619,11 +2619,11 @@ object PDVUpdatesView: TPDVUpdatesView
               Text = 'Valor do item'
               TabOrder = 2
             end
-            object Label6: TLabel
+            object lblValorUltimoItem: TLabel
               Anchors = [akLeft, akBottom]
               AutoSize = True
               StyledSettings = [Family]
-              Position.X = 160.000000000000000000
+              Position.X = 164.000000000000000000
               Position.Y = 358.000000000000000000
               Size.Width = 157.000000000000000000
               Size.Height = 27.000000000000000000
@@ -2714,7 +2714,8 @@ object PDVUpdatesView: TPDVUpdatesView
                     AutoSize = True
                     StyledSettings = [Family]
                     Margins.Top = 22.000000000000000000
-                    Position.X = 188.000000000000000000
+                    Margins.Right = 5.000000000000000000
+                    Position.X = 301.000000000000000000
                     Position.Y = 22.000000000000000000
                     Size.Width = 24.000000000000000000
                     Size.Height = 58.000000000000000000
@@ -2725,19 +2726,20 @@ object PDVUpdatesView: TPDVUpdatesView
                     Text = 'R$'
                     TabOrder = 1
                   end
-                  object Label9: TLabel
+                  object lblTotalCupom: TLabel
                     Align = Right
                     AutoSize = True
                     StyledSettings = [Family]
                     Margins.Right = 20.000000000000000000
-                    Position.X = 212.000000000000000000
-                    Size.Width = 207.000000000000000000
+                    Position.X = 330.000000000000000000
+                    Size.Width = 89.000000000000000000
                     Size.Height = 80.000000000000000000
                     Size.PlatformDefault = False
                     TextSettings.Font.Size = 48.000000000000000000
                     TextSettings.FontColor = claWhite
                     TextSettings.HorzAlign = Trailing
-                    Text = '00.000,00'
+                    TextSettings.WordWrap = False
+                    Text = '0,00'
                     TabOrder = 2
                   end
                 end

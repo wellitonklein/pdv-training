@@ -44,12 +44,12 @@ type
     Label4: TLabel;
     Edit4: TEdit;
     Label5: TLabel;
-    Label6: TLabel;
+    lblValorUltimoItem: TLabel;
     Label7: TLabel;
     Layout9: TLayout;
     Rectangle5: TRectangle;
     Label8: TLabel;
-    Label9: TLabel;
+    lblTotalCupom: TLabel;
     Label10: TLabel;
     ListBox1: TListBox;
     StyleBook1: TStyleBook;
@@ -154,6 +154,18 @@ begin
   lbItem.StylesData['quantidade'] := FormatCurr('0.000x', Value.Quantidade);
   lbItem.StylesData['valorunitario'] := FormatCurr('#,##0.00', Value.ValorUnitario);
   lbItem.StylesData['valor'] := FormatCurr('#,##0.00', Value.ValorTotal);
+
+  lblTotalCupom.Text :=
+    FormatCurr(
+      '#,##0.00',
+      StrToCurr(
+        StringReplace(lblTotalCupom.Text, '.', '', [rfReplaceAll, rfIgnoreCase])
+      )
+      +
+      Value.ValorTotal
+    );
+  lblValorUltimoItem.Text := FormatCurr('R$ #,##0.00', Value.ValorTotal);
+
   ListBox1.AddObject(lbItem);
 end;
 
