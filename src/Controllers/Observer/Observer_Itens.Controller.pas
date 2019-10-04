@@ -55,7 +55,7 @@ var
   I: Integer;
 begin
   for I := 0 to Pred(FListaObserver.Count) do
-    FListaObserver[I].Updates(Value);
+    FListaObserver[I].UpdatesItem(Value);
 end;
 
 function TObserverItensController.RemoveObserver(

@@ -27,7 +27,7 @@ type
     FGUUID: String;
     FDESCRICAO: Nullable<String>;
     FCODIGO: Nullable<String>;
-    FPRECO: Nullable<Double>;
+    FPRECO: Double;
     FNCM: Nullable<Integer>;
     FALIQUOTA: Nullable<Double>;
     FST: SmallInt;
@@ -52,7 +52,7 @@ type
 
     [Column('PRECO', ftBCD, 18, 4)]
     [Dictionary('PRECO', 'Mensagem de validação', '0', '', '', taRightJustify)]
-    property PRECO: Nullable<Double> read FPRECO write FPRECO;
+    property PRECO: Double read FPRECO write FPRECO;
 
     [Column('NCM', ftInteger)]
     [Dictionary('NCM', 'Mensagem de validação', '', '', '', taCenter)]

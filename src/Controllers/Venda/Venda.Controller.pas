@@ -5,7 +5,7 @@ interface
 uses
   Venda.Controller.Interf,
   Caixa.Controller.Interf,
-  Venda.Model.Inerf;
+  Venda.Model.Inerf, Observer.Controller.Interf;
 
 type
   TVendaController = class(TInterfacedObject, IVendaController)
@@ -13,6 +13,7 @@ type
     FMetodo: IVendaMetodoController;
     FCaixa: ICaixaController;
     FVendaModel: IVendaModel;
+    FObserverItens: ISubjectItensController;
   public
     constructor Create(Caixa: ICaixaController);
     destructor Destroy; override;
@@ -24,7 +25,10 @@ type
 implementation
 
 uses
-  Venda_Metodo.Controller, PDVUpdates.Model, PDVUpdates.Controller;
+  Venda_Metodo.Controller,
+  PDVUpdates.Model,
+  PDVUpdates.Controller,
+  Observer_Itens.Controller;
 
 { TVendaController }
 
@@ -32,6 +36,8 @@ constructor TVendaController.Create(Caixa: ICaixaController);
 begin
   FCaixa      := Caixa;
   FMetodo     := TVendaMetodoController.New(Self, FCaixa);
+  FObserverItens := TObserverItensController.New;
+
   FVendaModel :=
     TPDVUpdatesModel.New
       .Venda(
@@ -39,7 +45,10 @@ begin
       )
       .ModalidadeFiscal(
         TPDVUpdatesController.New.Fiscal.ProxyFiscal
-      );
+      )
+      .Observers
+        .Itens(FObserverItens)
+      .&End;
 end;
 
 destructor TVendaController.Destroy;

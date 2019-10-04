@@ -9,7 +9,7 @@ type
 
   IObserverItensController = interface
     ['{733248A8-6788-4FF2-856D-F5C0688BCC4C}']
-    function Updates(Value: TRecordItem): IObserverItensController;
+    function UpdatesItem(Value: TRecordItem): IObserverItensController;
   end;
 
   ISubjectItensController = interface
