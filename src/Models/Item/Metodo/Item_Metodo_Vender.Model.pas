@@ -3,17 +3,20 @@ unit Item_Metodo_Vender.Model;
 interface
 
 uses
-  Item.Model.Interf, Venda.Model.Inerf;
+  Item.Model.Interf, Venda.Model.Inerf, Entidade_Produto.Model,
+  System.Generics.Collections;
 
 type
   TItemMetodoVenderModel = class(TInterfacedObject, IItemMetodoVenderModel)
   private
+    ListaProduto: TObjectList<TPRODUTO>;
     FParent: IItemModel;
     FVenda: IVendaModel;
     FItem: SmallInt;
     FQuantidade: Currency;
     procedure Gravar;
     procedure Fiscal;
+    procedure Observer;
   public
     constructor Create(Parent: IItemModel; Venda: IVendaModel);
     destructor Destroy; override;
@@ -26,8 +29,8 @@ type
 implementation
 
 uses
-  Item_State_Factory.Model, System.Generics.Collections, PDVUpdates.Model,
-  System.SysUtils, Entidade_Produto.Model;
+  Item_State_Factory.Model, PDVUpdates.Model,
+  System.SysUtils, PDVUpdates_Type.Controller;
 
 { TItemMetodoVenderModel }
 
@@ -37,6 +40,7 @@ begin
 
   Gravar;
   Fiscal;
+  Observer;
 
   FParent.SetState(TItemStateFactoryModel.New.Vendido);
 end;
@@ -61,8 +65,6 @@ begin
 end;
 
 procedure TItemMetodoVenderModel.Gravar;
-var
-  ListaProduto: TObjectList<TPRODUTO>;
 begin
   ListaProduto := FParent.Produto.DAO.FindWhere('CODIGO = ' + QuotedStr(IntToStr(FItem)));
   if (ListaProduto.Count <= 0) then
@@ -91,6 +93,17 @@ end;
 class function TItemMetodoVenderModel.New(Parent: IItemModel; Venda: IVendaModel): IItemMetodoVenderModel;
 begin
   Result := Self.Create(Parent, Venda);
+end;
+
+procedure TItemMetodoVenderModel.Observer;
+var
+  RI: TRecordItem;
+begin
+  RI.Descricao  := ListaProduto[0].DESCRICAO;
+  RI.Quantidade := FQuantidade;
+  RI.ValorUnitario := ListaProduto[0].PRECO;
+  RI.ValorTotal := (FQuantidade * ListaProduto[0].PRECO);
+  FVenda.Observers.Itens.Notify(RI);
 end;
 
 function TItemMetodoVenderModel.SetItem(
