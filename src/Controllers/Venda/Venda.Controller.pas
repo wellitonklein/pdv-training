@@ -20,6 +20,7 @@ type
     class function New(Caixa: ICaixaController): IVendaController;
     function Metodo: IVendaMetodoController;
     function Model: IVendaModel;
+    function ObserverItem: ISubjectItensController;
   end;
 
 implementation
@@ -70,6 +71,11 @@ end;
 class function TVendaController.New(Caixa: ICaixaController): IVendaController;
 begin
   Result := Self.Create(Caixa);
+end;
+
+function TVendaController.ObserverItem: ISubjectItensController;
+begin
+  Result := FObserverItens;
 end;
 
 end.

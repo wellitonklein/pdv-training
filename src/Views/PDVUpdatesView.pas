@@ -9,7 +9,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Layouts, FMX.ListBox, Item.Controller.Interf,
   Cliente.Controller.Interf, Pagamento.Controller.Interf,
   Venda.Controller.Interf, FMX.Objects, FMX.Effects, FMX.Controls.Presentation,
-  FMX.StdCtrls, FMX.Edit;
+  FMX.StdCtrls, FMX.Edit, Observer.Controller.Interf,
+  PDVUpdates_Type.Controller;
 
 type
   /// Interface para a VIEW
@@ -18,7 +19,7 @@ type
   end;
 
   TPDVUpdatesView = class(TFormFactory { TFORM } , IView,
-    IThisAs<TPDVUpdatesView>, IPDVUpdatesView, IViewAs<IPDVUpdatesView>)
+    IThisAs<TPDVUpdatesView>, IPDVUpdatesView, IObserverItensController, IViewAs<IPDVUpdatesView>)
     Layout1: TLayout;
     Layout2: TLayout;
     Layout3: TLayout;
@@ -51,30 +52,8 @@ type
     Label9: TLabel;
     Label10: TLabel;
     ListBox1: TListBox;
+    StyleBook1: TStyleBook;
     procedure FormCreate(Sender: TObject);
-    procedure ListBoxItem1Click(Sender: TObject);
-    procedure ListBoxItem2Click(Sender: TObject);
-    procedure ListBoxItem3Click(Sender: TObject);
-    procedure ListBoxItem4Click(Sender: TObject);
-    procedure ListBoxItem5Click(Sender: TObject);
-    procedure ListBoxItem6Click(Sender: TObject);
-    procedure ListBoxItem7Click(Sender: TObject);
-    procedure ListBoxItem8Click(Sender: TObject);
-    procedure ListBoxItem9Click(Sender: TObject);
-    procedure ListBoxItem10Click(Sender: TObject);
-    procedure ListBoxItem11Click(Sender: TObject);
-    procedure ListBoxItem12Click(Sender: TObject);
-    procedure ListBoxItem13Click(Sender: TObject);
-    procedure ListBoxItem14Click(Sender: TObject);
-    procedure ListBoxItem15Click(Sender: TObject);
-    procedure ListBoxItem16Click(Sender: TObject);
-    procedure ListBoxItem17Click(Sender: TObject);
-    procedure ListBoxItem18Click(Sender: TObject);
-    procedure ListBoxItem19Click(Sender: TObject);
-    procedure ListBoxItem20Click(Sender: TObject);
-    procedure ListBoxItem21Click(Sender: TObject);
-    procedure ListBoxItem23Click(Sender: TObject);
-    procedure ListBoxItem24Click(Sender: TObject);
     procedure Edit4KeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
   private
@@ -85,6 +64,8 @@ type
     FPagamento: IPagamentoController;
     FVenda: IVendaController;
     procedure VenderItem;
+    function UpdatesItem(Value: TRecordItem): IObserverItensController;
+    procedure HeaderListaItens;
   protected
     function Controller(const aController: IController): IView; override;
   public
@@ -121,121 +102,22 @@ begin
   FItem      := TPDVUpdatesController.New.Item(FVenda);
   FCliente   := TPDVUpdatesController.New.Cliente;
   FPagamento := TPDVUpdatesController.New.Pagamento(FVenda);
+
+  FVenda.ObserverItem.AddObserver(Self);
+  HeaderListaItens;
 end;
 
-procedure TPDVUpdatesView.ListBoxItem10Click(Sender: TObject);
+procedure TPDVUpdatesView.HeaderListaItens;
+var
+  lbItem: TListBoxItem;
 begin
-  FItem.Metodo.Desconto;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem11Click(Sender: TObject);
-begin
-  FItem.Metodo.Acrescimo;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem12Click(Sender: TObject);
-begin
-  FItem.Metodo.Repetir;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem13Click(Sender: TObject);
-begin
-  FCliente.Metodo.Saldo;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem14Click(Sender: TObject);
-begin
-  FPagamento.Executar.Executar;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem15Click(Sender: TObject);
-begin
-  FPagamento.Executar.Estornar;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem16Click(Sender: TObject);
-begin
-  FPagamento.Executar.Executar;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem17Click(Sender: TObject);
-begin
-  FPagamento.Executar.Estornar;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem18Click(Sender: TObject);
-begin
-  FVenda.Metodo.Abrir;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem19Click(Sender: TObject);
-begin
-  FVenda.Metodo.Pagar;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem1Click(Sender: TObject);
-begin
-  FCaixa.Metodo.Abrir;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem20Click(Sender: TObject);
-begin
-  FVenda.Metodo.Fechar;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem21Click(Sender: TObject);
-begin
-  FVenda.Metodo.IdentificarCliente;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem23Click(Sender: TObject);
-begin
-  FVenda.Metodo.EfetuarPagamento;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem24Click(Sender: TObject);
-begin
-  FVenda.Metodo.EfetuarEstorno;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem2Click(Sender: TObject);
-begin
-  FCaixa.Metodo.Fechar;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem3Click(Sender: TObject);
-begin
-  FCaixa.Metodo.Suprimento;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem4Click(Sender: TObject);
-begin
-  FCaixa.Metodo.Sangria;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem5Click(Sender: TObject);
-begin
-  FCaixa.Metodo.TrocarOperador;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem6Click(Sender: TObject);
-begin
-  FCaixa.Metodo.Bloquear;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem7Click(Sender: TObject);
-begin
-  FCaixa.Metodo.Desbloquear;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem8Click(Sender: TObject);
-begin
-  FItem.Metodo.Vender;
-end;
-
-procedure TPDVUpdatesView.ListBoxItem9Click(Sender: TObject);
-begin
-  FItem.Metodo.Cancelar;
+  lbItem := TListBoxItem.Create(nil);
+  lbItem.StyleLookup := 'ListBoxItemProduto';
+  lbItem.StylesData['descricao'] := 'Descrição do produto';
+  lbItem.StylesData['quantidade'] := 'Qtde.';
+  lbItem.StylesData['valorunitario'] := 'Valor Unit.';
+  lbItem.StylesData['valor'] := 'Valor total';
+  ListBox1.AddObject(lbItem);
 end;
 
 class function TPDVUpdatesView.New(aController: IController): IView;
@@ -257,6 +139,22 @@ end;
 function TPDVUpdatesView.ThisAs: TPDVUpdatesView;
 begin
   result := self;
+end;
+
+function TPDVUpdatesView.UpdatesItem(
+  Value: TRecordItem): IObserverItensController;
+var
+  lbItem: TListBoxItem;
+begin
+  Result := Self;
+
+  lbItem := TListBoxItem.Create(nil);
+  lbItem.StyleLookup := 'ListBoxItemProduto';
+  lbItem.StylesData['descricao'] := Value.Descricao;
+  lbItem.StylesData['quantidade'] := FormatCurr('0.000x', Value.Quantidade);
+  lbItem.StylesData['valorunitario'] := FormatCurr('#,##0.00', Value.ValorUnitario);
+  lbItem.StylesData['valor'] := FormatCurr('#,##0.00', Value.ValorTotal);
+  ListBox1.AddObject(lbItem);
 end;
 
 function TPDVUpdatesView.ShowView(const AProc: TProc<IView>): integer;
