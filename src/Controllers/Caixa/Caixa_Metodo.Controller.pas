@@ -10,7 +10,6 @@ type
   private
     FParent: ICaixaController;
     FModel: ICaixaModel;
-    FCapturaValor: ICapturaValorView;
   public
     constructor Create(Parent: ICaixaController);
     destructor Destroy; override;
@@ -47,7 +46,7 @@ begin
         TUsuarioFactoryController.New.Usuario.Caixa.DesbloquearCaixa.&End
       )
       .SetValorAbertura(
-        FCapturaValor.ExibeForm('Valor da abertura', 'Confirmar', 'Cancelar')
+        TCapturaValorView.New(nil).ExibeForm('Valor da abertura', 'Confirmar', 'Cancelar')
       )
     .&End;
 end;
@@ -71,8 +70,11 @@ end;
 constructor TCaixaMetodoController.Create(Parent: ICaixaController);
 begin
   FParent := Parent;
-  FModel  := TPDVUpdatesModel.New.Caixa;
-  FCapturaValor := TCapturaValorView.New(nil);
+  FModel  :=
+    TPDVUpdatesModel.New.Caixa
+      .Observers
+        .Caixa(FParent.ObserverCaixa)
+      .&End;
 end;
 
 function TCaixaMetodoController.Desbloquear: ICaixaMetodoController;
@@ -88,7 +90,7 @@ end;
 
 destructor TCaixaMetodoController.Destroy;
 begin
-  FreeAndNil(FCapturaValor);
+
   inherited;
 end;
 
@@ -101,7 +103,7 @@ begin
         TUsuarioFactoryController.New.Usuario.Caixa.FecharCaixa.&End
       )
       .SetValorFechamento(
-        FCapturaValor.ExibeForm('Valor do fechamento', 'Confirmar', 'Cancelar')
+        TCapturaValorView.New(nil).ExibeForm('Valor do fechamento', 'Confirmar', 'Cancelar')
       )
     .&End;
 end;
@@ -125,7 +127,7 @@ begin
         TUsuarioFactoryController.New.Usuario.Caixa.Sangria.&End
       )
       .SetValor(
-        FCapturaValor.ExibeForm('Valor da sangria', 'Confirmar', 'Cancelar')
+        TCapturaValorView.New(nil).ExibeForm('Valor da sangria', 'Confirmar', 'Cancelar')
       )
     .&End;
 end;
@@ -139,7 +141,7 @@ begin
         TUsuarioFactoryController.New.Usuario.Caixa.Suprimento.&End
       )
       .SetValor(
-        FCapturaValor.ExibeForm('Valor do suprimento', 'Confirmar', 'Cancelar')
+        TCapturaValorView.New(nil).ExibeForm('Valor do suprimento', 'Confirmar', 'Cancelar')
       )
     .&End;
 end;
