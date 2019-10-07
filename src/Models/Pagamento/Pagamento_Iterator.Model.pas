@@ -55,6 +55,8 @@ end;
 function TPagamentoIteratorModel.hasNext: Boolean;
 begin
   Result := not (FCount = FLista.Count);
+  if (not Result) then
+    FCount := 0;
 end;
 
 class function TPagamentoIteratorModel.New(Parent: IPagamentoModel): IPagamentoIteratorModel;

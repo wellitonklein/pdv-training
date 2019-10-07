@@ -27,6 +27,7 @@ type
     function Entidade: TVENDAPAGAMENTOS; overload;
     function Entidade(Value: TVENDAPAGAMENTOS): IPagamentoModel; overload;
     function DAO: IContainerObjectSet<TVENDAPAGAMENTOS>;
+    function ValorTotal: Currency;
 
     // IPagamentoTipoModel
     function Dinheiro: IPagamentoTipoMetodoModel;
@@ -97,6 +98,13 @@ end;
 function TPagamentoModel.Tipo: IPagamentoTipoModel;
 begin
   Result := Self;
+end;
+
+function TPagamentoModel.ValorTotal: Currency;
+begin
+  Result := 0;
+  while FIterator.hasNext do
+    Result := (Result + FIterator.Next.Entidade.VALOR);
 end;
 
 end.

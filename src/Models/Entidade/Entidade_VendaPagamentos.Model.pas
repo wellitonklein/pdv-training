@@ -27,7 +27,7 @@ type
     FGUUID: String;
     FVENDA: Nullable<String>;
     FTIPO: SmallInt;
-    FVALOR: Nullable<Double>;
+    FVALOR: Double;
     FPARCELAS: SmallInt;
     FBANDEIRA: SmallInt;
     FSTATUS: SmallInt;
@@ -53,7 +53,7 @@ type
 
     [Column('VALOR', ftBCD, 18, 4)]
     [Dictionary('VALOR', 'Mensagem de validação', '0', '', '', taRightJustify)]
-    property VALOR: Nullable<Double> read FVALOR write FVALOR;
+    property VALOR: Double read FVALOR write FVALOR;
 
     [Column('PARCELAS', ftSmallint)]
     [Dictionary('PARCELAS', 'Mensagem de validação', '', '', '', taCenter)]

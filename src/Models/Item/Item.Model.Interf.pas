@@ -24,6 +24,7 @@ type
     function Entidade(Value: TVENDAITENS): IItemModel; overload;
     function DAO: IContainerObjectSet<TVENDAITENS>;
     function Produto: IProdutoModel;
+    function ValorTotal: Currency;
   end;
 
   IItemIteratorModel = interface

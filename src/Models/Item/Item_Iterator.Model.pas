@@ -55,6 +55,8 @@ end;
 function TItemIteratorModel.hasNext: Boolean;
 begin
   Result := not (FCount = FLista.Count);
+  if (not Result) then
+    FCount := 0;
 end;
 
 class function TItemIteratorModel.New(Parent: IItemModel): IItemIteratorModel;

@@ -11,6 +11,7 @@ type
   private
     FParent: IVendaController;
     FCaixaController: ICaixaController;
+    function VerificaFinalizacao: IVendaMetodoController;
   public
     constructor Create(Parent: IVendaController; Caixa: ICaixaController);
     destructor Destroy; override;
@@ -69,6 +70,7 @@ begin
           .Model
       )
     .&End;
+  Self.VerificaFinalizacao;
 end;
 
 function TVendaMetodoController.&End: IVendaController;
@@ -130,6 +132,14 @@ end;
 function TVendaMetodoController.VenderItem: IVendaMetodoItemController;
 begin
   Result := TVendaMetodoFactoryController.New.Item(FParent);
+end;
+
+function TVendaMetodoController.VerificaFinalizacao: IVendaMetodoController;
+begin
+  Result := Self;
+
+//  if (FParent.Model.Pagamentos.ValorTotal >= FParent.Model.Itens.ValorTotal) then
+  FParent.Metodo.Fechar;
 end;
 
 end.

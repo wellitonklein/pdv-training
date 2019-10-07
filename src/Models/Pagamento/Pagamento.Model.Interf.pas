@@ -21,6 +21,7 @@ type
     function Entidade: TVENDAPAGAMENTOS; overload;
     function Entidade(Value: TVENDAPAGAMENTOS): IPagamentoModel; overload;
     function DAO: IContainerObjectSet<TVENDAPAGAMENTOS>;
+    function ValorTotal: Currency;
   end;
 
   IPagamentoIteratorModel = interface

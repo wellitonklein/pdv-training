@@ -30,6 +30,7 @@ type
     function Entidade(Value: TVENDAITENS): IItemModel; overload;
     function DAO: IContainerObjectSet<TVENDAITENS>;
     function Produto: IProdutoModel;
+    function ValorTotal: Currency;
 
     // IItemMetodoModel
     function Vender: IItemMetodoVenderModel;
@@ -134,6 +135,18 @@ function TItemModel.SetState(Value: IItemMetodoModel): IItemModel;
 begin
   Result := Self;
   FState := Value;
+end;
+
+function TItemModel.ValorTotal: Currency;
+var
+  FItem: TVENDAITENS;
+begin
+  Result := 0;
+  while FIterator.hasNext do
+  begin
+    FItem := FIterator.Next.Entidade;
+    Result := Result + (FItem.QUANTIDADE * FItem.PRECO);
+  end;
 end;
 
 function TItemModel.Vender: IItemMetodoVenderModel;

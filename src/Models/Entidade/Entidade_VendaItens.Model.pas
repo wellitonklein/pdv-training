@@ -27,8 +27,8 @@ type
     FGUUID: String;
     FVENDA: Nullable<String>;
     FPRODUTO: Nullable<String>;
-    FQUANTIDADE: Nullable<Double>;
-    FPRECO: Nullable<Double>;
+    FQUANTIDADE: Double;
+    FPRECO: Double;
     FSTATUS: SmallInt;
     FDATACADASTRO: TDateTime;
     FDATAALTERACAO: TDateTime;
@@ -52,11 +52,11 @@ type
 
     [Column('QUANTIDADE', ftBCD, 18, 4)]
     [Dictionary('QUANTIDADE', 'Mensagem de validação', '0', '', '', taRightJustify)]
-    property QUANTIDADE: Nullable<Double> read FQUANTIDADE write FQUANTIDADE;
+    property QUANTIDADE: Double read FQUANTIDADE write FQUANTIDADE;
 
     [Column('PRECO', ftBCD, 18, 4)]
     [Dictionary('PRECO', 'Mensagem de validação', '0', '', '', taRightJustify)]
-    property PRECO: Nullable<Double> read FPRECO write FPRECO;
+    property PRECO: Double read FPRECO write FPRECO;
 
     [Column('STATUS', ftSmallint)]
     [Dictionary('STATUS', 'Mensagem de validação', '', '', '', taCenter)]

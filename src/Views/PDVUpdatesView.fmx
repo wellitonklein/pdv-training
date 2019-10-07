@@ -3278,5 +3278,10 @@ object PDVUpdatesView: TPDVUpdatesView
       ShortCut = 116
       OnExecute = actDesbloquearCaixaExecute
     end
+    object actEfetuaPagamento: TAction
+      Text = 'actEfetuaPagamento'
+      ShortCut = 118
+      OnExecute = actEfetuaPagamentoExecute
+    end
   end
 end
