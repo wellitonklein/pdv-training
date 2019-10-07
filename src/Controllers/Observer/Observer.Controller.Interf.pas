@@ -31,6 +31,18 @@ type
     function Notify(Value: string): ISubjectCaixaController;
   end;
 
+  IObserverVendaController = interface
+    ['{1DB7D531-5656-4234-B0FF-6EB5477B402A}']
+    function UpdatesStatus(Value: string): IObserverVendaController;
+  end;
+
+  ISubjectVendaController = interface
+    ['{66D07D27-CE58-4035-9B88-A584900CF57A}']
+    function AddObserver(Value: IObserverVendaController): ISubjectVendaController;
+    function RemoveObserver(Value: IObserverVendaController): ISubjectVendaController;
+    function NotifyStatus(Value: string): ISubjectVendaController;
+  end;
+
 implementation
 
 end.
