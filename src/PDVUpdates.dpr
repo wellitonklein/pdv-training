@@ -207,7 +207,8 @@ uses
   Observer.Controller.Interf in 'Controllers\Observer\Observer.Controller.Interf.pas',
   Observer_Itens.Controller in 'Controllers\Observer\Observer_Itens.Controller.pas',
   Venda_Observer.Model in 'Models\Venda\Venda_Observer.Model.pas',
-  Observer_Caixa.Controller in 'Controllers\Observer\Observer_Caixa.Controller.pas';
+  Observer_Caixa.Controller in 'Controllers\Observer\Observer_Caixa.Controller.pas',
+  Caixa_Observer.Model in 'Models\Caixa\Caixa_Observer.Model.pas';
 
 {$R *.res}
 

@@ -46,6 +46,7 @@ begin
   FParent.Entidade(Caixa);
 
   FParent.SetState(TCaixaStateFactoryModel.New.Fechado);
+  FParent.Observers.Caixa.Notify('CAIXA FECHADO');
 end;
 
 constructor TCaixaMetodoFecharModel.Create(Parent: ICaixaModel);

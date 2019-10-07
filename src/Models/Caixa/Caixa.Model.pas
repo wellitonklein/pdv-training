@@ -14,6 +14,7 @@ type
     FState: ICaixaMetodoModel;
     FEntidade: TCAIXA;
     FDAO: IContainerObjectSet<TCaixa>;
+    FObservers: ICaixaObserverModel;
     function SetStatusCaixa: ICaixaMetodoModel;
     procedure RecuperarCaixa;
   public
@@ -27,6 +28,7 @@ type
     function Entidade: TCaixa; overload;
     function Entidade(Value: TCAIXA): ICaixaModel; overload;
     function DAO: IContainerObjectSet<TCaixa>;
+    function Observers: ICaixaObserverModel;
 
     // ICaixaMetodoModel
     function Abrir: ICaixaMetodoAbrirModel;
@@ -43,7 +45,8 @@ implementation
 
 uses
   Caixa_Metodo_Factory.Model, Caixa_State_Factory.Model, PDVUpdates.Model,
-  ormbr.container.objectset, PDVUpdates_Type.Controller, System.SysUtils;
+  ormbr.container.objectset, PDVUpdates_Type.Controller, System.SysUtils,
+  Caixa_Observer.Model;
 
 { TCaixaModel }
 
@@ -77,11 +80,11 @@ end;
 
 constructor TCaixaModel.Create;
 begin
-  FConn     := TPDVUpdatesModel.New.Conexao;
-  FEntidade := TPDVUpdatesModel.New.Entidade.Caixa;
-  FDAO      := TContainerObjectSet<TCaixa>.Create(FConn.Connection, 15);
-  FState    := SetStatusCaixa;
-  { TODO -oWelliton -cCaixa : Verificar Estado do último Caixa no Banco }
+  FConn      := TPDVUpdatesModel.New.Conexao;
+  FEntidade  := TPDVUpdatesModel.New.Entidade.Caixa;
+  FDAO       := TContainerObjectSet<TCaixa>.Create(FConn.Connection, 15);
+  FState     := SetStatusCaixa;
+  FObservers := TCaixaObserverModel.New(Self);
 end;
 
 function TCaixaModel.DAO: IContainerObjectSet<TCaixa>;
@@ -115,6 +118,11 @@ end;
 class function TCaixaModel.New: ICaixaModel;
 begin
   Result := Self.Create;
+end;
+
+function TCaixaModel.Observers: ICaixaObserverModel;
+begin
+  Result := FObservers;
 end;
 
 procedure TCaixaModel.RecuperarCaixa;

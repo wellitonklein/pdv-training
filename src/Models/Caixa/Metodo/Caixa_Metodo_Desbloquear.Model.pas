@@ -42,6 +42,7 @@ begin
   CAIXA.STATUS := Integer(tcsAberto);
   FParent.DAO.Update(CAIXA);
   FParent.SetState(TCaixaStateFactoryModel.New.Aberto);
+  FParent.Observers.Caixa.Notify('CAIXA ABERTO');
 end;
 
 constructor TCaixaMetodoDesbloquearModel.Create(Parent: ICaixaModel);

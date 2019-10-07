@@ -5,10 +5,11 @@ interface
 uses
   Usuario.Model.Interf,
   Entidade_Caixa.Model,
-  ormbr.container.objectset.interfaces;
+  ormbr.container.objectset.interfaces, Observer.Controller.Interf;
 
 type
   ICaixaModel = interface;
+  ICaixaObserverModel = interface;
   ICaixaMetodoModel = interface;
   ICaixaMetodoAbrirModel = interface;
   ICaixaMetodoFecharModel = interface;
@@ -25,6 +26,14 @@ type
     function Entidade: TCaixa; overload;
     function Entidade(Value: TCAIXA): ICaixaModel; overload;
     function DAO: IContainerObjectSet<TCaixa>;
+    function Observers: ICaixaObserverModel;
+  end;
+
+  ICaixaObserverModel = interface
+    ['{39AADFCA-3026-408B-BE9E-47D7DE992A6B}']
+    function Caixa(Value: ISubjectCaixaController): ICaixaObserverModel; overload;
+    function Caixa: ISubjectCaixaController; overload;
+    function &End: ICaixaModel;
   end;
 
   ICaixaMetodoModel = interface

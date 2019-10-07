@@ -44,6 +44,7 @@ begin
   FParent.DAO.Insert(FParent.Entidade);
 
   FParent.SetState(TCaixaStateFactoryModel.New.Aberto);
+  FParent.Observers.Caixa.Notify('CAIXA ABERTO');
 end;
 
 constructor TCaixaMetodoAbrirModel.Create(Parent: ICaixaModel);
