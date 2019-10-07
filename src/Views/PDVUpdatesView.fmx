@@ -3255,4 +3255,28 @@ object PDVUpdatesView: TPDVUpdatesView
     OnTimer = Timer1Timer
     Left = 64
   end
+  object ActionList1: TActionList
+    Left = 456
+    Top = 24
+    object acAbrirCaixa: TAction
+      Text = 'acAbrirCaixa'
+      ShortCut = 113
+      OnExecute = acAbrirCaixaExecute
+    end
+    object actFecharCaixa: TAction
+      Text = 'actFecharCaixa'
+      ShortCut = 114
+      OnExecute = actFecharCaixaExecute
+    end
+    object actBloquearCaixa: TAction
+      Text = 'actBloquearCaixa'
+      ShortCut = 115
+      OnExecute = actBloquearCaixaExecute
+    end
+    object actDesbloquearCaixa: TAction
+      Text = 'actDesbloquearCaixa'
+      ShortCut = 116
+      OnExecute = actDesbloquearCaixaExecute
+    end
+  end
 end

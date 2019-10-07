@@ -10,7 +10,7 @@ uses
   Cliente.Controller.Interf, Pagamento.Controller.Interf,
   Venda.Controller.Interf, FMX.Objects, FMX.Effects, FMX.Controls.Presentation,
   FMX.StdCtrls, FMX.Edit, Observer.Controller.Interf,
-  PDVUpdates_Type.Controller, FMX.Ani;
+  PDVUpdates_Type.Controller, FMX.Ani, System.Actions, FMX.ActnList;
 
 type
   /// Interface para a VIEW
@@ -19,7 +19,10 @@ type
   end;
 
   TPDVUpdatesView = class(TFormFactory { TFORM } , IView,
-    IThisAs<TPDVUpdatesView>, IPDVUpdatesView, IObserverItensController, IViewAs<IPDVUpdatesView>)
+    IThisAs<TPDVUpdatesView>, IPDVUpdatesView,
+    IObserverItensController,
+    IObserverCaixaController,
+    IViewAs<IPDVUpdatesView>)
     Layout1: TLayout;
     Layout2: TLayout;
     Layout3: TLayout;
@@ -59,11 +62,20 @@ type
     Timer1: TTimer;
     ShadowEffect3: TShadowEffect;
     lblCaixa: TLabel;
+    ActionList1: TActionList;
+    acAbrirCaixa: TAction;
+    actFecharCaixa: TAction;
+    actBloquearCaixa: TAction;
+    actDesbloquearCaixa: TAction;
     procedure FormCreate(Sender: TObject);
     procedure Edit4KeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure Timer1Timer(Sender: TObject);
     procedure RecErrorClick(Sender: TObject);
+    procedure acAbrirCaixaExecute(Sender: TObject);
+    procedure actFecharCaixaExecute(Sender: TObject);
+    procedure actBloquearCaixaExecute(Sender: TObject);
+    procedure actDesbloquearCaixaExecute(Sender: TObject);
   private
     FInited: boolean;
     FCaixa: ICaixaController;
@@ -73,6 +85,8 @@ type
     FVenda: IVendaController;
     procedure VenderItem;
     function UpdatesItem(Value: TRecordItem): IObserverItensController;
+    function UpdatesCaixa(Value: string): IObserverCaixaController;
+
     procedure HeaderListaItens;
     procedure ExecutaError(Sender: TObject; E: Exception);
     procedure CloseError;
@@ -126,6 +140,8 @@ begin
   FPagamento := TPDVUpdatesController.New.Pagamento(FVenda);
 
   FVenda.ObserverItem.AddObserver(Self);
+  FCaixa.ObserverCaixa.AddObserver(Self);
+
   HeaderListaItens;
   Application.OnException := ExecutaError;
 end;
@@ -174,6 +190,12 @@ begin
   CloseError;
 end;
 
+function TPDVUpdatesView.UpdatesCaixa(Value: string): IObserverCaixaController;
+begin
+  Result := Self;
+  lblCaixa.Text := Value;
+end;
+
 function TPDVUpdatesView.UpdatesItem(
   Value: TRecordItem): IObserverItensController;
 var
@@ -205,6 +227,26 @@ end;
 function TPDVUpdatesView.ShowView(const AProc: TProc<IView>): integer;
 begin
   inherited;
+end;
+
+procedure TPDVUpdatesView.acAbrirCaixaExecute(Sender: TObject);
+begin
+  FCaixa.Metodo.Abrir;
+end;
+
+procedure TPDVUpdatesView.actBloquearCaixaExecute(Sender: TObject);
+begin
+  FCaixa.Metodo.Bloquear;
+end;
+
+procedure TPDVUpdatesView.actDesbloquearCaixaExecute(Sender: TObject);
+begin
+  FCaixa.Metodo.Desbloquear;
+end;
+
+procedure TPDVUpdatesView.actFecharCaixaExecute(Sender: TObject);
+begin
+  FCaixa.Metodo.Fechar;
 end;
 
 procedure TPDVUpdatesView.CloseError;
