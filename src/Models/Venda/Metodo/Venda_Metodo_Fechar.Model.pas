@@ -28,7 +28,8 @@ begin
   Result := FParent.Metodo;
   FParent.ModalidadeFiscal.Proxy.Exec;
   FParent.SetState(TVendaStateFactoryModel.New.Fechado);
-  FParent.Observers.Venda.NotifyStatus('VENDA FINALIZADA');
+  FParent.Observers.Venda.NotifyStatus('CAIXA ABERTO');
+  FParent.Observers.Venda.NotifyLimparVenda;
 end;
 
 constructor TVendaMetodoFecharModel.Create(Parent: IVendaModel);

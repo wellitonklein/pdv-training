@@ -2583,7 +2583,7 @@ object PDVUpdatesView: TPDVUpdatesView
               Text = 'Valor unit'#225'rio'
               TabOrder = 4
             end
-            object Edit3: TEdit
+            object edtValorUnitario: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Anchors = [akLeft, akBottom]
               TabOrder = 8
@@ -2610,7 +2610,7 @@ object PDVUpdatesView: TPDVUpdatesView
               Text = 'Desconto'
               TabOrder = 3
             end
-            object Edit4: TEdit
+            object edtDesconto: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Anchors = [akLeft, akBottom]
               TabOrder = 5
@@ -2622,7 +2622,7 @@ object PDVUpdatesView: TPDVUpdatesView
               Size.Height = 30.000000000000000000
               Size.PlatformDefault = False
               StyledSettings = [Family, Style]
-              OnKeyDown = Edit4KeyDown
+              OnKeyDown = edtDescontoKeyDown
             end
             object Label5: TLabel
               Anchors = [akLeft, akBottom]
@@ -2651,7 +2651,7 @@ object PDVUpdatesView: TPDVUpdatesView
               TextSettings.Font.StyleExt = {00070000000000000004000000}
               TextSettings.FontColor = xFF494A4A
               TextSettings.HorzAlign = Trailing
-              Text = 'R$ 0.000,00'
+              Text = 'R$ 0,00'
               TabOrder = 1
             end
             object Label7: TLabel

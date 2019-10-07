@@ -34,6 +34,7 @@ type
   IObserverVendaController = interface
     ['{1DB7D531-5656-4234-B0FF-6EB5477B402A}']
     function UpdatesStatus(Value: string): IObserverVendaController;
+    function LimparVenda: IObserverVendaController;
   end;
 
   ISubjectVendaController = interface
@@ -41,6 +42,7 @@ type
     function AddObserver(Value: IObserverVendaController): ISubjectVendaController;
     function RemoveObserver(Value: IObserverVendaController): ISubjectVendaController;
     function NotifyStatus(Value: string): ISubjectVendaController;
+    function NotifyLimparVenda: ISubjectVendaController;
   end;
 
 implementation

@@ -17,6 +17,7 @@ type
     function AddObserver(Value: IObserverVendaController): ISubjectVendaController;
     function RemoveObserver(Value: IObserverVendaController): ISubjectVendaController;
     function NotifyStatus(Value: string): ISubjectVendaController;
+    function NotifyLimparVenda: ISubjectVendaController;
   end;
 
 implementation
@@ -46,6 +47,14 @@ end;
 class function TObserverVendaController.New: ISubjectVendaController;
 begin
   Result := Self.Create;
+end;
+
+function TObserverVendaController.NotifyLimparVenda: ISubjectVendaController;
+var
+  I: Integer;
+begin
+  for I := 0 to Pred(FListaObserver.Count) do
+    FListaObserver[I].LimparVenda;
 end;
 
 function TObserverVendaController.NotifyStatus(Value: string): ISubjectVendaController;

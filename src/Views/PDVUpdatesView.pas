@@ -44,9 +44,9 @@ type
     edtQuantidadeProd: TEdit;
     Label2: TLabel;
     Label3: TLabel;
-    Edit3: TEdit;
+    edtValorUnitario: TEdit;
     Label4: TLabel;
-    Edit4: TEdit;
+    edtDesconto: TEdit;
     Label5: TLabel;
     lblValorUltimoItem: TLabel;
     Label7: TLabel;
@@ -72,7 +72,7 @@ type
     actAbrirVenda: TAction;
     actFecharVenda: TAction;
     procedure FormCreate(Sender: TObject);
-    procedure Edit4KeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
+    procedure edtDescontoKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure Timer1Timer(Sender: TObject);
     procedure RecErrorClick(Sender: TObject);
@@ -95,6 +95,7 @@ type
     function UpdatesItem(Value: TRecordItem): IObserverItensController;
     function UpdatesCaixa(Value: string): IObserverCaixaController;
     function UpdatesStatus(Value: string): IObserverVendaController;
+    function LimparVenda: IObserverVendaController;
 
     procedure HeaderListaItens;
     procedure ExecutaError(Sender: TObject; E: Exception);
@@ -121,7 +122,7 @@ begin
   result := self;
 end;
 
-procedure TPDVUpdatesView.Edit4KeyDown(Sender: TObject; var Key: Word;
+procedure TPDVUpdatesView.edtDescontoKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   if (KeyChar = #0) then
@@ -167,6 +168,16 @@ begin
   lbItem.StylesData['valorunitario'] := 'Valor Unit.';
   lbItem.StylesData['valor'] := 'Valor total';
   ListBox1.AddObject(lbItem);
+end;
+
+function TPDVUpdatesView.LimparVenda: IObserverVendaController;
+begin
+  ListBox1.Items.Clear;
+  edtCodigoProd.Text := EmptyStr;
+  edtQuantidadeProd.Text := EmptyStr;
+  edtValorUnitario.Text := EmptyStr;
+  edtDesconto.Text := EmptyStr;
+  lblValorUltimoItem.Text := 'R$ 0,00';
 end;
 
 class function TPDVUpdatesView.New(aController: IController): IView;
