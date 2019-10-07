@@ -68,6 +68,8 @@ type
     actBloquearCaixa: TAction;
     actDesbloquearCaixa: TAction;
     actEfetuaPagamento: TAction;
+    actAbrirVenda: TAction;
+    actFecharVenda: TAction;
     procedure FormCreate(Sender: TObject);
     procedure Edit4KeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
@@ -78,6 +80,8 @@ type
     procedure actBloquearCaixaExecute(Sender: TObject);
     procedure actDesbloquearCaixaExecute(Sender: TObject);
     procedure actEfetuaPagamentoExecute(Sender: TObject);
+    procedure actAbrirVendaExecute(Sender: TObject);
+    procedure actFecharVendaExecute(Sender: TObject);
   private
     FInited: boolean;
     FCaixa: ICaixaController;
@@ -236,6 +240,12 @@ begin
   FCaixa.Metodo.Abrir;
 end;
 
+procedure TPDVUpdatesView.actAbrirVendaExecute(Sender: TObject);
+begin
+  FVenda.Metodo.Abrir;
+  FVenda.Metodo.Pagar;
+end;
+
 procedure TPDVUpdatesView.actBloquearCaixaExecute(Sender: TObject);
 begin
   FCaixa.Metodo.Bloquear;
@@ -254,6 +264,11 @@ end;
 procedure TPDVUpdatesView.actFecharCaixaExecute(Sender: TObject);
 begin
   FCaixa.Metodo.Fechar;
+end;
+
+procedure TPDVUpdatesView.actFecharVendaExecute(Sender: TObject);
+begin
+  FVenda.Metodo.Fechar;
 end;
 
 procedure TPDVUpdatesView.CloseError;

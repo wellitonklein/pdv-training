@@ -3283,5 +3283,15 @@ object PDVUpdatesView: TPDVUpdatesView
       ShortCut = 118
       OnExecute = actEfetuaPagamentoExecute
     end
+    object actAbrirVenda: TAction
+      Text = 'actAbrirVenda'
+      ShortCut = 16449
+      OnExecute = actAbrirVendaExecute
+    end
+    object actFecharVenda: TAction
+      Text = 'actFecharVenda'
+      ShortCut = 16454
+      OnExecute = actFecharVendaExecute
+    end
   end
 end
