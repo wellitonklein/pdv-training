@@ -28,6 +28,7 @@ begin
   Result := FParent.Metodo;
 
   FParent.SetState(TVendaStateFactoryModel.New.Pagamento);
+  FParent.Observers.Venda.NotifyStatus('VENDA EM PAGAMENTO');
 end;
 
 constructor TVendaMetodoPagarModel.Create(Parent: IVendaModel);

@@ -38,6 +38,8 @@ type
     ['{39AADFCA-3026-408B-BE9E-47D7DE992A6B}']
     function Itens(Value: ISubjectItensController): IVendaObserverModel; overload;
     function Itens: ISubjectItensController; overload;
+    function Venda(Value: ISubjectVendaController): IVendaObserverModel; overload;
+    function Venda: ISubjectVendaController; overload;
     function &End: IVendaModel;
   end;
 

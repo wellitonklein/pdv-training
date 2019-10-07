@@ -36,6 +36,7 @@ begin
   Fiscal;
 
   FParent.SetState(TVendaStateFactoryModel.New.Aberto);
+  FParent.Observers.Venda.NotifyStatus('VENDA ABERTA');
 end;
 
 procedure TVendaMetodoAbrirModel.Fiscal;
