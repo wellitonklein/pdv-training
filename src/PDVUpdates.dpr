@@ -206,7 +206,8 @@ uses
   Venda_Metodo_Factory.Controller in 'Controllers\Venda\Metodo\Factory\Venda_Metodo_Factory.Controller.pas',
   Observer.Controller.Interf in 'Controllers\Observer\Observer.Controller.Interf.pas',
   Observer_Itens.Controller in 'Controllers\Observer\Observer_Itens.Controller.pas',
-  Venda_Observer.Model in 'Models\Venda\Venda_Observer.Model.pas';
+  Venda_Observer.Model in 'Models\Venda\Venda_Observer.Model.pas',
+  Observer_Caixa.Controller in 'Controllers\Observer\Observer_Caixa.Controller.pas';
 
 {$R *.res}
 

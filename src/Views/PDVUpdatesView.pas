@@ -58,6 +58,7 @@ type
     FloatAnimation1: TFloatAnimation;
     Timer1: TTimer;
     ShadowEffect3: TShadowEffect;
+    lblCaixa: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure Edit4KeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);

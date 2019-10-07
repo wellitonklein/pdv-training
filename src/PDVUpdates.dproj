@@ -365,6 +365,7 @@
         <DCCReference Include="Controllers\Observer\Observer.Controller.Interf.pas"/>
         <DCCReference Include="Controllers\Observer\Observer_Itens.Controller.pas"/>
         <DCCReference Include="Models\Venda\Venda_Observer.Model.pas"/>
+        <DCCReference Include="Controllers\Observer\Observer_Caixa.Controller.pas"/>
         <None Include="mvcbr.inc"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

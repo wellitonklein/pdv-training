@@ -2450,6 +2450,25 @@ object PDVUpdatesView: TPDVUpdatesView
             Size.PlatformDefault = False
           end
         end
+        object lblCaixa: TLabel
+          Align = Right
+          AutoSize = True
+          StyledSettings = [Family, Style]
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 30.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Position.X = 529.000000000000000000
+          Position.Y = 10.000000000000000000
+          Size.Width = 341.000000000000000000
+          Size.Height = 69.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 52.000000000000000000
+          TextSettings.FontColor = claWhite
+          TextSettings.HorzAlign = Trailing
+          TextSettings.WordWrap = False
+          Text = 'CAIXA ABERTO'
+          TabOrder = 1
+        end
       end
     end
     object Layout3: TLayout

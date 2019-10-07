@@ -3,7 +3,8 @@ unit Caixa.Controller.Interf;
 interface
 
 uses
-  Caixa.Model.interf;
+  Caixa.Model.interf,
+  Observer.Controller.Interf;
 
 type
   ICaixaController = interface;
@@ -12,6 +13,7 @@ type
   ICaixaController = interface
     ['{C9067D98-929E-4B9D-8ACB-C8B4168D9B0C}']
     function Metodo: ICaixaMetodoController;
+    function ObserverCaixa: ISubjectCaixaController;
   end;
 
   ICaixaMetodoController = interface
