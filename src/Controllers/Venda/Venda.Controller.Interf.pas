@@ -16,6 +16,7 @@ type
     function Metodo: IVendaMetodoController;
     function Model: IVendaModel;
     function ObserverItem: ISubjectItensController;
+    function ObserverVenda: ISubjectVendaController;
   end;
 
   IVendaMetodoController = interface

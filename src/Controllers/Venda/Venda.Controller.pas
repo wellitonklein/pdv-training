@@ -14,6 +14,7 @@ type
     FCaixa: ICaixaController;
     FVendaModel: IVendaModel;
     FObserverItens: ISubjectItensController;
+    FObserverVenda: ISubjectVendaController;
   public
     constructor Create(Caixa: ICaixaController);
     destructor Destroy; override;
@@ -21,6 +22,7 @@ type
     function Metodo: IVendaMetodoController;
     function Model: IVendaModel;
     function ObserverItem: ISubjectItensController;
+    function ObserverVenda: ISubjectVendaController;
   end;
 
 implementation
@@ -29,7 +31,7 @@ uses
   Venda_Metodo.Controller,
   PDVUpdates.Model,
   PDVUpdates.Controller,
-  Observer_Itens.Controller;
+  Observer_Itens.Controller, Observer_Venda.Controller;
 
 { TVendaController }
 
@@ -38,18 +40,21 @@ begin
   FCaixa      := Caixa;
   FMetodo     := TVendaMetodoController.New(Self, FCaixa);
   FObserverItens := TObserverItensController.New;
+  FObserverVenda := TObserverVendaController.New;
 
-  FVendaModel :=
-    TPDVUpdatesModel.New
-      .Venda(
-        FCaixa.Metodo.Model
-      )
-      .ModalidadeFiscal(
-        TPDVUpdatesController.New.Fiscal.ProxyFiscal
-      )
-      .Observers
-        .Itens(FObserverItens)
-      .&End;
+  if (not Assigned(FVendaModel)) then
+    FVendaModel :=
+      TPDVUpdatesModel.New
+        .Venda(
+          FCaixa.Metodo.Model
+        )
+        .ModalidadeFiscal(
+          TPDVUpdatesController.New.Fiscal.ProxyFiscal
+        )
+        .Observers
+          .Itens(FObserverItens)
+          .Venda(FObserverVenda)
+        .&End;
 end;
 
 destructor TVendaController.Destroy;
@@ -76,6 +81,11 @@ end;
 function TVendaController.ObserverItem: ISubjectItensController;
 begin
   Result := FObserverItens;
+end;
+
+function TVendaController.ObserverVenda: ISubjectVendaController;
+begin
+  Result := FObserverVenda;
 end;
 
 end.

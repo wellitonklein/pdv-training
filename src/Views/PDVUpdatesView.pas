@@ -22,6 +22,7 @@ type
     IThisAs<TPDVUpdatesView>, IPDVUpdatesView,
     IObserverItensController,
     IObserverCaixaController,
+    IObserverVendaController,
     IViewAs<IPDVUpdatesView>)
     Layout1: TLayout;
     Layout2: TLayout;
@@ -90,8 +91,10 @@ type
     FPagamento: IPagamentoController;
     FVenda: IVendaController;
     procedure VenderItem;
+
     function UpdatesItem(Value: TRecordItem): IObserverItensController;
     function UpdatesCaixa(Value: string): IObserverCaixaController;
+    function UpdatesStatus(Value: string): IObserverVendaController;
 
     procedure HeaderListaItens;
     procedure ExecutaError(Sender: TObject; E: Exception);
@@ -146,6 +149,7 @@ begin
   FPagamento := TPDVUpdatesController.New.Pagamento(FVenda);
 
   FVenda.ObserverItem.AddObserver(Self);
+  FVenda.ObserverVenda.AddObserver(Self);
   FCaixa.ObserverCaixa.AddObserver(Self);
 
   HeaderListaItens;
@@ -228,6 +232,12 @@ begin
   lblValorUltimoItem.Text := FormatCurr('R$ #,##0.00', Value.ValorTotal);
 
   ListBox1.AddObject(lbItem);
+end;
+
+function TPDVUpdatesView.UpdatesStatus(Value: string): IObserverVendaController;
+begin
+  Result := Self;
+  lblCaixa.Text := Value;
 end;
 
 function TPDVUpdatesView.ShowView(const AProc: TProc<IView>): integer;
